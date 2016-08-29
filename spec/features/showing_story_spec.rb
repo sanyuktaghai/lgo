@@ -12,7 +12,7 @@ RSpec.feature "Showing Stories" do
     
     expect(page).to have_content(@story.title)
     expect(page).to have_content(@story.body)
-    expect(current_path).to eq(story_path(@article))
+    expect(current_path).to eq(story_path(@story))
   end
   
 end

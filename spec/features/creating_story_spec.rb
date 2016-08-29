@@ -15,7 +15,7 @@ RSpec.feature "Creating Stories" do
     
   end
   
-  scenario "A user faily to create a new story" do
+  scenario "A user fails to create a new story" do
     visit "/"
     
     click_link "New Story"
