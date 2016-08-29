@@ -37,6 +37,14 @@ class StoriesController < ApplicationController
     end
   end
   
+  def destroy
+    @story = Story.find(params[:id])
+    if @story.destroy
+      flash[:success] = "Story has been deleted"
+      redirect_to stories_path
+    end
+  end
+  
   private
   def story_params
     params.require(:story).permit(:title, :body)
