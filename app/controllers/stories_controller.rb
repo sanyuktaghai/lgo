@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
       flash[:success] = "Story has been submitted"
       redirect_to stories_path
     else
-      flash[:danger] = "Story has not been submitted"
+      flash.now[:danger] = "Story has not been submitted"
       render :new #renders the new template again
     end
   end
