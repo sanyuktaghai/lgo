@@ -8,9 +8,13 @@ class StoriesController < ApplicationController
   
   def create
     @story = Story.new(article_params)#uses title & body from form
-    @story.save
-    flash[:success] = "Story has been submitted"
-    redirect_to stories_path
+    if @story.save
+      flash[:success] = "Story has been submitted"
+      redirect_to stories_path
+    else
+      flash[:danger] = "Story has not been submitted"
+      render :new #renders the new template again
+    end
   end
   
   private

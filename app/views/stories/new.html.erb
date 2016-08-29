@@ -1,5 +1,13 @@
 <h3>Add new Story</h3>
-  <%= form_for(@story, :html => {class: "form", role: "form"}) do |f| %>
+<%= form_for(@story, :html => {class: "form", role: "form"}) do |f| %>
+  <% if @story.errors.any? %>
+    <h2>
+    <%= pluralize(@story.errors.count, "error") %>
+    prohibited this story from being saved:</h2>
+    <% @story.errors.full_messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
   <%= f.label :title %>
   <%= f.text_field :title, class: "form-control", autofocus: true %>
   <%= f.label :body %>
