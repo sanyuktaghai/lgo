@@ -1,16 +1,2 @@
 <h3>Editing a Story</h3>
-<%= form_for(@story, :html => {class: "form", role: "form"}) do |f| %>
-  <% if @story.errors.any? %>
-    <h2>
-    <%= pluralize(@story.errors.count, "error") %>
-    prohibited this story from being saved:</h2>
-    <% @story.errors.full_messages.each do |msg| %>
-      <%= msg %>
-    <% end %>
-  <% end %>
-  <%= f.label :title %>
-  <%= f.text_field :title, class: "form-control", autofocus: true %>
-  <%= f.label :body %>
-  <%= f.text_area :body, rows: 10, class: "form-control" %>
-  <%= f.submit class: "button" %>
-<% end %>
+<%= render 'form' %>

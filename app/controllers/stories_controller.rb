@@ -1,4 +1,6 @@
 class StoriesController < ApplicationController
+  before_filter :set_story, only: [:show, :edit, :update, :destroy]
+  
   def index
     @stories = Story.all
   end
@@ -19,15 +21,12 @@ class StoriesController < ApplicationController
   end
   
   def show
-    @story = Story.find(params[:id])
   end
   
   def edit
-    @story = Story.find(params[:id])
   end
   
   def update
-    @story = Story.find(params[:id])
     if @story.update(story_params)
       flash[:success] = "Story has been updated"
       redirect_to @story
@@ -38,7 +37,6 @@ class StoriesController < ApplicationController
   end
   
   def destroy
-    @story = Story.find(params[:id])
     if @story.destroy
       flash[:success] = "Story has been deleted"
       redirect_to stories_path
@@ -48,5 +46,9 @@ class StoriesController < ApplicationController
   private
   def story_params
     params.require(:story).permit(:title, :body)
+  end
+  
+  def set_story
+    @story = Story.find(params[:id])
   end
 end
