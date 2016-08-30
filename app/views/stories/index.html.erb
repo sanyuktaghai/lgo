@@ -10,4 +10,7 @@
   <div>
     <%= truncate(story.body, length: 150) %>
   </div>
+  <div>
+    <small>Created by: <%= story.user.email %></small>
+  </div>
 <% end %>

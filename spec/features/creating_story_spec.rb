@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature "Creating Stories" do 
+  
+  before do
+    @foo = User.create!(email: "foo@bar.com", password: "password")
+    login_as(@foo)
+  end
+  
   scenario "A user creates a new story" do
     visit "/"
     
@@ -12,7 +18,7 @@ RSpec.feature "Creating Stories" do
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(stories_path)
-    
+    expect(page).to have_content("Created by: #{@foo.email}")
   end
   
   scenario "A user fails to create a new story" do
