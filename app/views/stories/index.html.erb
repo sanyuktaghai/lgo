@@ -11,6 +11,9 @@
     <%= truncate(story.body, length: 150) %>
   </div>
   <div>
-    <small>Created by: <%= story.user.email %></small>
+    <% if story.user %>
+      <!--    If story.user exists, then show the following line:-->
+      <small>Created by: <%= story.user.email %></small>
+    <% end %>
   </div>
 <% end %>

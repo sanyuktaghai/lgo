@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Editing Stories" do 
   before do
-    @story = Story.create(title: "The first story", body: "Body of first story")
+    foo = User.create(email: "foo@bar.com", password: "password")
+    login_as(foo)
+    @story = Story.create(title: "The first story", body: "Body of first story", user: foo)
   end
   
   scenario "A user edits a story" do

@@ -11,7 +11,8 @@ class StoriesController < ApplicationController
   end
   
   def create
-    @story = Story.new(story_params)#uses title & body from form
+    @story = current_user.stories.build(story_params)
+    #    @story = Story.new(story_params)#uses title & body from form #old version, use top one
     if @story.save
       flash[:success] = "Story has been submitted"
       redirect_to stories_path
