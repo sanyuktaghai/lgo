@@ -2,5 +2,7 @@
 <%= @story.created_at.strftime("%b %d, %Y") %>
 <%= @story.body %>
 
-<%= link_to "Edit Story", edit_story_path(@story), class: "btn" %>
-<%= link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn" %>
+<% if user_signed_in? && current_user == @story.user %>
+  <%= link_to "Edit Story", edit_story_path(@story), class: "btn" %>
+  <%= link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn" %>
+<% end %>

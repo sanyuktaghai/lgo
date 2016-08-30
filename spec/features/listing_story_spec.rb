@@ -15,6 +15,7 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_content(@story2.body)
     expect(page).to have_link(@story1.title)
     expect(page).to have_link(@story2.title)
+    expect(page).not_to have_link("New Story")
   end
   
 end
