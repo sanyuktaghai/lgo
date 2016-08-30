@@ -35,6 +35,21 @@ RSpec.feature "Showing Stories" do
     expect(page).not_to have_link("Delete Story")
   end
   
+  scenario "A signed-in owner sees both edit and delete links" do
+    login_as(@foo)
+    
+    visit "/"
+    
+    click_link @story.title
+    
+    expect(page).to have_content(@story.title)
+    expect(page).to have_content(@story.body)
+    expect(current_path).to eq(story_path(@story))
+    
+    expect(page).to have_link("Edit Story")
+    expect(page).to have_link("Delete Story")
+  end
+  
   scenario "Display individual story" do
     visit "/"
     
