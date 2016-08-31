@@ -6,3 +6,40 @@
   <%= link_to "Edit Story", edit_story_path(@story), class: "btn" %>
   <%= link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn" %>
 <% end %>
+<!--  Code for adding comments follows. Note that it's on the "show" view -->
+<div>
+  <%= form_for [@story, @comment], :html => {class: "form-horizontal", role: "form"} do |f| %>
+  <div>
+    <% if @comment.errors.any? %>
+      <%= pluralize(@comment.errors.count, "error") %> prohibited this article from being saved:
+    <ul><% @comment.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :body, 'New Comment' %>
+    <%= f.text_area :body, rows: 10, class: "form-control" %>
+  </div>
+  <div>
+    <%= f.submit "Add Comment", class: "button" %>
+  </div>
+<% end %>
+</div>
+
+<h2>Comments</h2>
+<% if @story.comments.any? %>
+  <% @story.comments.persisted.each do |comment| %>
+  <div>
+    <%= comment.body %>
+  </div>
+  <div>
+    <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.email %>
+  </div>
+    <% end %>
+<% else %>
+  There are no comments to show.
+<% end %>

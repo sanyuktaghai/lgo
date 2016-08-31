@@ -23,6 +23,7 @@ class StoriesController < ApplicationController
   end
   
   def show
+    @comment = @story.comments.build
   end
   
   def edit
