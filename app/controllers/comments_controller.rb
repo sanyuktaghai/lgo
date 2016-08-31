@@ -2,15 +2,20 @@ class CommentsController < ApplicationController
   before_action :set_story
   
   def create
-    @comment = @story.comments.build(comment_params)
-    @comment.user = current_user
-    
-    if @comment.save
-      flash[:success] = "Comment has been added"
+    unless current_user
+      flash[:danger] = "Please sign in to continue"
+      redirect_to new_user_session_path
     else
-      flash.now[:danger] = "Comment has not been added"
+      @comment = @story.comments.build(comment_params)
+      @comment.user = current_user
+
+      if @comment.save
+        flash[:success] = "Comment has been added"
+      else
+        flash.now[:danger] = "Comment has not been added"
+      end
+      redirect_to story_path(@story)
     end
-    redirect_to story_path(@story)
   end
   
   private

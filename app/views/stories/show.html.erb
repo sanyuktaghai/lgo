@@ -33,13 +33,13 @@
 <h2>Comments</h2>
 <% if @story.comments.any? %>
   <% @story.comments.persisted.each do |comment| %>
-  <div>
-    <%= comment.body %>
-  </div>
-  <div>
-    <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.email %>
-  </div>
-    <% end %>
+    <div>
+      <%= comment.body %>
+    </div>
+    <div>
+      <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.email %>
+    </div>
+  <% end %>
 <% else %>
   There are no comments to show.
 <% end %>
