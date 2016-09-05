@@ -31,8 +31,8 @@
 </div>
 
 <h2>Comments</h2>
-<% if @story.comments.any? %>
   <% persisted_comments = @story.comments.reject { |comment| comment.new_record? } %>
+<% if persisted_comments.any? %>
   <% persisted_comments.each do |comment| %>
     <div>
       <%= comment.body %>
