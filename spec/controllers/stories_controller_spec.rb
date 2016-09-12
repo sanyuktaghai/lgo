@@ -13,7 +13,7 @@ RSpec.describe StoriesController, type: :controller do
         sign_in @foo
         story = Story.create(title: "first story", body: "body of first story", user: @foo)
         
-        get :edit, id: story
+        get :edit, params: { id: story }
         expect(response).to render_template :edit #since foo created the story, we expect her to edit it
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe StoriesController, type: :controller do
         sign_in foobar
         story = Story.create(title: "first story", body: "body of first story", user: @foo)
         
-        get :edit, id: story
+        get :edit, params: { id: story }
         expect(response).to redirect_to(root_path)
         message = "You can only edit your own stories."
         expect(flash[:danger]).to eq message

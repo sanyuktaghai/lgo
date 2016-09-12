@@ -14,9 +14,9 @@ RSpec.describe CommentsController, type: :controller do
           title: "First Story", 
           body: "Body of first story", 
           user: @foo)
-        post :create, 
+        post :create, params: { 
           comment: {body: "Great story!"},#post to create action
-        story_id: story.id
+          story_id: story.id }
         expect(flash[:success]).to eq("Comment has been added")
       end
     end
@@ -27,7 +27,7 @@ RSpec.describe CommentsController, type: :controller do
         title: "First Story", 
         body: "Body of first story", 
         user: @foo)
-        post :create, comment: {body: "Great story!"}, story_id: story.id
+        post :create, params: {comment: {body: "Great story!"}, story_id: story.id }
         expect(response).to redirect_to new_user_session_path
       end
     end
