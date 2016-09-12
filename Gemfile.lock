@@ -75,6 +75,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     ffi (1.9.14)
     formatador (0.2.5)
     foundation-rails (6.2.3.0)
@@ -264,6 +269,7 @@ DEPENDENCIES
   capybara (~> 2.8, >= 2.8.1)
   coffee-rails (~> 4.1.0)
   devise (~> 4.1, >= 4.1.1)
+  factory_girl_rails
   foundation-rails
   guard-rspec
   jbuilder (~> 2.0)
@@ -283,4 +289,4 @@ DEPENDENCIES
   zurb-foundation (~> 4.3, >= 4.3.2)
 
 BUNDLED WITH
-   1.12.5
+   1.13.0
