@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Creating Stories" do 
+RSpec.feature "Creating Stories", :type => :feature do 
   
   before do
     @foo = User.create!(email: "foo@bar.com", password: "password")
@@ -10,7 +10,10 @@ RSpec.feature "Creating Stories" do
   scenario "A user creates a new story" do
     visit "/"
     
+    expect(page).to have_content("Signed in as")
+    
     click_link "New Story"
+#    click_button "New Story"
     
     fill_in "Title", with: "Creating first story"
     fill_in "Body", with: "Lorem Ipsum"
