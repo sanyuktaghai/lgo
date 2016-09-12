@@ -4,7 +4,7 @@
       div[class="callout alert" data-closable]
         button[class="close-button" aria-label="Dismiss alert" type="button" data-close]
           span[aria-hidden="true"] &times;
-        h4
+        h5
           == pluralize(@story.errors.count, "error")
           |  prohibited this story from being saved:
         ul
