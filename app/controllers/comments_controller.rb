@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   
   def create
     unless current_user
-      flash[:danger] = "Please sign in to continue"
+      flash[:warning] = "Please sign in to continue"
       redirect_to new_user_session_path
     else
       @comment = @story.comments.build(comment_params)
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
       if @comment.save
         flash[:success] = "Comment has been added"
       else
-        flash.now[:danger] = "Comment has not been added"
+        flash.now[:alert] = "Comment has not been added"
       end
       redirect_to story_path(@story)
     end

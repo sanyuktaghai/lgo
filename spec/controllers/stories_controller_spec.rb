@@ -27,7 +27,7 @@ RSpec.describe StoriesController, type: :controller do
         get :edit, params: { id: story }
         expect(response).to redirect_to(root_path)
         message = "You can only edit your own stories."
-        expect(flash[:danger]).to eq message
+        expect(flash[:warning]).to eq message
       end
     end
 

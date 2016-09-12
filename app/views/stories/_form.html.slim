@@ -1,0 +1,21 @@
+== form_for(@story, :html => {class: "form", role: "form"}) do |f|
+  div
+    - if @story.errors.any?
+      div[class="callout alert" data-closable]
+        button[class="close-button" aria-label="Dismiss alert" type="button" data-close]
+          span[aria-hidden="true"] &times;
+        h4
+          == pluralize(@story.errors.count, "error")
+          |  prohibited this story from being saved:
+        ul
+          - @story.errors.full_messages.each do |msg|
+            li
+              == msg
+  div
+    == f.label :title
+    == f.text_field :title, class: "form-control", autofocus: true
+  div
+    == f.label :body
+    == f.text_area :body, rows: 10, class: "form-control"
+  div
+    == f.submit class: "button"
