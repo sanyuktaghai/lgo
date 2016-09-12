@@ -1,0 +1,22 @@
+<div>
+  <%= form_for [@story, @comment], :html => {class: "form-horizontal", role: "form"} do |f| %>
+  <div>
+    <% if @comment.errors.any? %>
+      <%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:
+    <ul><% @comment.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+  <div>
+    <%= f.label :body, 'New Comment' %>
+    <%= f.text_area :body, rows: 10, class: "form-control" %>
+  </div>
+  <div>
+    <%= f.submit "Add Comment", class: "button" %>
+  </div>
+<% end %>
+</div>

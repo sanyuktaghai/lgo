@@ -1,6 +1,10 @@
 class CommentsController < ApplicationController
   before_action :set_story
   
+  def index
+    @comment = @story.comments.all
+  end
+  
   def create
     unless current_user
       flash[:warning] = "Please sign in to continue"
@@ -11,10 +15,11 @@ class CommentsController < ApplicationController
 
       if @comment.save
         flash[:success] = "Comment has been added"
+        redirect_to story_path(@story)
       else
-        flash.now[:alert] = "Comment has not been added"
+        flash.now[:warning] = "Comment has not been added"
+        render :new
       end
-      redirect_to story_path(@story)
     end
   end
   

@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   
   validates :body, presence: true
   
-  def self.persisted
-    where.not(id: nil)
-  end
+#  def self.persisted
+#    where.not(id: nil)
+#  end
 end
