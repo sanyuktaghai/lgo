@@ -1,0 +1,18 @@
+== form_for [@story, @comment], :html => {class: "form-horizontal", role: "form"} do |f|
+  div
+    - if @comment.errors.any?
+      div[class="callout alert" data-closable]
+        button[class="close-button" aria-label="Dismiss alert" type="button" data-close]
+          span[aria-hidden="true"] &times;
+        h5
+          == pluralize(@comment.errors.count, "error")
+          |  prohibited this comment from being saved:
+          ul
+            - @comment.errors.full_messages.each do |msg|
+              li
+                == msg
+  div
+    == f.label :body, 'New Comment'
+    == f.text_area :body, rows: 10, class: "form-control"
+  div
+    == f.submit "Add Comment", class: "button"

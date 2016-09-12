@@ -1,0 +1,12 @@
+h2 Comments
+- persisted_comments = @story.comments.reject { |comment| comment.new_record? }
+- if persisted_comments.any?
+  - persisted_comments.each do |comment|
+    div
+      == comment.body
+    div
+      == time_ago_in_words(comment.created_at)
+      |  ago by 
+      == comment.user.email
+- else
+  | There are no comments to show.
