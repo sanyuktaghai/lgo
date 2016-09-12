@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature "Showing Stories" do 
   before do
-    @foo = User.create(email: "foo@bar.com", password: "password")
-    @foobar = User.create(email: "foobar@bar.com", password: "password")
+    @foo = FactoryGirl.create(:user)
+    @bar = FactoryGirl.create(:user)
     @story = Story.create(title: "The first story", body: "Body of first story", user: @foo)
   end
   
@@ -21,7 +21,7 @@ RSpec.feature "Showing Stories" do
   end
   
   scenario "A non-owner signed in does not see edit or delete links" do
-    login_as(@foobar)
+    login_as(@bar, :scope => :user)
     
     visit "/"
     
@@ -36,7 +36,7 @@ RSpec.feature "Showing Stories" do
   end
   
   scenario "A signed-in owner sees both edit and delete links" do
-    login_as(@foo)
+    login_as(@foo, :scope => :user)
     
     visit "/"
     

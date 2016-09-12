@@ -3,16 +3,13 @@ require 'rails_helper'
 RSpec.feature "Creating Stories", :type => :feature do 
   
   before do
-#    @foo = User.create!(email: "foo@bar.com", password: "password")
-    user = FactoryGirl.create!(:user)
-    login_as(user, :scope => :user)
+    @user = FactoryGirl.create(:user)
+    login_as(@user, :scope => :user)
   end
   
   scenario "A user creates a new story" do
     visit "/"
-    
-#    expect(page).to have_content("Signed in as")
-    
+  
     click_link "New Story"
     
     fill_in "Title", with: "Creating first story"
@@ -21,7 +18,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(stories_path)
-    expect(page).to have_content("Created by: #{@foo.email}")
+    expect(page).to have_content("Created by: #{@user.email}")
   end
   
   scenario "A user fails to create a new story" do

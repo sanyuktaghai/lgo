@@ -2,14 +2,14 @@ require "rails_helper"
 
 RSpec.feature "Adding Comments to Stories" do
   before do
-    @foo = User.create(email: "foo@bar.com", password: "password")
-    @foobar = User.create(email: "foobar@bar.com", password: "password")
+    @foo = FactoryGirl.create(:user)
+    @bar = FactoryGirl.create(:user)
     
     @story = Story.create(title: "The first story", body: "Body of first story", user: @foo)
   end
   
   scenario "Permit a signed in user to write a comment" do
-    login_as(@foobar)
+    login_as(@bar, :scope => :user)
     
     visit "/"
     click_link @story.title
