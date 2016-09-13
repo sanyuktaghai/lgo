@@ -18,9 +18,22 @@ RSpec.feature "Adding Comments to Stories" do
     
     expect(page).to have_content("Comment has been added")
     expect(page).to have_content("Great story!")
-    expect(page.current_path).to eq(story_path(@story.comments.last.id))
+    expect(page.current_path).to eq(story_path(@story))
+#    expect(page.current_path).to eq(story_path(@story.comments.last.id))
   end
   
+  scenario "A user fails to create a new comment", :js => true do
+    login_as(@bar, :scope => :user)
+    
+    visit "/"
+    click_link @story.title
+    fill_in "New Comment", with: ""
+    click_button "Add Comment"
+    assert_text("Body can't be blank")
+    
+    expect(page).to have_content("Comment has not been added")
+    
+  end
   
 end
   
