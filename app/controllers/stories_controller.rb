@@ -45,7 +45,6 @@ class StoriesController < ApplicationController
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
           format.html {redirect_to @story}
-#          redirect_to @story
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders the edit template again
