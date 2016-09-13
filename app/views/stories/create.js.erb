@@ -1,8 +1,9 @@
 <% if @story.errors.any? %>
-  $("#error_block").html("<%= j flash[:alert] %>");
-  $("#error_block").append(
+  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i><%= j flash[:alert] %></p></div>');
+  $("#error_block").html(
     '<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><ul><% @story.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul></div>'
   );
+  
 <% else %>
   window.location.href = "<%= stories_path %>"
 <% end %>

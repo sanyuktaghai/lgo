@@ -8,7 +8,7 @@ RSpec.describe StoriesController, type: :controller do
       @foo = User.create(email: "foo@bar.com", password: "password")
     end
     
-    context "owner is allowed to edit her articles" do
+    context "owner is allowed to edit her stories" do
       it "renders the edit template" do
         sign_in @foo
         story = Story.create(title: "first story", body: "body of first story", user: @foo)
@@ -18,7 +18,7 @@ RSpec.describe StoriesController, type: :controller do
       end
     end
     
-    context "non-owner is not allowed to edit other users' articles" do
+    context "non-owner is not allowed to edit other users' stories" do
       it "redirects to the root path" do
         foobar = User.create(email: "foobar@bar.com", password: "password")
         sign_in foobar

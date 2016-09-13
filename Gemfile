@@ -29,6 +29,8 @@ gem 'devise', '~> 4.1', '>= 4.1.1'
 
 gem 'foundation-rails'
 
+gem 'foundation-icons-sass-rails'
+
 gem 'slim-rails'
 
 gem 'font-awesome-rails'
