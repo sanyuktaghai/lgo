@@ -31,7 +31,6 @@ RSpec.feature "Creating Stories", :type => :feature do
     click_button "Create Story"
     assert_text("Title can't be blank")
     
-#    wait_for_ajax
     expect(page).to have_content("Story has not been submitted")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Body can't be blank")
