@@ -12,18 +12,15 @@ class StoriesController < ApplicationController
   
   def create
     @story = current_user.stories.build(story_params)
-#      @errorContent = []
     respond_to do |format|
       if @story.save
         flash[:success] = "Story has been submitted"
         format.html {redirect_to stories_path}
         format.js
-        #redirect_to stories_path
       else
         flash.now[:alert] = "Story has not been submitted"
         format.html {render :new}
         format.js
-        #render :new #renders the new template again
       end
     end
   end

@@ -35,4 +35,19 @@ RSpec.feature "Creating Stories", :type => :feature do
     expect(page).to have_content("Body can't be blank")
     
   end
+  
+  scenario "A user fails to create a new story with AJAX" do
+    visit "/"
+    
+    click_link "New Story"
+    
+    fill_in "Title", with: ""
+    fill_in "Body", with: ""
+    click_button "Create Story"
+    
+    expect(page).to have_content("Story has not been submitted")
+    expect(page).to have_content("Title can't be blank", wait: 1.0)
+    expect(page).to have_content("Body can't be blank")
+    
+  end
 end
