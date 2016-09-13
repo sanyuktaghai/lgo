@@ -11,19 +11,15 @@ class CommentsController < ApplicationController
       redirect_to new_user_session_path
     else
       @comment = @story.comments.build(comment_params)
-      @comment.user = current_user
-      
+      @comment.user = current_user    
       respond_to do |format|
         if @comment.save
           flash[:success] = "Comment has been added"
           format.html { redirect_to story_path(@story) }
         else
           flash[:warning] = "Comment has not been added"
-#          format.html {render :new}
           format.js
-#          render "stories/show"
         end
-#       redirect_to story_path(@story)
       end
     end
   end
