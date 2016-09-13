@@ -1,4 +1,5 @@
-== form_for(@story, :html => {class: "form", role: "form"}) do |f|
+== form_for(@story, :html => {class: "form"}, remote: true) do |f|
+  /The following div is so that specs pass without Ajax (e.g. HTML format)
   div
     - if @story.errors.any?
       div[class="callout alert" data-closable]
@@ -12,10 +13,12 @@
             li
               == msg
   div
-    == f.label :title
+    == f.label :title 
     == f.text_field :title, class: "form-control", autofocus: true
+    span class="form-error" This field is required.
   div
     == f.label :body
     == f.text_area :body, rows: 10, class: "form-control"
+    span class="form-error" This field is required.
   div
     == f.submit class: "button"
