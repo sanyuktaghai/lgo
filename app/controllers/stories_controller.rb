@@ -37,19 +37,25 @@ class StoriesController < ApplicationController
   end
   
   def update
-    if @story.user != current_user
-      flash[:warning] = "You can only edit your own stories."
-      redirect_to root_path
-    else
-      if @story.update(story_params)
-        flash[:success] = "Story has been updated"
-        redirect_to @story
+    respond_to do |format|
+      if @story.user != current_user
+        flash[:warning] = "You can only edit your own stories."
+        redirect_to root_path
       else
-        flash.now[:alert] = "Story has not been updated"
-        render :edit #renders the edit template again
+        if @story.update(story_params)
+          flash[:success] = "Story has been updated"
+          format.html {redirect_to @story}
+          format.js
+#          redirect_to @story
+        else
+          flash.now[:alert] = "Story has not been updated"
+          format.html {render :edit} #renders the edit template again
+          format.js
+        end
       end
     end
   end
+  
   
   def destroy
     if @story.destroy
