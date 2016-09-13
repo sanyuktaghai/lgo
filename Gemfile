@@ -53,6 +53,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'pg'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
@@ -61,5 +62,6 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.8', '>= 2.8.1'
+  gem 'capybara'
+  gem 'capybara-webkit'
 end

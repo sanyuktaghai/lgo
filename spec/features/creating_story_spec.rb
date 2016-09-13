@@ -21,7 +21,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     expect(page).to have_content("Created by: #{@user.email}")
   end
   
-  scenario "A user fails to create a new story" do
+  scenario "A user fails to create a new story", :js => true do
     visit "/"
     
     click_link "New Story"
@@ -29,25 +29,13 @@ RSpec.feature "Creating Stories", :type => :feature do
     fill_in "Title", with: ""
     fill_in "Body", with: ""
     click_button "Create Story"
+    assert_text("Title can't be blank")
     
+#    wait_for_ajax
     expect(page).to have_content("Story has not been submitted")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Body can't be blank")
-    
-  end
-  
-  scenario "A user fails to create a new story with AJAX" do
-    visit "/"
-    
-    click_link "New Story"
-    
-    fill_in "Title", with: ""
-    fill_in "Body", with: ""
-    click_button "Create Story"
-    
-    expect(page).to have_content("Story has not been submitted")
-    expect(page).to have_content("Title can't be blank", wait: 1.0)
-    expect(page).to have_content("Body can't be blank")
+
     
   end
 end
