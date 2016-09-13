@@ -1,9 +1,23 @@
+$("#new_story label.is-invalid-label").removeClass("is-invalid-label");
+$("#new_story input.is-invalid-input, #new_story textarea.is-invalid-input").removeClass("is-invalid-input");
+$("#new_story span.form-error").remove("p");
+$("#new_story span.form-error.is-visible").removeClass("is-visible");
+
+
 <% if @story.errors.any? %>
-  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i><%= j flash[:alert] %></p></div>');
-  $("#error_block").html(
-    '<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><ul><% @story.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul></div>'
-  );
-  
+  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
+
+  <% field_array = ["title", "body"] %>  
+  <% for i in 0..@story.errors.full_messages.length-1 %>
+    <% field_array.each do |field| %>
+      <% if @story.errors.full_messages[i].downcase.include? field %>
+        $('label[for="story_<%= j field%>"]').addClass("is-invalid-label");
+        $('#story_<%= j field%>').addClass("is-invalid-input");
+        $('#story_<%= j field%>').closest('div').find('span.form-error').addClass("is-visible").html('<p><%= @story.errors.full_messages[i] %></p>');
+      <% end %>
+    <% end %>
+  <% end %>
+ 
 <% else %>
   window.location.href = "<%= stories_path %>"
 <% end %>

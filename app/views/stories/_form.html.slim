@@ -14,11 +14,11 @@
               == msg
   div
     == f.label :title 
-    == f.text_field :title, class: "form-control", autofocus: true
-    span class="form-error" This field is required.
+    == f.text_field :title, autofocus: true
+    span class="form-error" 
   div
     == f.label :body
-    == f.text_area :body, rows: 10, class: "form-control"
+    == f.text_area :body, rows: 10
     span class="form-error" This field is required.
   div
     == f.submit class: "button"
