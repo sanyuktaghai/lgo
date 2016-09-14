@@ -26,7 +26,6 @@ class CommentsController < ApplicationController
   
   def edit
     @comment = @story.comments.find(params[:id])
-    
     if @comment.user != current_user
       flash[:alert] = "You can only edit your own comments"
       redirect_to story_path(@story)
