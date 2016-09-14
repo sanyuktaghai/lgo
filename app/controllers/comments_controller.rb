@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_story
+  before_action :set_comment, only: [:edit, :update, :destroy]
   
   def index
     @comment = @story.comments.all
@@ -25,7 +26,6 @@ class CommentsController < ApplicationController
   end
   
   def edit
-    @comment = @story.comments.find(params[:id])
     if @comment.user != current_user
       flash[:alert] = "You can only edit your own comments"
       redirect_to story_path(@story)
@@ -33,7 +33,6 @@ class CommentsController < ApplicationController
   end
   
   def update
-    @comment = @story.comments.find(params[:id])
     if @comment.user != current_user
       flash[:alert] = "You can only edit your own comments"
       redirect_to story_path(@story)
@@ -50,6 +49,18 @@ class CommentsController < ApplicationController
     end
   end
   
+  def destroy
+    if @comment.user != current_user
+      flash[:alert] = "You can only edit your own comments"
+      redirect_to story_path(@story)
+    else
+      if @comment.destroy
+        flash[:success] = "Comment has been deleted"
+        redirect_to story_path(@story)
+      end
+    end
+  end
+  
   private
   
   def comment_params
@@ -58,5 +69,9 @@ class CommentsController < ApplicationController
   
   def set_story
     @story = Story.find(params[:story_id])#if just :id, it's comment id
+  end
+    
+  def set_comment
+    @comment = @story.comments.find(params[:id])
   end
 end

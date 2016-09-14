@@ -11,6 +11,6 @@ h2 Comments
     div
       - if current_user == comment.user
         == link_to "Edit", edit_story_comment_path(@story, comment)
-/      Up next, make loop for every comment & display edit if current user = story.author
+        == link_to "Delete", story_comment_path(@story, comment), method: :delete, data: {confirm: "Are you sure you want to delete the comment?"}, class: "btn"
 - else
   | There are no comments to show.
