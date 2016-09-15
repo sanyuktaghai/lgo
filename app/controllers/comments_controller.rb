@@ -30,6 +30,9 @@ class CommentsController < ApplicationController
       flash[:alert] = "You can only edit your own comments"
       redirect_to story_path(@story)
     end   
+    respond_to do |format|
+      format.js
+    end
   end
   
   def update

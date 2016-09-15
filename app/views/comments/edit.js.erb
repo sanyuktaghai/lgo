@@ -1,0 +1,4 @@
+$("#comment_<%= j @comment[:id].to_s %>").html('<div>Cool, we are getting somewhere!</div>');
+
+
+$("#comment_<%= j @comment[:id].to_s %>").html("<%= j render(:partial => 'form')%>");

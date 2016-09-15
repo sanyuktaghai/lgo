@@ -2,6 +2,7 @@ $("#edit_story_<%= j @story[:id].to_s %> label.is-invalid-label").removeClass("i
 $("#edit_story_<%= j @story[:id].to_s %> input.is-invalid-input, #edit_story_<%= j @story[:id].to_s %> textarea.is-invalid-input").removeClass("is-invalid-input");
 $("#edit_story_<%= j @story[:id].to_s %> span.form-error").remove("p");
 $("#edit_story_<%= j @story[:id].to_s %> span.form-error.is-visible").removeClass("is-visible");
+alert("update.js.erb is working for stories");
 
 
 <% if @story.errors.any? %>
