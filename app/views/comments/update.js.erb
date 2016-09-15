@@ -1,1 +1,15 @@
-alert("It's reading from the comments create view!");
+<% if @comment.errors.any? %>
+  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
+  <% field_array = ["body"] %>  
+  <% for i in 0..@comment.errors.full_messages.length-1 %>
+    <% field_array.each do |field| %>
+      <% if @comment.errors.full_messages[i].downcase.include? field %>
+        $('#edit_comment_<%= j @comment[:id].to_s %>').each(function() { 
+          $(this).find('label[for="comment_<%= j field%>"]').addClass("is-invalid-label");
+          $(this).find('#comment_<%= j field%>').addClass("is-invalid-input");
+          $(this).find('#comment_<%= j field%>').closest('div').find('span.form-error').addClass("is-visible").html('<p><%= @comment.errors.full_messages[i] %></p>');
+        });
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
