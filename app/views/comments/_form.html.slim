@@ -1,19 +1,13 @@
 == form_for [@story, @comment], :html => {class: "form"}, remote: true do |f|
-  /div
-    - if @comment.errors.any?
-      div[class="callout alert" data-closable]
-        button[class="close-button" aria-label="Dismiss alert" type="button" data-close]
-          span[aria-hidden="true"] &times;
-        h5
-          == pluralize(@comment.errors.count, "error")
-          |  prohibited this comment from being saved:
-          ul
-            - @comment.errors.full_messages.each do |msg|
-              li
-                == msg
   div
-    == f.label :body, 'New Comment'
+    - if controller.action_name == "new" or  controller.action_name == "show"
+      == f.label :body, 'New Comment'
+    - else controller.action_name == "edit"
+      == f.label :body, 'Edit Comment'
     == f.text_area :body, autofocus: true, rows: 10, class: "form-control"
     span class="form-error"
   div
-    == f.submit class: "button"
+    - if controller.action_name == "new" or controller.action_name == "show"
+      == f.submit "Add Comment", class: "button"
+    - else controller.action_name == "edit"
+      == f.submit class: "button"
