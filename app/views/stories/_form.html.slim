@@ -1,17 +1,4 @@
 == form_for(@story, :html => {class: "form"}, remote: true) do |f|
-  /The following div is so that specs pass without Ajax (e.g. HTML format). QUESTION: May not need this going forward? Answer should relate to wait time in creating_story_spec.rb. Without waiting 1 second, the spec only passes with the following code
-  /div
-    - if @story.errors.any?
-      div[class="callout alert" data-closable]
-        button[class="close-button" aria-label="Dismiss alert" type="button" data-close]
-          span[aria-hidden="true"] &times;
-        h5
-          == pluralize(@story.errors.count, "error")
-          |  prohibited this story from being saved:
-        ul
-          - @story.errors.full_messages.each do |msg|
-            li
-              == msg
   div
     == f.label :title 
     == f.text_field :title, autofocus: true

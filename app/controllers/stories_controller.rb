@@ -16,11 +16,13 @@ class StoriesController < ApplicationController
       if @story.save
         flash[:success] = "Story has been submitted"
         format.html {redirect_to stories_path}
-        format.js
+#        format.js
       else
         flash.now[:alert] = "Story has not been submitted"
         format.html {render :new}
-        format.js
+#        format.js
+        format.js {render :partial => 'stories/storyerrors', :data => @story.to_json }
+    
       end
     end
   end
@@ -48,7 +50,7 @@ class StoriesController < ApplicationController
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders the edit template again
-          format.js
+          format.js 
         end
       end
     end
@@ -69,5 +71,7 @@ class StoriesController < ApplicationController
   
   def set_story
     @story = Story.find(params[:id])
+    #to make sure users can only get to their own stories
+    #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
   end
 end

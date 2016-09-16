@@ -1,8 +1,12 @@
-$("#edit_story_<%= j @story[:id].to_s %> label.is-invalid-label").removeClass("is-invalid-label");
-$("#edit_story_<%= j @story[:id].to_s %> input.is-invalid-input, #edit_story_<%= j @story[:id].to_s %> textarea.is-invalid-input").removeClass("is-invalid-input");
-$("#edit_story_<%= j @story[:id].to_s %> span.form-error").remove("p");
-$("#edit_story_<%= j @story[:id].to_s %> span.form-error.is-visible").removeClass("is-visible");
-
+<% if controller.action_name == "create" %>
+  console.log("create");
+<% elsif controller.action_name == "update" %>
+  console.log("update");
+<% end %>
+$("#new_story label.is-invalid-label").removeClass("is-invalid-label");
+$("#new_story input.is-invalid-input, #new_story textarea.is-invalid-input").removeClass("is-invalid-input");
+$("#new_story span.form-error").remove("p");
+$("#new_story span.form-error.is-visible").removeClass("is-visible");
 
 <% if @story.errors.any? %>
   $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
@@ -17,7 +21,4 @@ $("#edit_story_<%= j @story[:id].to_s %> span.form-error.is-visible").removeClas
       <% end %>
     <% end %>
   <% end %>
- 
-<% else %>
-  window.location.href = "<%= @story %>"
 <% end %>
