@@ -7,4 +7,10 @@ class Story < ApplicationRecord
   
   default_scope { order(created_at: :desc)}
   
+  #scope :published { where published: true}
+  # =>  Story.published in controller do the above query
+  # e.g. @ final_stories = Story.published
+  #scope :unpublished {where published: false}
+  # current_user.
+  
 end
