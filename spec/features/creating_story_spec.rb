@@ -14,7 +14,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     fill_in "Title", with: "Creating first story"
     fill_in "Body", with: "Lorem Ipsum"
-    click_button "Create Story"
+    click_button "Contribute Story"
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(stories_path)
@@ -28,7 +28,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     fill_in "Title", with: ""
     fill_in "Body", with: ""
-    click_button "Create Story"
+    click_button "Contribute Story"
     assert_text("Title can't be blank")
     
     expect(page).to have_content("Story has not been submitted")

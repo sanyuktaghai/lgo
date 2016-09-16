@@ -8,4 +8,7 @@
     == f.text_area :body, rows: 10
     span class="form-error"
   div
-    == f.submit class: "button"
+    - if controller.action_name == "new"
+      == f.submit "Contribute Story", class: "button"
+    - else
+      == f.submit class: "button"
