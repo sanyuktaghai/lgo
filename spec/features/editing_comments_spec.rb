@@ -12,18 +12,17 @@ RSpec.feature "Editing Comments" do
     @comment3 = Comment.create(body: "Super great story!", user: @bar, story: @story_bar)
   end
   
-  scenario "An owner succeeds " do
+  scenario "An owner succeeds", :js => true do
     login_as(@foo, :scope => :user)
     
     visit "/"
     click_link @story_foo.title
     
-#    expect(page).to have_link("Edit")#need to update this to reflect a[href]
-    
     link = "a[href='/stories/#{@story_foo.id}/comments/#{@comment1.id}/edit']"
     find(link).click
-    fill_in "New Comment", with: "OK read" #should be fillin "Update Comment"
-    click_button "Add Comment"#should be "update comment"
+    expect(page).to have_field('Edit Comment', :with => "Great story!")
+    within("#edit_comment_#{@comment1.id}"){fill_in("Edit Comment", with: "OK read" )}
+    click_button "Update Comment"
     
     expect(page).to have_content("OK read")
     expect(page).not_to have_content("Great story!")
