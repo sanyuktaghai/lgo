@@ -1,12 +1,24 @@
+<% action_array = ["new_story", "edit_story_#{@story[:id]}"] %>
+  
 <% if controller.action_name == "create" %>
-  console.log("create");
+  <% array_index = 0 %>
 <% elsif controller.action_name == "update" %>
-  console.log("update");
+  <% array_index = 1 %>
 <% end %>
-$("#new_story label.is-invalid-label").removeClass("is-invalid-label");
-$("#new_story input.is-invalid-input, #new_story textarea.is-invalid-input").removeClass("is-invalid-input");
-$("#new_story span.form-error").remove("p");
-$("#new_story span.form-error.is-visible").removeClass("is-visible");
+  
+
+$("#<%= j action_array[array_index].to_s %> label.is-invalid-label").removeClass("is-invalid-label");
+$("#<%= j action_array[array_index].to_s %> input.is-invalid-input, #<%= j action_array[array_index].to_s %> textarea.is-invalid-input").removeClass("is-invalid-input");
+$("#<%= j action_array[array_index].to_s %> span.form-error").remove("p");
+$("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeClass("is-visible");
+
+
+
+
+
+  
+  
+
 
 <% if @story.errors.any? %>
   $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');

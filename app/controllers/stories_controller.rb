@@ -16,11 +16,9 @@ class StoriesController < ApplicationController
       if @story.save
         flash[:success] = "Story has been submitted"
         format.html {redirect_to stories_path}
-#        format.js
       else
         flash.now[:alert] = "Story has not been submitted"
         format.html {render :new}
-#        format.js
         format.js {render :partial => 'stories/storyerrors', :data => @story.to_json }
     
       end
@@ -49,13 +47,12 @@ class StoriesController < ApplicationController
           format.html {redirect_to @story}
         else
           flash.now[:alert] = "Story has not been updated"
-          format.html {render :edit} #renders the edit template again
-          format.js 
+          format.html {render :edit} #renders edit tmplt again
+          format.js {render :partial => 'stories/storyerrors', :data => @story.to_json }
         end
       end
     end
   end
-  
   
   def destroy
     if @story.destroy
