@@ -19,5 +19,14 @@ RSpec.feature "Adding Likes to Stories" do
     expect(page).to have_content("Likes: 1")
     expect(page.current_path).to eq(story_path(@story))
   end
+  
+  scenario "A non-signed in user fails to like a story" do
+    visit "/"
+    click_link @story.title
+    
+    click_button "Like Story"
+    
+    expect(page).to have_content("Please sign in to continue")
+    expect(page.current_path).to eq(new_user_session_path)
+  end
 end
-

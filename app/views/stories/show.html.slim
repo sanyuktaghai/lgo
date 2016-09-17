@@ -14,9 +14,9 @@ p
 == render 'comments/show'
 
 <!-- Likes -->
-
 == form_for [@story, @story_like] do |f|
   div
     == f.submit "Like Story", class: "button"
 | Likes: 
+
 == @story.story_likes.count

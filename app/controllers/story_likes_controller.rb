@@ -2,14 +2,19 @@ class StoryLikesController < ApplicationController
   before_action :set_story
   
   def create
-    @story_like = @story.story_likes.build(story_likes_params)
-    @story_like.user = current_user
-    if @story_like.save
-      flash[:success] = "Like has been added"
+    unless current_user
+      flash[:warning] = "Please sign in to continue"
+      redirect_to new_user_session_path
     else
-      flash[:warning] = "Like has not been added"
+      @story_like = @story.story_likes.build(story_likes_params)
+      @story_like.user = current_user
+      if @story_like.save
+        flash[:success] = "Like has been added"
+      else
+        flash[:warning] = "Like has not been added"
+      end
+      redirect_to story_path(@story)
     end
-    redirect_to story_path(@story)
   end
   
   private
