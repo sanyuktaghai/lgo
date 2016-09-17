@@ -15,7 +15,7 @@ class StoryLikesController < ApplicationController
   private
   
   def story_likes_params
-    params.require(:StoryLike).permit(:id)
+    #    params.require(:story_like).permit(:id) #Q:Do i need to whitelist this? It throws an error.
   end
   
   def set_story
