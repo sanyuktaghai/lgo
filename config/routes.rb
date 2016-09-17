@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root to: 'stories#index'
   resources :stories do 
     resources :comments
+    resources :story_likes
   end
 
   # Example of regular route:

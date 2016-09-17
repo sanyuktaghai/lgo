@@ -5,5 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   has_many :stories
+  has_many :story_likes
   
 end
