@@ -14,9 +14,13 @@ p
 == render 'comments/show'
 
 <!-- Likes -->
-== form_for [@story, @story_like] do |f|
+- if @story.story_likes.find_by(user_id: current_user) != nil
   div
+    == link_to "Unlike Story", story_story_like_path(@story, current_user), method: :delete, data: {confirm: "Are you sure you want to unlike the story?"}, class: "button"
+- else
+  == form_for [@story, @story_like] do |f|
+    div
     == f.submit "Like Story", class: "button"
-| Likes: 
 
+| Likes: 
 == @story.story_likes.count
