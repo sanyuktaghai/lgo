@@ -11,7 +11,7 @@ class BookmarksController < ApplicationController
       respond_to do |format|
         if @bookmark.save
           flash.now[:success] = "Save has been added"
-#          format.js {render :partial => 'story_saves/showstorysaves'}
+          format.js {render :partial => 'bookmarks/showbookmarks'}
           format.html {redirect_to story_path(@story)}
         else
           flash[:warning] = "Save has not been added"
@@ -21,16 +21,16 @@ class BookmarksController < ApplicationController
     end
   end
   
-#  def destroy
-#    @story_like = @story.story_likes.find_by(user_id: current_user)
-#    respond_to do |format|
-#      if @story_like.destroy
-#        flash.now[:success] = "Like has been deleted"
-#        format.js {render :partial => 'story_likes/showstorylikes'}
-##        redirect_to story_path(@story)
-#      end
-#    end
-#  end
+  def destroy
+    @bookmark = @story.bookmarks.find_by(user_id: current_user)
+    respond_to do |format|
+      if @story_like.destroy
+        flash.now[:success] = "Like has been deleted"
+        format.js {render :partial => 'bookmarks/showbookmarks'}
+        redirect_to story_path(@story)
+      end
+    end
+  end
   
   private
   
