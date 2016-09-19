@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :stories do 
     resources :comments
     resources :story_likes
+    resources :bookmarks
   end
 
   # Example of regular route:

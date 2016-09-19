@@ -1,4 +1,10 @@
-FactoryGirl.define do  factory :story_like do
+FactoryGirl.define do  factory :bookmark do
+    user nil
+story nil
+  end
+  
+
+  factory :story_like do
     user nil
 story nil
   end

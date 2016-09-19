@@ -6,5 +6,6 @@ class User < ApplicationRecord
   
   has_many :stories
   has_many :story_likes
+  has_many :bookmarks
   
 end
