@@ -16,6 +16,7 @@ RSpec.feature "Adding Saves to Stories" do
   
     click_button "Save Story"
     
+    expect(page).to have_content("Story has been saved")
     expect(page).to have_content("Saves: 1")
     expect(page.current_path).to eq(story_path(@story))
   end

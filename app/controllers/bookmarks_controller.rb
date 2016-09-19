@@ -10,7 +10,7 @@ class BookmarksController < ApplicationController
       @bookmark.user = current_user
       respond_to do |format|
         if @bookmark.save
-          flash.now[:success] = "Save has been added"
+          flash.now[:success] = "Story has been saved"
           format.js {render :partial => 'bookmarks/showbookmarks'}
           format.html {redirect_to story_path(@story)}
         else
@@ -24,10 +24,10 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark = @story.bookmarks.find_by(user_id: current_user)
     respond_to do |format|
-      if @story_like.destroy
-        flash.now[:success] = "Like has been deleted"
+      if @bookmark.destroy
+        flash.now[:success] = "Story save has been deleted"
         format.js {render :partial => 'bookmarks/showbookmarks'}
-        redirect_to story_path(@story)
+#        redirect_to story_path(@story)
       end
     end
   end
