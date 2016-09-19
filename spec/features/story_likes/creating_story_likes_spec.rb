@@ -8,7 +8,7 @@ RSpec.feature "Adding Likes to Stories" do
     @story = Story.create(title: "The first story", body: "Body of first story", user: @foo)
   end
   
-  scenario "Permit a signed in user to like a story" do
+  scenario "Permit a signed in user to like a story", :js => true do
     login_as(@bar, :scope => :user)
     
     visit "/"
@@ -20,7 +20,7 @@ RSpec.feature "Adding Likes to Stories" do
     expect(page.current_path).to eq(story_path(@story))
   end
   
-  scenario "A non-signed in user fails to like a story" do
+  scenario "A non-signed in user fails to like a story", :js => true do
     visit "/"
     click_link @story.title
     

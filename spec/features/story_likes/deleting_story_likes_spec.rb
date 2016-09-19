@@ -10,7 +10,7 @@ RSpec.feature "Deleting StoryLikes" do
     @story_like = StoryLike.create(user: @foo, story: @story_bar)
   end
   
-  scenario "A user succeeds" do
+  scenario "A user succeeds", :js => true do
     login_as(@foo, :scope => :user)
     
     visit "/"
@@ -18,6 +18,8 @@ RSpec.feature "Deleting StoryLikes" do
     click_link "Unlike Story"
     
     expect(page).to have_content("Like has been deleted")
-    expect(page).not_to have_content("Likes: 0")
+    expect(page).to have_content("Likes: 0")
+    expect(page).to have_button("Like Story")
+    expect(page).not_to have_link("Unlike Story")
   end
 end

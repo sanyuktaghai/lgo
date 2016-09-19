@@ -1,0 +1,11 @@
+$("#flash_notice").html('<div class="callout success" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-check"></i> <%= j flash[:success] %></p></div>');
+
+<% if controller.action_name == "create" %>
+  $("#new_story_like").remove();
+  $("#story_like_buttons").html('<%= j link_to "Unlike Story", story_story_like_path(@story, current_user), method: :delete, class: "button", remote: true %>');
+<% elsif controller.action_name == "destroy" %>
+  $('a[href="/stories/<%= j @story.id.to_s %>/story_likes/<%= j @story_like.id.to_s %>"]').remove();
+ $("#story_like_buttons").html('<%= j render :partial => 'story_likes/form' %>');
+<% end %>
+  
+$("#story_like_count").html('<%= j @story.story_likes.count.to_s %>');

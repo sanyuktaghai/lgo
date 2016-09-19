@@ -1,6 +1,5 @@
 class StoryLikesController < ApplicationController
   before_action :set_story
-#  before_action :find_likes
   
   def create
     unless current_user
@@ -9,20 +8,26 @@ class StoryLikesController < ApplicationController
     else
       @story_like = @story.story_likes.build(story_likes_params)
       @story_like.user = current_user
-      if @story_like.save
-        flash[:success] = "Like has been added"
-      else
-        flash[:warning] = "Like has not been added"
+      respond_to do |format|
+        if @story_like.save
+          flash.now[:success] = "Like has been added"
+          format.js {render :partial => 'story_likes/showstorylikes'}
+        else
+          flash[:warning] = "Like has not been added"
+          format.html { redirect_to story_path(@story)}
+        end
       end
-      redirect_to story_path(@story)
     end
   end
   
   def destroy
     @story_like = @story.story_likes.find_by(user_id: current_user)
-    if @story_like.destroy
-      flash[:success] = "Like has been deleted"
-      redirect_to story_path(@story)
+    respond_to do |format|
+      if @story_like.destroy
+        flash.now[:success] = "Like has been deleted"
+        format.js {render :partial => 'story_likes/showstorylikes'}
+#        redirect_to story_path(@story)
+      end
     end
   end
   
@@ -34,10 +39,5 @@ class StoryLikesController < ApplicationController
   
   def set_story
     @story = Story.find(params[:story_id])
-  end
-  
-  def find_likes
-#    @user = current_user
-#    @story_like = @story.story_likes.find(params[:user_id])
   end
 end

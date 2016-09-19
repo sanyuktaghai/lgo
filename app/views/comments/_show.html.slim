@@ -10,7 +10,7 @@ h2 Comments
         |  ago by 
         == comment.user.email
       div 
-        - if current_user && current_user == comment.user
+        - if current_user == comment.user
           == link_to "Edit", edit_story_comment_path(@story, comment), remote: true
           == link_to "Delete", story_comment_path(@story, comment), method: :delete, data: {confirm: "Are you sure you want to delete the comment?"}, class: "btn"
 - else

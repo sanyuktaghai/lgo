@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
           flash[:success] = "Comment has been added"
           format.html { redirect_to story_path(@story) }
         else
-          flash[:warning] = "Comment has not been added"
+          flash.now[:warning] = "Comment has not been added"
           format.js {render :partial => 'comments/commenterrors', :data => @comment.to_json }
         end
       end
