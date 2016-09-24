@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Editing Stories" do 
   before do
-    user = FactoryGirl.create(:user)
-    login_as(user, :scope => :user)
-    @story = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: user)
+    @user = FactoryGirl.create(:user_with_stories)
+    login_as(@user, :scope => :user)
+    @story = Story.find_by(user_id: @user.id)
   end
   
   scenario "A user edits a story" do
