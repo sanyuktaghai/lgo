@@ -2,11 +2,10 @@ require "rails_helper"
 
 RSpec.feature "Deleting Bookmarks" do
   before do
-    @foo = FactoryGirl.create(:user)
-    @bar = FactoryGirl.create(:user)
-    
-    @story_foo = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
-    @story_bar = Story.create(raw_title: "The second story", raw_body: "Body of second story", user: @bar)
+    @bar = FactoryGirl.create(:user_with_stories)
+    @foo = FactoryGirl.create(:user_with_stories)
+    @story_foo = Story.find_by(user_id: @foo.id)
+    @story_bar = Story.find_by(user_id: @bar.id)
     @bookmark = Bookmark.create(user: @foo, story: @story_bar)
   end
   
