@@ -1,13 +1,8 @@
 FactoryGirl.define do  
-  
-  factory :bookmark do
-    user nil
-    story nil
-  end
-  
-  factory :story_like do
-    user nil
-    story nil
+  factory :story do
+    sequence(:raw_title) { |n| "#{n.ordinalize.capitalize} Story" }
+    sequence(:raw_body) { |n| "Body of the #{n.ordinalize} story" }
+    user
   end
 
   factory :user do
@@ -16,13 +11,17 @@ FactoryGirl.define do
     
     factory :admin do
       admin true
-    end  
+    end
+    
+    factory :user_with_stories do
+      transient do
+        stories_count 1
+      end
+    end
+    
+    after(:create) do |user, evaluator|
+      create_list(:story, evaluator.stories_count, user: user)
+    end
   end  
-  
-  factory :story do
-    sequence(:raw_title) { |n| "#{n.ordinalize.capitalize} Story" }
-    sequence(:raw_body) { |n| "Body of the #{n.ordinalize} story" }
-#    user 
-  end
   
 end
