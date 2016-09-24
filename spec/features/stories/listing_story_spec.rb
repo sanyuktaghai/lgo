@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Listing Stories" do 
   before do
-    @story1 = Story.create(raw_title: "The first story", raw_body: "Body of first story")
-    @story2 = Story.create(raw_title: "The second story", raw_body: "Body of second story")
+    @user = FactoryGirl.create(:user_with_stories, stories_count: 2)
+    @story1 = Story.where(user_id: @user.id).first
+    @story2 = Story.where(user_id: @user.id).last
   end
   
   scenario "List all stories" do
