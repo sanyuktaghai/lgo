@@ -17,11 +17,10 @@ FactoryGirl.define do
       transient do
         stories_count 1
       end
-    end
     
-    after(:create) do |user, evaluator|
-      create_list(:story, evaluator.stories_count, user: user)
-    end
-  end  
-  
+      after(:create) do |user, evaluator|
+        create_list(:story, evaluator.stories_count, user: user)
+      end
+    end  
+  end
 end

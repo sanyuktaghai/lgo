@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.feature "Showing Stories" do 
   before do
-    @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
-    @story = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
+    @foo = FactoryGirl.create(:user_with_stories, stories_count: 1)
+#    @story = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
+    @story = Story.find_by(user_id: @foo.id)
   end
   
   scenario "A non-signed in user does not see edit or delete links" do
