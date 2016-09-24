@@ -5,14 +5,14 @@ RSpec.feature "Adding Comments to Stories" do
     @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
     
-    @story = Story.create(title: "The first story", body: "Body of first story", user: @foo)
+    @story = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
   end
   
   scenario "Permit a signed in user to write a comment" do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.title
+    click_link @story.raw_title
     fill_in "New Comment", with: "Great story!"
     click_button "Add Comment"
     
@@ -25,7 +25,7 @@ RSpec.feature "Adding Comments to Stories" do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.title
+    click_link @story.raw_title
     fill_in "New Comment", with: ""
     click_button "Add Comment"
     assert_text("Body can't be blank")

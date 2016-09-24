@@ -1,6 +1,6 @@
 class Story < ApplicationRecord
-  validates :title, presence: true
-  validates :body, presence: true
+  validates :raw_title, presence: true
+  validates :raw_body, presence: true
   
   belongs_to :user
   has_many :comments, dependent: :destroy  # If story gets deleted, the depending comment also gets deleted

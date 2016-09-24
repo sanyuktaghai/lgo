@@ -17,9 +17,9 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
   <% for i in 0..@story.errors.full_messages.length-1 %>
     <% field_array.each do |field| %>
       <% if @story.errors.full_messages[i].downcase.include? field %>
-        $('label[for="story_<%= j field%>"]').addClass("is-invalid-label");
-        $('#story_<%= j field%>').addClass("is-invalid-input");
-        $('#story_<%= j field%>').closest('div').find('span.form-error').addClass("is-visible").html('<p><%= @story.errors.full_messages[i] %></p>');
+        $('label[for="story_<%= j "raw_"+field%>"]').addClass("is-invalid-label");
+        $('#story_<%= j "raw_"+field%>').addClass("is-invalid-input");
+        $('#story_<%= j "raw_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Raw ).*?/im, "").capitalize %></p>");
       <% end %>
     <% end %>
   <% end %>

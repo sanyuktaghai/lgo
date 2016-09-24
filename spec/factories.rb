@@ -19,4 +19,10 @@ FactoryGirl.define do
     end  
   end  
   
+  factory :story do
+    sequence(:raw_title) { |n| "#{n.ordinalize.capitalize} Story" }
+    sequence(:raw_body) { |n| "Body of the #{n.ordinalize} story" }
+#    user 
+  end
+  
 end

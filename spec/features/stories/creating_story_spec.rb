@@ -34,7 +34,6 @@ RSpec.feature "Creating Stories", :type => :feature do
     expect(page).to have_content("Story has not been submitted")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Body can't be blank")
-
-    
   end
 end
+

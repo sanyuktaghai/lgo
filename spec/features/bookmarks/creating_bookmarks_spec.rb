@@ -5,14 +5,14 @@ RSpec.feature "Adding Saves to Stories" do
     @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
     
-    @story = Story.create(title: "The first story", body: "Body of first story", user: @foo)
+    @story = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
   end
   
   scenario "Permit a signed in user to save a story", :js => true do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.title
+    click_link @story.raw_title
   
     click_button "Save Story"
     
@@ -23,7 +23,7 @@ RSpec.feature "Adding Saves to Stories" do
   
   scenario "A non-signed in user fails to save a story", :js => true do
     visit "/"
-    click_link @story.title
+    click_link @story.raw_title
     
     click_button "Save Story"
     
