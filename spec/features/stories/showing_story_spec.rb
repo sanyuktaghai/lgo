@@ -4,7 +4,6 @@ RSpec.feature "Showing Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_stories, stories_count: 1)
-#    @story = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
     @story = Story.find_by(user_id: @foo.id)
   end
   
