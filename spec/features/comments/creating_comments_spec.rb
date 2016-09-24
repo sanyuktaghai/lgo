@@ -35,15 +35,5 @@ RSpec.feature "Adding Comments to Stories" do
     
   end
   
-  scenario "A non-signed-in user fails to create a new comment" do
-    visit "/"
-    click_link @story.title
-    fill_in "New Comment", with: "test comment"
-    click_button "Add Comment"
-    
-    expect(page).to have_content("Please sign in to continue")
-    expect(page.current_path).to eq(new_user_session_path)
-  end
-  
 end
   
