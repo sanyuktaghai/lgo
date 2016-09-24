@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     resources :story_likes
     resources :bookmarks
   end
+  
+  namespace :admin do
+    root to: 'stories#index'
+    resources :stories
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
