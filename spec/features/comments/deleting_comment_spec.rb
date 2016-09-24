@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.feature "Deleting Comments" do
   before do
-    @foo = FactoryGirl.create(:user)
-    @bar = FactoryGirl.create(:user)
+    @bar = FactoryGirl.create(:user_with_stories)
+    @foo = FactoryGirl.create(:user_with_stories)
+    @story_foo = Story.find_by(user_id: @foo.id)
+    @story_bar = Story.find_by(user_id: @bar.id)
     
-    @story_foo = Story.create(raw_title: "The first story", raw_body: "Body of first story", user: @foo)
-    @story_bar = Story.create(raw_title: "The second story", raw_body: "Body of second story", user: @bar)
     @comment1 = Comment.create(body: "Great story!", user: @foo, story: @story_foo)
     @comment2 = Comment.create(body: "Really great story!", user: @bar, story: @story_foo)
     @comment3 = Comment.create(body: "Super great story!", user: @bar, story: @story_bar)
