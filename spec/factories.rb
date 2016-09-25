@@ -3,6 +3,11 @@ FactoryGirl.define do
     sequence(:raw_title) { |n| "#{n.ordinalize.capitalize} Story" }
     sequence(:raw_body) { |n| "Body of the #{n.ordinalize} story" }
     user
+    
+    factory :published_story do
+      published true
+    end
+    
   end
 
   factory :user do
@@ -21,6 +26,17 @@ FactoryGirl.define do
       after(:create) do |user, evaluator|
         create_list(:story, evaluator.stories_count, user: user)
       end
-    end  
+    end
+    
+    factory :user_with_published_stories do
+      transient do
+        stories_count 1
+      end
+    
+      after(:create) do |user, evaluator|
+        create_list(:published_story, evaluator.stories_count, user: user)
+      end
+    end
+    
   end
 end
