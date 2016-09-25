@@ -5,6 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   
   has_many :stories
+#  has_many :stories_as_admin, class_name: 'Story'
+#  has_many :stories_as_author, class_name: 'Story'
+#  has_many :stories_as_poster, class_name: 'Story'
+  
   has_many :story_likes
   has_many :bookmarks
   

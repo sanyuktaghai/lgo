@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925053728) do
+ActiveRecord::Schema.define(version: 20160925154950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,12 @@ ActiveRecord::Schema.define(version: 20160925053728) do
     t.string   "final_title"
     t.text     "final_body"
     t.boolean  "published",   default: false
+    t.integer  "admin_id"
+    t.integer  "author_id"
+    t.integer  "poster_id"
+    t.index ["admin_id"], name: "index_stories_on_admin_id", using: :btree
+    t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
+    t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree
     t.index ["user_id"], name: "index_stories_on_user_id", using: :btree
   end
 
@@ -95,6 +101,9 @@ ActiveRecord::Schema.define(version: 20160925053728) do
   add_foreign_key "comments", "stories"
   add_foreign_key "comments", "users"
   add_foreign_key "stories", "users"
+  add_foreign_key "stories", "users", column: "admin_id"
+  add_foreign_key "stories", "users", column: "author_id"
+  add_foreign_key "stories", "users", column: "poster_id"
   add_foreign_key "story_likes", "stories"
   add_foreign_key "story_likes", "users"
 end
