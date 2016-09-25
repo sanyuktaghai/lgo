@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Editing Stories" do 
   before do
-    @user = FactoryGirl.create(:user_with_stories)
+    @user = FactoryGirl.create(:user_with_published_stories)
     login_as(@user, :scope => :user)
     @story = Story.find_by(user_id: @user.id)
   end
