@@ -29,7 +29,7 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:raw_title, :raw_body, :final_title, :final_body, :published, :admin_id)
+    params.require(:story).permit(:final_title, :final_body, :published)
   end
   
   def require_admin
