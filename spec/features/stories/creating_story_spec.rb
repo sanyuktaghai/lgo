@@ -18,7 +18,7 @@ RSpec.feature "Creating Stories", :type => :feature do
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(stories_path)
-    expect(page).to have_content("Created by: #{@user.email}")
+#    expect(page).to have_content("Created by: #{@user.email}")
   end
   
   scenario "A user fails to create a new story", :js => true do
