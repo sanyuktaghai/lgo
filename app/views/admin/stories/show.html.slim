@@ -1,9 +1,30 @@
-h2
-  == @story.raw_title
-p.small
+p
+  | Original Author: 
+  == @story.user(:author_id).email
+p 
+  | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
 p
+  - if @story.published?
+    | Published
+  - else
+    | Unpublished
+h2
+  | Raw Title: 
+  == @story.raw_title
+p
+  | Raw Body: 
   == @story.raw_body
+h2 
+  | Final Title: 
+  == @story.final_title
+p 
+  | Final Body: 
+  == @story.final_body
+p
+  | Admin: 
+  - if @story.admin_id?
+    == @story.user(:admin_id).email
   
 == link_to "Edit Story", edit_admin_story_path(@story), class: "btn"
 == link_to "Delete Story", admin_story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
