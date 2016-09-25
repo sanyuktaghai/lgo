@@ -11,7 +11,7 @@ RSpec.feature "Adding Comments to Stories" do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
     fill_in "New Comment", with: "Great story!"
     click_button "Add Comment"
     
@@ -24,7 +24,7 @@ RSpec.feature "Adding Comments to Stories" do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
     fill_in "New Comment", with: ""
     click_button "Add Comment"
     assert_text("Body can't be blank")

@@ -11,7 +11,7 @@ RSpec.feature "Adding Likes to Stories" do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
   
     click_button "Like Story"
     
@@ -21,7 +21,7 @@ RSpec.feature "Adding Likes to Stories" do
   
   scenario "A non-signed in user fails to like a story", :js => true do
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
     
     click_button "Like Story"
     

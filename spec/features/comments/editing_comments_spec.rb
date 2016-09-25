@@ -16,7 +16,7 @@ RSpec.feature "Editing Comments" do
     login_as(@foo, :scope => :user)
     
     visit "/"
-    click_link @story_foo.raw_title
+    click_link @story_foo.final_title
     
     link = "a[href='/stories/#{@story_foo.id}/comments/#{@comment1.id}/edit']"
     find(link).click
@@ -32,7 +32,7 @@ RSpec.feature "Editing Comments" do
     login_as(@foo, :scope => :user)
     
     visit "/"
-    click_link @story_bar.raw_title
+    click_link @story_bar.final_title
     
     expect(page).not_to have_content("Edit")
     

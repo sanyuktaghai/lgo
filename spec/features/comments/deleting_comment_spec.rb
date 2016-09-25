@@ -16,7 +16,7 @@ RSpec.feature "Deleting Comments" do
     login_as(@foo, :scope => :user)
     
     visit "/"
-    click_link @story_foo.raw_title  
+    click_link @story_foo.final_title  
     click_link "Delete"
     
     expect(page).to have_content("Comment has been deleted")
@@ -27,7 +27,7 @@ RSpec.feature "Deleting Comments" do
     login_as(@foo, :scope => :user)
 
     visit "/"
-    click_link @story_bar.raw_title
+    click_link @story_bar.final_title
     
     expect(page).not_to have_content("Delete")
     

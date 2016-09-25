@@ -13,7 +13,7 @@ RSpec.feature "Deleting Bookmarks" do
     login_as(@foo, :scope => :user)
     
     visit "/"
-    click_link @story_bar.raw_title  
+    click_link @story_bar.final_title  
     click_link "Unsave Story"
     
     expect(page).to have_content("Story save has been deleted")

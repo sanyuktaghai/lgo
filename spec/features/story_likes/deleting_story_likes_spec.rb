@@ -13,7 +13,7 @@ RSpec.feature "Deleting StoryLikes" do
     login_as(@foo, :scope => :user)
     
     visit "/"
-    click_link @story_bar.raw_title  
+    click_link @story_bar.final_title  
     click_link "Unlike Story"
     
     expect(page).to have_content("Like has been deleted")

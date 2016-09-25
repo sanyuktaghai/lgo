@@ -11,7 +11,7 @@ RSpec.feature "Adding Saves to Stories" do
     login_as(@bar, :scope => :user)
     
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
   
     click_button "Save Story"
     
@@ -22,7 +22,7 @@ RSpec.feature "Adding Saves to Stories" do
   
   scenario "A non-signed in user fails to save a story", :js => true do
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
     
     click_button "Save Story"
     
