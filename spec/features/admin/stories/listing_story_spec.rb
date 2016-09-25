@@ -9,7 +9,7 @@ RSpec.feature "Listing Stories" do
     login_as(@admin, :scope => :user)
   end
   
-  scenario "Logged-in admin can see list of all stories" do
+  scenario "Logged-in admin can see list of all unpublished stories" do
     visit "/"
     
     expect(page).not_to have_content(@story1.raw_title)
