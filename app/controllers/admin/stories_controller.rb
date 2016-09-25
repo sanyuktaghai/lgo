@@ -3,6 +3,7 @@ class Admin::StoriesController < ApplicationController
   before_action :require_admin
   
   def index
+    @stories = Story.unpublished
   end
   
   private

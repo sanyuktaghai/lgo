@@ -1,1 +1,13 @@
 h1 Welcome to the admin view!
+
+h3 List of all Unpublished Stories
+
+- @stories.each do |story|
+  div
+    == link_to story.raw_title, admin_story_path(story)
+  div
+    == truncate(story.raw_body, length: 150)
+    - if story.user #if story.user exists, then show the following line:
+      small 
+        | Created by: 
+        == story.user.email
