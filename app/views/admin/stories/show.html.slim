@@ -1,0 +1,9 @@
+h2
+  == @story.raw_title
+p.small
+  == @story.created_at.strftime("%b %d, %Y")
+p
+  == @story.raw_body
+  
+== link_to "Edit Story", edit_admin_story_path(@story), class: "btn"
+== link_to "Delete Story", admin_story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
