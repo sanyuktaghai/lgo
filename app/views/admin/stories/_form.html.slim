@@ -5,7 +5,9 @@ p
 h4 Raw Body
 p
   == @story.raw_body
-
+h4 Story Author
+p
+  == @story.user(:author_id).email
 == form_for(@story, :html => {class: "form"}, remote: true) do |f|
   div
     == f.label :final_title, "Final Title"
