@@ -1,0 +1,13 @@
+h1 List of all Stories
+- if user_signed_in?
+  == link_to "New Story", new_story_path, class: "btn", id: "new-story-btn"
+
+- @stories.each do |story|
+  div
+    == link_to story.raw_title, story_path(story)
+  div
+    == truncate(story.raw_body, length: 150)
+    - if story.user #if story.user exists, then show the following line:
+      small 
+        | Created by: 
+        == story.user.email
