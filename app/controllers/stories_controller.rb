@@ -41,6 +41,7 @@ class StoriesController < ApplicationController
   end
   
   def update
+    @story.published = false
     respond_to do |format|
       if @story.user != current_user
         flash[:warning] = "You can only edit your own stories."
@@ -67,7 +68,7 @@ class StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:raw_title, :raw_body)
+    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body)
   end
   
   def set_story
