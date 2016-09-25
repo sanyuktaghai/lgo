@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
   
   def create
     @story = current_user.stories.build(story_params)
-    @story.published = true
+    @story.published = false
     @story.author_id = current_user[:id]
     respond_to do |format|
       if @story.save
