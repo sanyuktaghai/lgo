@@ -14,6 +14,7 @@ class Admin::StoriesController < ApplicationController
   end
   
   def update
+    @story.validate_final_fields = true
     @story.admin_id = current_user[:id]
     respond_to do |format|
       if @story.update(story_params)

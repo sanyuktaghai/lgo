@@ -2,8 +2,12 @@ class Story < ApplicationRecord
   validates :raw_title, presence: true
   validates :raw_body, presence: true
   
-  validates :final_title, presence: true, :if => Proc.new { user.admin? }
-  validates :final_body, presence: true, :if => Proc.new { user.admin? }
+  attr_accessor :validate_final_fields
+  def validate_final_fields?
+    validate_final_fields == 'true' || validate_final_fields == true
+  end
+  validates :final_title, presence: true, if: :validate_final_fields?
+  validates :final_body, presence: true, if: :validate_final_fields?
   
   belongs_to :user
   
