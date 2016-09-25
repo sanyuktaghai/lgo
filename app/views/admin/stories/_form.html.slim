@@ -1,0 +1,22 @@
+h3 Original User-Submitted Content:
+h4 Raw Title
+p
+  == @story.raw_title
+h4 Raw Body
+p
+  == @story.raw_body
+
+== form_for(@story, :html => {class: "form"}, remote: true) do |f|
+  div
+    == f.label :final_title, "Final Title"
+    == f.text_field :final_title, autofocus: true
+    span class="form-error" 
+  div
+    == f.label :final_body, "Final Body"
+    == f.text_area :final_body, rows: 10
+    span class="form-error"
+  div
+    == f.label :published
+    == f.check_box :published, type: "checkbox"
+  div
+    == f.submit class: "button"
