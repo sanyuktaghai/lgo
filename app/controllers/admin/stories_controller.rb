@@ -10,6 +10,9 @@ class Admin::StoriesController < ApplicationController
   def show
   end
   
+  def edit
+  end
+  
   private
   
   def require_admin
