@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.feature "Editing Comments" do
   before do
-    @bar = FactoryGirl.create(:user_with_stories)
-    @foo = FactoryGirl.create(:user_with_stories)
+    @bar = FactoryGirl.create(:user_with_published_stories)
+    @foo = FactoryGirl.create(:user_with_published_stories)
     @story_foo = Story.find_by(user_id: @foo.id)
     @story_bar = Story.find_by(user_id: @bar.id)
     
