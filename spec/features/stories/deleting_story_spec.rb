@@ -10,7 +10,7 @@ RSpec.feature "Deleting Stories" do
   
   scenario "A user deletes a story" do
     visit "/"
-    click_link @story.raw_title
+    click_link @story.final_title
     
     click_link "Delete Story"
     

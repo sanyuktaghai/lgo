@@ -10,7 +10,7 @@ RSpec.feature "Editing Stories" do
   scenario "A user edits a story" do
     visit "/"
     
-    click_link @story.raw_title
+    click_link @story.final_title
     click_link "Edit Story"
     
     fill_in "Title", with: "Updated Story Title"
@@ -24,7 +24,7 @@ RSpec.feature "Editing Stories" do
   scenario "A user fails to edit a story" do
     visit "/"
     
-    click_link @story.raw_title
+    click_link @story.final_title
     click_link "Edit Story"
     
     fill_in "Title", with: ""

@@ -6,6 +6,8 @@ FactoryGirl.define do
     
     factory :published_story do
       published true
+      sequence(:final_title) { |n| "#{n.ordinalize.capitalize} Final Story" }
+    sequence(:final_body) { |n| "Final body of the #{n.ordinalize} story" }
     end
     
   end

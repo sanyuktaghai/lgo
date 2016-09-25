@@ -10,12 +10,12 @@ RSpec.feature "Listing Stories" do
   scenario "List all stories" do
     visit "/"
     
-    expect(page).to have_content(@story1.raw_title)
-    expect(page).to have_content(@story1.raw_body)
-    expect(page).to have_content(@story2.raw_title)
-    expect(page).to have_content(@story2.raw_body)
-    expect(page).to have_link(@story1.raw_title)
-    expect(page).to have_link(@story2.raw_title)
+    expect(page).to have_content(@story1.final_title)
+    expect(page).to have_content(@story1.final_body)
+    expect(page).to have_content(@story2.final_title)
+    expect(page).to have_content(@story2.final_body)
+    expect(page).to have_link(@story1.final_title)
+    expect(page).to have_link(@story2.final_title)
     expect(page).not_to have_link("New Story")
   end
   
