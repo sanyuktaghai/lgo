@@ -1,14 +1,27 @@
-== form_for(@story, :html => {class: "form"}, remote: true) do |f|
-  div
-    == f.label :raw_title, "Title"
-    == f.text_field :raw_title, autofocus: true
-    span class="form-error" 
-  div
-    == f.label :raw_body, "Body"
-    == f.text_area :raw_body, rows: 10
-    span class="form-error"
-  div
-    - if controller.action_name == "new"
+- action_array = ["raw", "updated"]
+
+- if controller.action_name == "new"
+  == form_for(@story, :html => {class: "form"}, remote: true) do |f|
+    div
+      == f.label :raw_title, "Title"
+      == f.text_field :raw_title, autofocus: true
+      span class="form-error"
+    div
+      == f.label :raw_body, "Body"
+      == f.text_area :raw_body, rows: 10
+      span class="form-error"
+    div
       == f.submit "Contribute Story", class: "button"
-    - else
+- elsif controller.action_name == "edit"
+  -# array_index = 1
+  == form_for(@story, :html => {class: "form"}, remote: true) do |f|
+    div
+      == f.label :updated_title, "Title"
+      == f.text_field :updated_title, autofocus: true, value: @story.final_title
+      span class="form-error"
+    div
+      == f.label :updated_body, "Body"
+      == f.text_area :updated_body, rows: 10, value: @story.final_body
+      span class="form-error"
+    div
       == f.submit class: "button"
