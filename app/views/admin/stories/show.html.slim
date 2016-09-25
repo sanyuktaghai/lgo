@@ -15,16 +15,26 @@ h2
 p
   | Raw Body: 
   == @story.raw_body
-h2 
-  | Final Title: 
-  == @story.final_title
-p 
-  | Final Body: 
-  == @story.final_body
+- if @story.updated_title?
+  h2
+    | Updated Title: 
+    == @story.updated_title
+  p
+    | Updated Body: 
+    == @story.updated_body
+- if @story.final_title?
+  h2 
+    | Final Title: 
+    == @story.final_title
+  p 
+    | Final Body: 
+    == @story.final_body
 p
   | Admin: 
   - if @story.admin_id?
     == @story.user(:admin_id).email
+  - else
+    | Unclaimed
   
 == link_to "Edit Story", edit_admin_story_path(@story), class: "btn"
 == link_to "Delete Story", admin_story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"

@@ -11,16 +11,23 @@ h4
 p
   | Raw Body: 
   == @story.raw_body
+- if @story.updated_title?
+  h4 
+    | Updated Title: 
+    == @story.updated_title
+  p
+    | Updated Body: 
+    == @story.updated_body
 p
   == @story.user(:author_id).email
 == form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
   div
     == f.label :final_title, "Final Title"
-    == f.text_field :final_title, autofocus: true
+    == f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.updated_title : @story.raw_title)
     span class="form-error" 
   div
     == f.label :final_body, "Final Body"
-    == f.text_area :final_body, rows: 10
+    == f.text_area :final_body, rows: 10, value: (@story.updated_body ? @story.updated_body : @story.raw_body)
     span class="form-error"
   div
     == f.label :published
