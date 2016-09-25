@@ -18,7 +18,7 @@ RSpec.feature "Editing Stories" do
     click_button "Update Story"
     
     expect(page).to have_content("Story has been updated")
-    expect(page.current_path).to eq(story_path(@story))   
+    expect(page.current_path).to eq(stories_path)   
   end
   
   scenario "A user fails to edit a story" do

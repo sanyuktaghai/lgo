@@ -42,6 +42,7 @@ class StoriesController < ApplicationController
   
   def update
     @story.published = false
+    @story.validate_updated_fields = true
     respond_to do |format|
       if @story.user != current_user
         flash[:warning] = "You can only edit your own stories."
@@ -49,7 +50,7 @@ class StoriesController < ApplicationController
       else
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
-          format.html {redirect_to @story}
+          format.html {redirect_to stories_path}
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders edit tmplt again

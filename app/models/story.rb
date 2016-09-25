@@ -3,11 +3,17 @@ class Story < ApplicationRecord
   validates :raw_body, presence: true
   
   attr_accessor :validate_final_fields
+  attr_accessor :validate_updated_fields
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
   end
+  def validate_updated_fields?
+    validate_updated_fields == 'true' || validate_updated_fields == true
+  end
   validates :final_title, presence: true, if: :validate_final_fields?
   validates :final_body, presence: true, if: :validate_final_fields?
+  validates :updated_title, presence: true, if: :validate_updated_fields?
+  validates :updated_body, presence: true, if: :validate_updated_fields?
   
   belongs_to :user
   

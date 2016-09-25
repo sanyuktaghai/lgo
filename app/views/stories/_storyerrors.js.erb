@@ -13,13 +13,25 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
 <% if @story.errors.any? %>
   $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
 
-  <% field_array = ["title", "body"] %>  
-  <% for i in 0..@story.errors.full_messages.length-1 %>
-    <% field_array.each do |field| %>
-      <% if @story.errors.full_messages[i].downcase.include? field %>
-        $('label[for="story_<%= j "raw_"+field%>"]').addClass("is-invalid-label");
-        $('#story_<%= j "raw_"+field%>').addClass("is-invalid-input");
-        $('#story_<%= j "raw_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Raw ).*?/im, "").capitalize %></p>");
+  <% field_array = ["title", "body"] %> 
+  <% if array_index == 0 %>
+    <% for i in 0..@story.errors.full_messages.length-1 %>
+      <% field_array.each do |field| %>
+        <% if @story.errors.full_messages[i].downcase.include? field %>
+          $('label[for="story_<%= j "raw_"+field%>"]').addClass("is-invalid-label");
+          $('#story_<%= j "raw_"+field%>').addClass("is-invalid-input");
+          $('#story_<%= j "raw_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Raw ).*?/im, "").capitalize %></p>");
+        <% end %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% for i in 0..@story.errors.full_messages.length-1 %>
+      <% field_array.each do |field| %>
+        <% if @story.errors.full_messages[i].downcase.include? field %>
+          $('label[for="story_<%= j "updated_"+field%>"]').addClass("is-invalid-label");
+          $('#story_<%= j "updated_"+field%>').addClass("is-invalid-input");
+          $('#story_<%= j "updated_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Updated ).*?/im, "").capitalize %></p>");
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
