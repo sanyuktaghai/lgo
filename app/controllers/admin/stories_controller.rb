@@ -13,6 +13,13 @@ class Admin::StoriesController < ApplicationController
   def edit
   end
   
+  def destroy
+    if @story.destroy
+      flash[:success] = "Story has been deleted"
+      redirect_to admin_stories_path
+    end
+  end
+  
   def update
     @story.validate_final_fields = true
     @story.admin_id = current_user[:id]
