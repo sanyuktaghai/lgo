@@ -1,11 +1,16 @@
 h3 Original User-Submitted Content:
-h4 Raw Title
 p
+  | Original Author: 
+  == @story.user(:author_id).email
+p 
+  | Submitted At: 
+  == @story.created_at.strftime("%b %d, %Y")
+h4 
+  | Raw Title: 
   == @story.raw_title
-h4 Raw Body
 p
+  | Raw Body: 
   == @story.raw_body
-h4 Story Author
 p
   == @story.user(:author_id).email
 == form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|

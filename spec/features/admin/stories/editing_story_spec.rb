@@ -14,7 +14,10 @@ RSpec.feature "Editing Stories" do
     click_link @story.raw_title
     click_link "Edit Story"
     
-    #possibly a few more expectations here, such as, expect page to have the raw content for reference
+    expect(page).to have_content(@story.user(:author_id).email)
+    expect(page).to have_content(@story.created_at.strftime("%b %d, %Y"))
+    expect(page).to have_content(@story.raw_title)
+    expect(page).to have_content(@story.raw_body)
     
     fill_in "Final Title", with: "Final Story Title"
     fill_in "Final Body", with: "Final story body"
@@ -23,7 +26,8 @@ RSpec.feature "Editing Stories" do
     
     expect(page).to have_content("Story has been updated")
     expect(page.current_path).to eq(admin_story_path(@story))  
-
-    #should be a few more expectations in here, correct? Such as, then regular user can then see the published story on their index page (though maybe this is already handled in the other listing story tests), and the links should be final_titles all around
+    expect(page).to have_content(@story.final_title)
+    expect(page).to have_content(@story.final_body)
+    expect(page).to have_content(@story.user(:admin_id).email)
   end
 end
