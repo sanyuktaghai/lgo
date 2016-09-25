@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Listing Stories" do 
   before do
-    @user = FactoryGirl.create(:user_with_stories, stories_count: 2)
+    @user = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
     @story1 = Story.where(user_id: @user.id).first
     @story2 = Story.where(user_id: @user.id).last
   end
