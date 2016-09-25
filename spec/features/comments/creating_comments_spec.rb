@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.feature "Adding Comments to Stories" do
   before do
     @bar = FactoryGirl.create(:user)
-    @foo = FactoryGirl.create(:user_with_stories)
+    @foo = FactoryGirl.create(:user_with_published_stories)
     @story = Story.find_by(user_id: @foo.id)
   end
   
