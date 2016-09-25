@@ -12,6 +12,8 @@ class StoriesController < ApplicationController
   
   def create
     @story = current_user.stories.build(story_params)
+    @story.published = true
+    @story.author_id = current_user[:id]
     respond_to do |format|
       if @story.save
         flash[:success] = "Story has been submitted"
