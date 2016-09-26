@@ -4,7 +4,8 @@ RSpec.feature "Showing Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story = Story.find_by(user_id: @foo.id)
+    @story = Story.find_by(author_id: @foo.id)
+    
   end
   
   scenario "A non-signed in user does not see edit or delete links" do
