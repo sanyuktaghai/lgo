@@ -69,7 +69,7 @@ class StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body)
+    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body, :anonymous)
   end
   
   def set_story

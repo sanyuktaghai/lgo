@@ -11,6 +11,9 @@
       == f.text_area :raw_body, rows: 10
       span class="form-error"
     div
+      == f.label :anonymous
+      == f.check_box :anonymous, type: "checkbox"
+    div
       == f.submit "Contribute Story", class: "button"
 - elsif controller.action_name == "edit"
   -# array_index = 1
