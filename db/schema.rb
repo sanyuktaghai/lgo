@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925205909) do
+ActiveRecord::Schema.define(version: 20160926044648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20160925205909) do
     t.text     "raw_body"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "user_id"
     t.string   "final_title"
     t.text     "final_body"
     t.boolean  "published",     default: false
@@ -65,6 +64,7 @@ ActiveRecord::Schema.define(version: 20160925205909) do
     t.integer  "poster_id"
     t.string   "updated_title"
     t.text     "updated_body"
+    t.integer  "user_id"
     t.index ["admin_id"], name: "index_stories_on_admin_id", using: :btree
     t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
     t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree
