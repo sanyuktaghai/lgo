@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature "Listing Stories" do 
   before do
     @user = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
-    @story1 = Story.where(user_id: @user.id).first
-    @story2 = Story.where(user_id: @user.id).last
+    @story1 = Story.where(author_id: @user.id).first
+    @story2 = Story.where(author_id: @user.id).last
   end
   
   scenario "List all stories" do
@@ -18,5 +18,4 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_link(@story2.final_title)
     expect(page).not_to have_link("New Story")
   end
-  
 end
