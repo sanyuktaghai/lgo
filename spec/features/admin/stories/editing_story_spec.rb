@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.feature "Editing Stories" do 
   before do
-    @user = FactoryGirl.create(:user_with_stories)
+    @user = FactoryGirl.create(:user_with_unpublished_stories)
     @user2 = FactoryGirl.create(:user_with_unpublished_updated_stories)
     @admin = FactoryGirl.create(:admin)
-    @story = Story.find_by(user_id: @user.id)
-    @story2 = Story.find_by(user_id: @user2.id)
-    
+    @story = Story.find_by(author_id: @user.id)
+    @story2 = Story.find_by(author_id: @user2.id)
   end
   
   scenario "An admin edits a story" do
