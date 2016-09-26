@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160926044648) do
+ActiveRecord::Schema.define(version: 20160926045644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160926044648) do
     t.string   "updated_title"
     t.text     "updated_body"
     t.integer  "user_id"
+    t.boolean  "anonymous"
     t.index ["admin_id"], name: "index_stories_on_admin_id", using: :btree
     t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
     t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree
