@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.feature "Deleting Stories" do 
   
   before do
-    @user = FactoryGirl.create(:user_with_stories)
+    @user = FactoryGirl.create(:user_with_unpublished_stories)
     @admin = FactoryGirl.create(:admin)
     login_as(@admin, :scope => :user)
-    @story = Story.find_by(user_id: @user.id)
+    @story = Story.find_by(author_id: @user.id)
   end
   
   scenario "A user deletes a story" do
