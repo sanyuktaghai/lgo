@@ -14,6 +14,10 @@ p
     | Anonymous
   - else
     | Not Anonymous
+- if @story.poster_id?
+  div
+    | Posted by: 
+    == User.find(@story.poster_id).email
 h2
   | Raw Title: 
   == @story.raw_title

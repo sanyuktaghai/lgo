@@ -28,11 +28,11 @@ p
 == form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
   div
     == f.label :final_title, "Final Title"
-    == f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.updated_title : @story.raw_title)
+    == f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.final_title : @story.raw_title)
     span class="form-error" 
   div
     == f.label :final_body, "Final Body"
-    == f.text_area :final_body, rows: 10, value: (@story.updated_body ? @story.updated_body : @story.raw_body)
+    == f.text_area :final_body, rows: 10, value: (@story.updated_body ? @story.final_body : @story.raw_body)
     span class="form-error"
   div
     == f.label :published
