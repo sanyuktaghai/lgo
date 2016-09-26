@@ -5,6 +5,11 @@ p
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
+p
+  - if @story.anonymous?
+    | Anonymous
+  - else
+    | Not Anonymous
 h4 
   | Raw Title: 
   == @story.raw_title

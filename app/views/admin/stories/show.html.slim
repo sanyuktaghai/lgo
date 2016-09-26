@@ -9,6 +9,11 @@ p
     | Published
   - else
     | Unpublished
+p
+  - if @story.anonymous?
+    | Anonymous
+  - else
+    | Not Anonymous
 h2
   | Raw Title: 
   == @story.raw_title

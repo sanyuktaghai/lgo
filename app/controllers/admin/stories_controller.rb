@@ -23,6 +23,11 @@ class Admin::StoriesController < ApplicationController
   def update
     @story.validate_final_fields = true
     @story.admin_id = current_user[:id]
+    if @story.anonymous?
+      @story.poster_id = 3
+    else
+      @story.poster_id = @story.author_id
+    end
     respond_to do |format|
       if @story.update(story_params)
         flash[:success] = "Story has been updated"
