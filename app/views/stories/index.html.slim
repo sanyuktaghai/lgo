@@ -7,7 +7,8 @@ h1 List of all Stories
     == link_to story.final_title, story_path(story)
   div
     == truncate(story.final_body, length: 150)
-    - if story.author_id? #if story.user exists, then show the following line:
+  div
+    - if story.poster_id?
       small 
-        | Created by: 
-        == story.user(:author_id).email
+        | Posted by: 
+        == User.find(story.poster_id).email

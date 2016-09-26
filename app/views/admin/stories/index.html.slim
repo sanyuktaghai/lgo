@@ -9,5 +9,5 @@ h3 List of all Unpublished Stories
     == truncate(story.raw_body, length: 150)
     - if story.user #if story.user exists, then show the following line:
       small 
-        | Posted by: 
+        | Created by: 
         == story.user.email
