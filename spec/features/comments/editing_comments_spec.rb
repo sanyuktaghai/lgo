@@ -4,8 +4,8 @@ RSpec.feature "Editing Comments" do
   before do
     @bar = FactoryGirl.create(:user_with_published_stories)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story_foo = Story.find_by(user_id: @foo.id)
-    @story_bar = Story.find_by(user_id: @bar.id)
+    @story_foo = Story.find_by(author_id: @foo.id)
+    @story_bar = Story.find_by(author_id: @bar.id)
     
     @comment1 = Comment.create(body: "Great story!", user: @foo, story: @story_foo)
     @comment2 = Comment.create(body: "Really great story!", user: @bar, story: @story_foo)

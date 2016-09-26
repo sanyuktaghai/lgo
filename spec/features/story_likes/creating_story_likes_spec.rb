@@ -4,7 +4,7 @@ RSpec.feature "Adding Likes to Stories" do
   before do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story = Story.find_by(user_id: @foo.id)
+    @story = Story.find_by(author_id: @foo.id)
   end
   
   scenario "Permit a signed in user to like a story", :js => true do

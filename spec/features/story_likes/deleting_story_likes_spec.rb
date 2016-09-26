@@ -4,8 +4,8 @@ RSpec.feature "Deleting StoryLikes" do
   before do
     @bar = FactoryGirl.create(:user_with_published_stories)
     @foo = FactoryGirl.create(:user_with_published_stories)
-    @story_foo = Story.find_by(user_id: @foo.id)
-    @story_bar = Story.find_by(user_id: @bar.id)
+    @story_foo = Story.find_by(author_id: @foo.id)
+    @story_bar = Story.find_by(author_id: @bar.id)
     @story_like = StoryLike.create(user: @foo, story: @story_bar)
   end
   
