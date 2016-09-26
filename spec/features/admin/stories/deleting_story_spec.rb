@@ -7,6 +7,7 @@ RSpec.feature "Deleting Stories" do
     @admin = FactoryGirl.create(:admin)
     login_as(@admin, :scope => :user)
     @story = Story.find_by(author_id: @user.id)
+    
   end
   
   scenario "A user deletes a story" do

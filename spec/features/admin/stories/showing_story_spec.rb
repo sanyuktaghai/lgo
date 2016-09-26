@@ -6,6 +6,7 @@ RSpec.feature "Showing Stories" do
     @admin = FactoryGirl.create(:admin)
     @story = Story.find_by(author_id: @user.id)
     login_as(@admin, :scope => :user)
+    
   end
   
   scenario "Logged-in admin can see individual story" do
