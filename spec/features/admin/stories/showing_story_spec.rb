@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.feature "Showing Stories" do 
   before do
-    @user = FactoryGirl.create(:user_with_stories)
+    @user = FactoryGirl.create(:user_with_unpublished_stories)
     @admin = FactoryGirl.create(:admin)
-    @story = Story.find_by(user_id: @user.id)
+    @story = Story.find_by(author_id: @user.id)
     login_as(@admin, :scope => :user)
   end
   
