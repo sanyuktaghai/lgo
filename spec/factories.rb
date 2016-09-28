@@ -76,4 +76,9 @@ FactoryGirl.define do
     end
     
   end
+  
+  factory :story_like do
+    story
+    user
+  end
 end
