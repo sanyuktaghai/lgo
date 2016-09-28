@@ -5,7 +5,6 @@ RSpec.feature "Listing Stories" do
     @user = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
     @story1 = Story.where(author_id: @user.id).first
     @story2 = Story.where(author_id: @user.id).last
-    
     @anonymous_user = FactoryGirl.create(:anonymous_user, id: 1000)
     @user1 = FactoryGirl.create(:user_with_published_anonymous_stories, stories_count: 1)
     @story3 = Story.find_by(author_id: @user1.id)
@@ -15,9 +14,9 @@ RSpec.feature "Listing Stories" do
     visit "/"
     
     expect(page).to have_content(@story1.final_title)
-    expect(page).to have_content(@story1.final_body)
+    expect(page).to have_content(@story1.final_body.truncate(150))
     expect(page).to have_content(@story2.final_title)
-    expect(page).to have_content(@story2.final_body)
+    expect(page).to have_content(@story2.final_body.truncate(150))
     expect(page).to have_link(@story1.final_title)
     expect(page).to have_link(@story2.final_title)
     expect(page).not_to have_link("New Story")
@@ -27,7 +26,7 @@ RSpec.feature "Listing Stories" do
     visit "/"
     
     expect(page).to have_content(@story3.final_title)
-    expect(page).to have_content(@story3.final_body)
+    expect(page).to have_content(@story3.final_body.truncate(150))
     expect(page).to have_content("anonymous@example.com")
   end
 end

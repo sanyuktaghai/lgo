@@ -14,15 +14,15 @@ RSpec.feature "Listing Stories" do
     visit "/"
     
     expect(page).not_to have_content(@story1.raw_title)
-    expect(page).not_to have_content(@story1.raw_body)
+    expect(page).not_to have_content(@story1.raw_body.truncate(150))
     expect(page).not_to have_link(@story1.raw_title)
     
     visit "/admin"
     expect(page).to have_content(@story1.raw_title)
-    expect(page).to have_content(@story1.raw_body)
+    expect(page).to have_content(@story1.raw_body.truncate(150))
     expect(page).to have_link(@story1.raw_title)
     expect(page).to have_content(@story2.raw_title)
-    expect(page).to have_content(@story2.raw_body)
+    expect(page).to have_content(@story2.raw_body.truncate(150))
     expect(page).to have_link(@story2.raw_title)
   end
 end
