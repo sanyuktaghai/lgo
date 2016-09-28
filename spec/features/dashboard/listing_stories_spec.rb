@@ -13,6 +13,7 @@ RSpec.feature "Listing Stories" do
   scenario "Logged-in user can see full list of her published and unpublished stories" do
     visit(dashboard_path(@user))
     
+    expect(page).to have_content(Story.where(author_id: @user.id).count)
     expect(page).to have_content(@story1.raw_title)
     expect(page).to have_content(@story1.raw_body.truncate(150))
     expect(page).to have_link(@story1.raw_title)
