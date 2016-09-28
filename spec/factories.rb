@@ -1,18 +1,18 @@
 FactoryGirl.define do  
   factory :story do
-    sequence(:raw_title) { |n| "#{n.ordinalize.capitalize} Story" }
-    sequence(:raw_body) { |n| "Body of the #{n.ordinalize} story" }
+    raw_title { Faker::Hipster.sentence }
+    raw_body { Faker::Hipster.paragraph }
     user
     
     factory :published_story do
       published true
-      sequence(:final_title) { |n| "#{n.ordinalize.capitalize} Final Story" }
-      sequence(:final_body) { |n| "Final body of the #{n.ordinalize} story" }
+      final_title { Faker::Hipster.sentence }
+      final_body { Faker::Hipster.paragraph }
       
       factory :unpublished_updated_story do
         published false
-        sequence(:updated_title) { |n| "#{n.ordinalize.capitalize} Updated Story" }
-        sequence(:updated_body) { |n| "Updated body of the #{n.ordinalize} story" }
+        updated_title { Faker::Hipster.sentence }
+        updated_body { Faker::Hipster.paragraph }
       end
       
       factory :published_anonymous_story do
@@ -22,10 +22,10 @@ FactoryGirl.define do
   end
 
   factory :user, aliases: [:author, :poster] do
-    sequence(:email) { |n| "test#{n}@example.com" }
-    password 'password'
-    sequence(:first_name) { |n| "Jane{n}" }
-    sequence(:last_name) { |n| "Doe{n}" }
+    email {Faker::Internet.email }
+    password { Faker::Internet.password }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     
     factory :admin do
       admin true
