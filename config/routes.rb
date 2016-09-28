@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
 #root 'welcome#index'
-  root to: 'stories#index'
+  
   resources :stories do 
     resources :comments
     resources :story_likes
@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'stories#index'
     resources :stories
+  end
+  
+  resource :dashboard do
+    root to: 'dashboard#index'
   end
 
   # Example of regular route:
