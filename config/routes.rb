@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
 #root 'welcome#index'
   
+  root to: 'stories#index'
+  
   resources :stories do 
     resources :comments
     resources :story_likes
