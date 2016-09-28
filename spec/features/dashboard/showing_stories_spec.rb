@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Listing Stories" do 
+RSpec.feature "Showing Stories" do 
   before do
     @user = FactoryGirl.create(:user_with_unpublished_stories, stories_count: 3)
     @story1 = Story.where(author_id: @user.id).first
@@ -8,13 +8,6 @@ RSpec.feature "Listing Stories" do
     @story3 = Story.where(author_id: @user.id).last
     @story3 = @story3.update(published: true, final_title: "Title of the published story", final_body: "Body of the final story")
     login_as(@user, :scope => :user)
-  end
-  
-  scenario "Logged-in user can see her basic profile information" do
-    visit "/dashboard"
-    
-    expect(page).to have_content(@user.first_name)
-    expect(page).to have_content(@user.last_name)
   end
   
   scenario "Logged-in user can see full list of her published and unpublished stories" do

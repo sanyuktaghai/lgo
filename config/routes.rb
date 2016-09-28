@@ -21,9 +21,7 @@ Rails.application.routes.draw do
     resources :stories
   end
   
-  resource :dashboard do
-    root to: 'dashboard#index'
-  end
+  resources :dashboard
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
