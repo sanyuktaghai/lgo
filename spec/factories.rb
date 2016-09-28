@@ -24,6 +24,8 @@ FactoryGirl.define do
   factory :user, aliases: [:author, :poster] do
     sequence(:email) { |n| "test#{n}@example.com" }
     password 'password'
+    sequence(:first_name) { |n| "Jane{n}" }
+    sequence(:last_name) { |n| "Doe{n}" }
     
     factory :admin do
       admin true
