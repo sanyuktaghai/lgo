@@ -6,8 +6,7 @@ RSpec.feature "Listing Stories" do
     @story1 = Story.where(author_id: @user.id).first
     @story2 = Story.where(author_id: @user.id).second
     @story3 = Story.where(author_id: @user.id).last
-#    @story3 = @story3.update(published: true, final_title: "Title of the published story", final_body: "Body of the final story")
-    @story3 = @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph)
+    @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph)
     login_as(@user, :scope => :user)
   end
   
