@@ -5,3 +5,20 @@ h4
   == @user.first_name.titleize
   |  
   == @user.last_name.titleize
+
+h1 List of all Stories
+- @stories.each do |story|
+  - if story.published?
+    div
+      == link_to story.final_title, story_path(story)
+    div
+      == truncate(story.final_body, length: 150)
+  - else 
+    div
+      == link_to story.raw_title, story_path(story)
+    div
+      == truncate(story.raw_body, length: 150)
+    div Pending
+  p
+    | Posted on: 
+    == story.created_at.strftime("%b %d, %Y")
