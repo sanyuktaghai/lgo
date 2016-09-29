@@ -81,4 +81,9 @@ FactoryGirl.define do
     story
     user
   end
+  
+  factory :bookmark do
+    story
+    user
+  end
 end
