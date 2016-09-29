@@ -2,14 +2,16 @@ h1 Welcome to the Dashboard!
 
 h4 
   | Name: 
-  == @user.first_name.titleize
+  == @user.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }
   |  
-  == @user.last_name.titleize
+  == @user.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }
   
 p 
   == link_to "My Stories", authored_stories_dashboard_path(@user), remote: true
   |  
   == link_to "Likes", liked_stories_dashboard_path(@user), remote: true
+  |  
+  == link_to "Saves", bookmarked_stories_dashboard_path(@user), remote: true
 
 div#dashboard_partial
   == render partial: 'authored_stories'
