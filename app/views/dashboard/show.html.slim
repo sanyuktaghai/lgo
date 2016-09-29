@@ -6,8 +6,9 @@ h4
   |  
   == @user.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }
 div 
-  | About Me: 
-  == @user.about_me
+  - if @user.about_me?
+    | About Me: 
+    == @user.about_me
   
 div
   == link_to "Stories: #{@authored_stories.count}", authored_stories_dashboard_path(@user), remote: true
