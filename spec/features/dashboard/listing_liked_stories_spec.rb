@@ -16,6 +16,7 @@ RSpec.feature "Listing Liked Stories" do
     @story_like3.update(user_id: @user.id, story_id: @story3.id)
     
     login_as(@user, :scope => :user)
+    
   end
   
   scenario "Logged-in user can see the list of the stories she's liked", js: true do

@@ -10,6 +10,8 @@ p
   == link_to "My Stories", authored_stories_dashboard_path(@user), remote: true
   |  
   == link_to "Likes", liked_stories_dashboard_path(@user), remote: true
+  |  
+  == link_to "Saves", bookmarked_stories_dashboard_path(@user), remote: true
 
 div#dashboard_partial
   == render partial: 'authored_stories'

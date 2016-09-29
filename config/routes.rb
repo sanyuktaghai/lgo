@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     member do
       get 'liked_stories'
       get 'authored_stories'
+      get 'bookmarked_stories'
     end
   end
 
