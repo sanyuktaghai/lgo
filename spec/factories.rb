@@ -34,6 +34,8 @@ FactoryGirl.define do
     
     factory :anonymous_user do
       email "anonymous@example.com"
+      first_name "Brad"
+      last_name "The Penguin"
     end
     
     factory :user_with_unpublished_stories do
@@ -52,7 +54,7 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:published_story, evaluator.stories_count, user: user, author_id: user.id)
+        create_list(:published_story, evaluator.stories_count, user: user, author_id: user.id, poster_id: user.id)
       end
     end
     

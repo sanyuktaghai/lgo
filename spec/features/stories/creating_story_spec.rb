@@ -12,13 +12,12 @@ RSpec.feature "Creating Stories", :type => :feature do
   
     click_link "New Story"
     
-    fill_in "Title", with: "Creating first story"
-    fill_in "Body", with: "Lorem Ipsum"
+    fill_in "Title", with: Faker::Hipster::sentence
+    fill_in "Body", with: Faker::Hipster::paragraph
     click_button "Contribute Story"
     
     expect(page).to have_content("Story has been submitted")
     expect(page.current_path).to eq(stories_path)
-#    expect(page).to have_content("Created by: #{@user.email}")
   end
   
   scenario "A user fails to create a new story", :js => true do
