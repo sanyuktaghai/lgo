@@ -11,6 +11,7 @@ RSpec.feature "Showing Dashboard" do
     
     expect(page).to have_content(@user.first_name)
     expect(page).to have_content(@user.last_name)
+    expect(page).to have_content(@user.about_me)
   end
 
 end
