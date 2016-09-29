@@ -86,4 +86,10 @@ FactoryGirl.define do
     story
     user
   end
+  
+  factory :comment do
+    story
+    user
+    body { Faker::Hipster.sentence }
+  end
 end

@@ -1,7 +1,3 @@
-h4 
-  | Number of Authored Stories: 
-  == @authored_stories.count
-  
 h2 List of All Authored Stories
 - @authored_stories.each do |story|
   - if story.published?
