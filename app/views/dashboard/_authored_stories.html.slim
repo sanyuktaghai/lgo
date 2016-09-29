@@ -1,0 +1,20 @@
+h4 
+  | Number of Authored Stories: 
+  == @authored_stories.count
+h2 List of All Authored Stories
+
+- @authored_stories.each do |story|
+  - if story.published?
+    div
+      == link_to story.final_title, story_path(story)
+    div
+      == truncate(story.final_body, length: 150)
+  - else 
+    div
+      == link_to story.raw_title, story_path(story)
+    div
+      == truncate(story.raw_body, length: 150)
+    div Pending
+  p
+    | Posted on: 
+    == story.created_at.strftime("%b %d, %Y")
