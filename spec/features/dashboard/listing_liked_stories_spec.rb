@@ -18,12 +18,12 @@ RSpec.feature "Listing Stories" do
     login_as(@user, :scope => :user)
   end
   
-  scenario "Logged-in user can see the list of the stories she's liked" do
+  scenario "Logged-in user can see the list of the stories she's liked", js: true do
     visit(dashboard_path(@user))
     click_link "Likes"
     
-    #see number of stories the user liked that aren't written by her
-    expect(page).to have_content(Story.where(author_id: @author.id).joins(:story_likes).where(:story_likes => {:user_id => @user.id}).count)
+    expect(page).to have_content(Story.where.not(author_id: @user.id).joins(:story_likes).where(:story_likes => {:user_id => @user.id}).count)
+    expect(page).to have_content("2 Likes")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(150))
