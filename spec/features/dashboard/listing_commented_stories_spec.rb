@@ -25,7 +25,6 @@ RSpec.feature "Listing Commented Stories" do
     visit(dashboard_path(@user))
     click_link "Comments"
     
-#    expect(page).to have_content(Story.where.not(author_id: @user.id).joins(:comments).where(:comments => {:user_id => @user.id}).count)
     expect(page).to have_content("Comments: 2")
 
     expect(page).to have_content(@story1.final_title)
