@@ -1,6 +1,6 @@
 p
   | Original Author: 
-  == @story.user(:author_id).email
+  == "#{@story.user(:author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
@@ -17,7 +17,7 @@ p
 - if @story.poster_id?
   div
     | Posted by: 
-    == User.find(@story.poster_id).email
+    == "#{User.find(@story.poster_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{User.find(@story.poster_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
 h2
   | Raw Title: 
   == @story.raw_title
@@ -41,7 +41,7 @@ p
 p
   | Admin: 
   - if @story.admin_id?
-    == @story.user(:admin_id).email
+    == "#{@story.user(:admin_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:admin_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
   - else
     | Unclaimed
   

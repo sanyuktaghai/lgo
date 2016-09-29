@@ -1,7 +1,7 @@
 h3 Original User-Submitted Content:
 p
   | Original Author: 
-  == @story.user(:author_id).email
+  == "#{@story.user(:author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
@@ -23,8 +23,6 @@ p
   p
     | Updated Body: 
     == @story.updated_body
-p
-  == @story.user(:author_id).email
 == form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
   div
     == f.label :final_title, "Final Title"

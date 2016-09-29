@@ -1,14 +1,14 @@
-- action_array = ["raw", "updated"]
+/- action_array = ["raw", "updated"]
 
-- if controller.action_name == "new"
+- if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
   == form_for(@story, :html => {class: "form"}, remote: true) do |f|
     div
       == f.label :raw_title, "Title"
-      == f.text_field :raw_title, autofocus: true
+      == f.text_field :raw_title, autofocus: true, value: @story.raw_title
       span class="form-error"
     div
       == f.label :raw_body, "Body"
-      == f.text_area :raw_body, rows: 10
+      == f.text_area :raw_body, rows: 10,  value: @story.raw_body
       span class="form-error"
     div
       == f.label :anonymous
@@ -16,7 +16,6 @@
     div
       == f.submit "Contribute Story", class: "button"
 - elsif controller.action_name == "edit"
-  -# array_index = 1
   == form_for(@story, :html => {class: "form"}, remote: true) do |f|
     div
       == f.label :updated_title, "Title"

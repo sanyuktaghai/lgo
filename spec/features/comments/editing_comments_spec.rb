@@ -7,9 +7,9 @@ RSpec.feature "Editing Comments" do
     @story_foo = Story.find_by(author_id: @foo.id)
     @story_bar = Story.find_by(author_id: @bar.id)
     
-    @comment1 = Comment.create(body: "Great story!", user: @foo, story: @story_foo)
-    @comment2 = Comment.create(body: "Really great story!", user: @bar, story: @story_foo)
-    @comment3 = Comment.create(body: "Super great story!", user: @bar, story: @story_bar)
+    @comment1 = Comment.create(body: Faker::Hipster::word, user: @foo, story: @story_foo)
+    @comment2 = Comment.create(body: Faker::Hipster::sentence, user: @bar, story: @story_foo)
+    @comment3 = Comment.create(body: Faker::Hipster::paragraph, user: @bar, story: @story_bar)
   end
   
   scenario "An owner succeeds", :js => true do
@@ -20,12 +20,12 @@ RSpec.feature "Editing Comments" do
     
     link = "a[href='/stories/#{@story_foo.id}/comments/#{@comment1.id}/edit']"
     find(link).click
-    expect(page).to have_field('Edit Comment', :with => "Great story!")
+    expect(page).to have_field('Edit Comment', :with => @comment1.body)
     within("#edit_comment_#{@comment1.id}"){fill_in("Edit Comment", with: "OK read" )}
     click_button "Update Comment"
     
     expect(page).to have_content("OK read")
-    expect(page).not_to have_content("Great story!")
+    expect(page).not_to have_content(@comment1.body)
   end
   
   scenario "A non-owner fails" do
