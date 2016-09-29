@@ -21,7 +21,11 @@ Rails.application.routes.draw do
     resources :stories
   end
   
-  resources :dashboard
+  resources :dashboard do
+    member do
+      get 'liked_stories'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
