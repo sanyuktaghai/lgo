@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Listing Stories" do 
+RSpec.feature "Listing Liked Stories" do 
   before do
     @author = FactoryGirl.create(:user_with_published_stories, stories_count: 2)
     @user = FactoryGirl.create(:user_with_published_stories)
