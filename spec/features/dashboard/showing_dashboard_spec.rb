@@ -11,8 +11,8 @@ RSpec.feature "Showing Dashboard" do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     
-    expect(page).to have_content(@user.first_name)
-    expect(page).to have_content(@user.last_name)
+    expect(page).to have_content(@user.first_name.titleize.gsub(/\b\w/) { |w| w.upcase })
+    expect(page).to have_content(@user.last_name.titleize.gsub(/\b\w/) { |w| w.upcase })
     expect(page).to have_content(@user.about_me)
   end
   
