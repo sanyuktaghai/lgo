@@ -25,4 +25,20 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_content(@story3.final_body.truncate(150))
     expect(page).to have_link(@story3.final_title)
    end
+  
+  scenario "Logged-in user can click back to her full list of published and unpublished stories", js: true do
+    visit(dashboard_path(@user))
+    click_link "Saves"
+    click_link "Stories"
+    
+    expect(page).to have_content(@story1.raw_title)
+    expect(page).to have_content(@story1.raw_body.truncate(150))
+    expect(page).to have_link(@story1.raw_title)
+    expect(page).to have_content(@story2.raw_title)
+    expect(page).to have_content(@story2.raw_body.truncate(150))
+    expect(page).to have_link(@story2.raw_title)
+    expect(page).to have_content(@story3.final_title)
+    expect(page).to have_content(@story3.final_body.truncate(150))
+    expect(page).to have_link(@story3.final_title)
+   end
 end
