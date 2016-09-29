@@ -11,4 +11,4 @@ h1 List of all Stories
     - if story.poster_id?
       small 
         | Posted by: 
-        == "#{User.find(story.poster_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{User.find(story.poster_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
+        == link_to "#{User.find(story.poster_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{User.find(story.poster_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}", dashboard_path(User.find(story.poster_id))

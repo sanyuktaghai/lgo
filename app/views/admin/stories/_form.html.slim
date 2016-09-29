@@ -1,7 +1,7 @@
 h3 Original User-Submitted Content:
 p
   | Original Author: 
-  == "#{@story.user(:author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
+  == link_to "#{@story.user(:author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}", dashboard_path(@story.user(:author_id))
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
