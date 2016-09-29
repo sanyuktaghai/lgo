@@ -11,6 +11,8 @@ h2 List of All Authored Stories
     div
       == truncate(story.raw_body, length: 150)
     div Pending
+  - if story.anonymous?
+    div Anonymous
   p
     | Posted on: 
     == story.created_at.strftime("%b %d, %Y")
