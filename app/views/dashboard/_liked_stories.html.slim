@@ -2,7 +2,7 @@ h4
   | Number of Liked Stories: 
   == @liked_stories.count.to_s + " Likes"
 
-h1 List of All Liked Stories:
+h2 List of All Liked Stories:
 - @liked_stories.each do |story|
   div
     == link_to story.final_title, story_path(story)

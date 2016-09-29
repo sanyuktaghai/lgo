@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :dashboard do
     member do
       get 'liked_stories'
+      get 'authored_stories'
     end
   end
 
