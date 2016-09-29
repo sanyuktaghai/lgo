@@ -4,6 +4,8 @@ class DashboardController < ApplicationController
   def show
     @stories = Story.all
     @authored_stories = @stories.where(author_id: @user)
+    @liked_stories = Story.where.not(author_id: @user.id).joins(:story_likes).where(:story_likes => { :user_id => @user.id})
+    @bookmarked_stories = Story.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => { :user_id => @user.id})
   end
   
   def liked_stories

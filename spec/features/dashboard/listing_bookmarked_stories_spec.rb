@@ -23,7 +23,7 @@ RSpec.feature "Listing Bookmarked Stories" do
     click_link "Saves"
     
     expect(page).to have_content(Story.where.not(author_id: @user.id).joins(:bookmarks).where(:bookmarks => {:user_id => @user.id}).count)
-    expect(page).to have_content("2 Saves")
+    expect(page).to have_content("Saves: 2")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(150))

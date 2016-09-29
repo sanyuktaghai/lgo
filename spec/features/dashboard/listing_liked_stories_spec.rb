@@ -24,7 +24,7 @@ RSpec.feature "Listing Liked Stories" do
     click_link "Likes"
     
     expect(page).to have_content(Story.where.not(author_id: @user.id).joins(:story_likes).where(:story_likes => {:user_id => @user.id}).count)
-    expect(page).to have_content("2 Likes")
+    expect(page).to have_content("Likes: 2")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(150))
