@@ -14,7 +14,7 @@ p
   == link_to "Saves", bookmarked_stories_dashboard_path(@user), remote: true
 
 div
- | My Stories: 
+ | Stories: 
  == link_to @authored_stories.count, authored_stories_dashboard_path(@user), remote: true
  |  Likes: 
  == link_to @liked_stories.count, liked_stories_dashboard_path(@user), remote: true
