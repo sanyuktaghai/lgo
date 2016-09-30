@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.feature "Editing Dashboard" do 
   before do
     @user = FactoryGirl.create(:user)
-    @new_first_name = Faker::Hipster::first_name
-    @new_last_name = Faker::Hipster::last_name
+    @new_first_name = Faker::Name::first_name
+    @new_last_name = Faker::Name::last_name
     @new_about_me = Faker::Hipster::sentence
   end
   
