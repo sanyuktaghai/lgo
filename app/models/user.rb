@@ -4,12 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  has_many :stories
-#  has_many :stories_as_admin, class_name: 'Story'
-#  has_many :stories_as_author, class_name: 'Story'
-#  has_many :stories_as_poster, class_name: 'Story'
-  
+  has_many :stories  
   has_many :story_likes
   has_many :bookmarks
+  
+  validates :first_name, presence: true
+  validates :last_name, presence: true
   
 end
