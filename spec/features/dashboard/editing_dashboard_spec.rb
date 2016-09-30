@@ -8,7 +8,7 @@ RSpec.feature "Editing Dashboard" do
     @new_about_me = Faker::Hipster::sentence
   end
   
-  scenario "Logged-in user can edit her basic profile information on the dashboard" do
+  scenario "Logged-in user can edit her basic profile information on the dashboard", js:true do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     click_link "Edit"
