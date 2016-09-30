@@ -29,7 +29,6 @@ Rails.application.routes.draw do
       get 'bookmarked_stories'
       get 'commented_stories'
     end
-#    resources :registrations, only: :edit
     devise_for :users, controllers: { registrations: 'registrations' }
   end
 
