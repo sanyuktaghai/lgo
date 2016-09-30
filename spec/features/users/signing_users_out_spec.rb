@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.feature "Signing out signed-in users" do
   
   before do
-    @foo = User.create(email: "foo@bar.com", password: "password")
+    @foo = FactoryGirl.create(:user)
  
     visit "/"
     
     click_link "Sign in"
-    fill_in "Email", with: "foo@bar.com"
-    fill_in "Password", with: "password"
+    fill_in "Email", with: @foo.email
+    fill_in "Password", with: @foo.password
     click_button "Log in"
   end
   
