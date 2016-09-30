@@ -8,7 +8,7 @@ RSpec.feature "Editing Dashboard" do
     @new_about_me = Faker::Hipster::sentence
   end
   
-  scenario "Logged-in user can edit her basic profile information on the dashboard", js:true do
+  scenario "Logged-in user can edit her basic profile information via the dashboard", js:true do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     click_link "Edit"
@@ -18,12 +18,22 @@ RSpec.feature "Editing Dashboard" do
     fill_in "About Me", with: @new_about_me
     click_button "Update"
     
-    expect(page).to have_content(@user.first_name.titleize.gsub(/\b\w/) { |w| w.upcase })
     expect(page).to have_content(@new_first_name.titleize.gsub(/\b\w/) { |w| w.upcase })
-    expect(page).to have_content(@user.last_name.titleize.gsub(/\b\w/) { |w| w.upcase })
     expect(page).to have_content(@new_last_name.titleize.gsub(/\b\w/) { |w| w.upcase })
-    expect(page).to have_content(@user.about_me)
     expect(page).to have_content(@new_about_me)
   end
-
+  
+  scenario "Logged-in user fails to edit her basic profile information via the dashboard", js:true do
+    login_as(@user, :scope => :user)
+    visit(dashboard_path(@user))
+    click_link "Edit"
+    
+    fill_in "First Name", with: ""
+    fill_in "Last Name", with: ""
+    fill_in "About Me", with: ""
+    click_button "Update"
+    
+    expect(page).to have_content("First name can't be blank")
+    expect(page).to have_content("Last name can't be blank")
+  end
 end
