@@ -49,7 +49,11 @@ class DashboardController < ApplicationController
   end
   
   def set_liked_stories
-    @liked_stories = Story.where.not(author_id: @user.id).joins(:story_likes).where(:story_likes => { :user_id => @user.id})
+    if @user == current_user
+      @liked_stories = Story.where.not(author_id: @user.id).joins(:story_likes).where(:story_likes => { :user_id => @user.id})
+    else
+      @liked_stories = Story.joins(:story_likes).where(:story_likes => { :user_id => @user.id})
+    end
   end
   
   def set_bookmarked_stories
