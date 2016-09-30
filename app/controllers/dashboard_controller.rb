@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
   before_action :set_user, only: [:show, :liked_stories, :authored_stories, :bookmarked_stories, :commented_stories]
   
   before_action :set_authored_stories, only: [:show, :authored_stories]  
+  before_action :set_posted_stories, only: [:show, :authored_stories]  
   before_action :set_liked_stories, only: [:show, :liked_stories]  
   before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories]
   before_action :set_commented_stories, only: [:show, :commented_stories]
@@ -41,6 +42,10 @@ class DashboardController < ApplicationController
   
   def set_authored_stories
     @authored_stories = Story.where(author_id: @user)
+  end
+  
+  def set_posted_stories
+    @posted_stories = Story.where(poster_id: @user)
   end
   
   def set_liked_stories
