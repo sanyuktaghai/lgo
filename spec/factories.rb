@@ -36,6 +36,7 @@ FactoryGirl.define do
       email "anonymous@example.com"
       first_name "Brad"
       last_name "The Penguin"
+      id 1000
     end
     
     factory :user_with_unpublished_stories do
