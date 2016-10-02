@@ -13,7 +13,7 @@ RSpec.feature "Showing Stories" do
     visit "/admin"
     
     click_link @story.raw_title
-    expect(page).to have_content("#{@story.user(:author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("#{@story.user(:author_id).full_name}")
     expect(page).to have_content(@story.created_at.strftime("%b %d, %Y"))
     expect(page).to have_content("Unpublished")
     expect(page).to have_content(@story.raw_title)

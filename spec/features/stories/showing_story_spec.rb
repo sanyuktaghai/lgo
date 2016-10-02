@@ -15,7 +15,7 @@ RSpec.feature "Showing Stories" do
     
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
-    expect(page).to have_content("Posted by: #{@foo.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@foo.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("Posted by: #{@foo.full_name}")
     expect(current_path).to eq(story_path(@story))
     
     expect(page).not_to have_link("Edit Story")
@@ -32,7 +32,7 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
     expect(current_path).to eq(story_path(@story))
-    expect(page).to have_content("Posted by: #{@foo.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@foo.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("Posted by: #{@foo.full_name}")
     
     expect(page).not_to have_link("Edit Story")
     expect(page).not_to have_link("Delete Story")
@@ -48,7 +48,7 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
     expect(current_path).to eq(story_path(@story))
-    expect(page).to have_content("Posted by: #{@foo.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@foo.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("Posted by: #{@foo.full_name}")
     
     expect(page).to have_link("Edit Story")
     expect(page).to have_link("Delete Story")
@@ -61,7 +61,7 @@ RSpec.feature "Showing Stories" do
     
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
-    expect(page).to have_content("Posted by: #{@foo.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@foo.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("Posted by: #{@foo.full_name}")
     expect(current_path).to eq(story_path(@story))
   end
 end

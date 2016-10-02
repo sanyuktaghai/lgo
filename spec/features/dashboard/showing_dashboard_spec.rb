@@ -11,8 +11,7 @@ RSpec.feature "Showing Dashboard" do
     login_as(@user, :scope => :user)
     visit(dashboard_path(@user))
     
-    expect(page).to have_content(@user.first_name.titleize.gsub(/\b\w/) { |w| w.upcase })
-    expect(page).to have_content(@user.last_name.titleize.gsub(/\b\w/) { |w| w.upcase })
+    expect(page).to have_content(@user.full_name)
     expect(page).to have_content(@user.about_me)
   end
   
@@ -26,7 +25,7 @@ RSpec.feature "Showing Dashboard" do
   scenario "Non-logged-in user can go to other user's dashboards" do
     visit "/"
     
-    click_link "#{@user.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@user.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
+    click_link "#{@user.full_name}"
     expect(page).to have_current_path(dashboard_path(@user))
   end
 

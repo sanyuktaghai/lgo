@@ -20,7 +20,7 @@ RSpec.feature "Editing Stories" do
     click_link @story.raw_title
     click_link "Edit Story"
     
-    expect(page).to have_content("#{@story.user(:author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("#{@story.user(:author_id).full_name}")
     expect(page).to have_content(@story.created_at.strftime("%b %d, %Y"))
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
@@ -34,7 +34,7 @@ RSpec.feature "Editing Stories" do
     expect(page.current_path).to eq(admin_story_path(@story))  
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
-    expect(page).to have_content("#{@story.user(:admin_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{@story.user(:admin_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}")
+    expect(page).to have_content("#{@story.user(:admin_id).full_name}")
   end
   
   scenario "An admin edits an updated story" do

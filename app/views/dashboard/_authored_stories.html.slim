@@ -26,10 +26,10 @@
     p
       - if story.poster_id?
         | Posted by: 
-        == "#{User.find(story.poster_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{User.find(story.poster_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
+        == "#{User.find(story.poster_id).full_name}"
       - else
         | Written by: 
-        == "#{User.find(story.author_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{User.find(story.author_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
+        == "#{User.find(story.author_id).full_name}"
         
 - else
   h2 List of all Posted Stories
@@ -45,4 +45,4 @@
         div Anonymous
       p
         | Posted by: 
-        == "#{User.find(story.poster_id).first_name.titleize.gsub(/\b\w/) { |w| w.upcase }} #{User.find(story.poster_id).last_name.titleize.gsub(/\b\w/) { |w| w.upcase }}"
+        == "#{User.find(story.poster_id).full_name}"

@@ -20,11 +20,6 @@ class User < ApplicationRecord
   end
 
   def follows_or_same?(follow)
-#    Following.where(user_id: follow.id).include?(follower_id: self.id) || self == follow
-#    followings.map(&:user).include?(follow) || self == follow
-#        followings.map(&:follower).include?(new_follow) || self == new_follow
-#        followings.map(&:follower).include?(follow) || self == follow
-#    followings.map(&:user).include?(follow)
     Following.where(follower_id: self.id).where(user_id: follow.id).empty? || self == follow
   end
 end
