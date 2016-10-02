@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :set_user, only: [:show, :liked_stories, :authored_stories, :bookmarked_stories, :commented_stories]
+  before_action :set_user, only: [:show, :liked_stories, :authored_stories, :bookmarked_stories, :commented_stories, :followings, :followers]
   
   before_action :set_authored_stories, only: [:show, :authored_stories]  
   before_action :set_posted_stories, only: [:show, :authored_stories]  
