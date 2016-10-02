@@ -8,6 +8,7 @@ class DashboardController < ApplicationController
   before_action :set_commented_stories, only: [:show, :commented_stories]
   
   def show
+    @following = @user.followings.build
   end
   
   def liked_stories
