@@ -13,7 +13,7 @@ RSpec.feature "ListingFollowings" do
     visit(dashboard_path(@foo))
     
     expect(page).to have_content(@foo.full_name)    
-    expect(page).not_to have_link("Follow", href: "/followings?followed_id=#{@foo.id}")
+    expect(page).not_to have_link("Follow", href: "/followings?follower_id=#{@foo.id}")
    end
   
   scenario "Logged-in user can follow others" do
@@ -21,10 +21,10 @@ RSpec.feature "ListingFollowings" do
     
     expect(page).to have_content(@bar.full_name) 
     
-    link = "a[href='/followings?followed_id=#{@bar.id}']"
+    link = "a[href='/followings?follower_id=#{@bar.id}']"
     find(link).click
     
-    expect(page).not_to have_link("Follow", href: "/followings?followed_id=#{@bar.id}")
+    expect(page).not_to have_link("Follow", href: "/followings?follower_id=#{@bar.id}")
      
   end
 end

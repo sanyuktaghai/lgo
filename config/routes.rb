@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     end
     devise_for :users, controllers: { registrations: 'registrations' }
   end
+  
+  resources :followings, only: [:show, :create, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
