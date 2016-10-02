@@ -6,6 +6,8 @@ class DashboardController < ApplicationController
   before_action :set_liked_stories, only: [:show, :liked_stories]  
   before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories]
   before_action :set_commented_stories, only: [:show, :commented_stories]
+  before_action :set_followers, only: [:show, :followers]
+   before_action :set_followings, only: [:show, :followings]
   
   def show
     @following = @user.followings.build
@@ -32,6 +34,18 @@ class DashboardController < ApplicationController
   def commented_stories
     respond_to do |format|
       format.js {render :partial => 'dashboard/commented_stories'} 
+    end
+  end
+  
+  def followers
+    respond_to do |format|
+      format.js {render :partial => 'dashboard/followers'} 
+    end
+  end
+  
+  def followings
+    respond_to do |format|
+      format.js {render :partial => 'dashboard/followings'} 
     end
   end
   
@@ -63,5 +77,13 @@ class DashboardController < ApplicationController
   
   def set_commented_stories
     @commented_stories = Story.where.not(author_id: @user.id).joins(:comments).where(:comments => { :user_id => @user.id})
+  end
+  
+  def set_followers
+    @followers = Following.where(user_id: @user.id)
+  end
+  
+  def set_followings
+    @followings = Following.where(follower_id: @user.id)
   end
 end
