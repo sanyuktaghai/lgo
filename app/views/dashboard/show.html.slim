@@ -12,8 +12,8 @@ div#user_registration
     == link_to "Edit", edit_user_dashboard_registration_path(@user), remote: true
   - else
     div
-      - if !current_user || !current_user.follows_or_same?(@user)
-        == link_to "Follow", followings_path(follower_id: @user.id), method: :post, class: "button"
+      - if !current_user || current_user.follows_or_same?(@user)
+        == link_to "Follow", followings_path(user_id: @user.id), method: :post, class: "button"   
     
 div
   - if @user == current_user

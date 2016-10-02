@@ -6,10 +6,10 @@ class FollowingsController < ApplicationController
       flash[:warning] = "Please sign in to continue"
       redirect_to new_user_session_path
     else
-      follower = User.find(params[:follower_id])
-      Following.create(following_params.merge!(follower_id: params[:follower_id], user_id: current_user.id)) unless current_user.follows_or_same?(follower)
-      
-      redirect_to root_path
+      follow = User.find(params[:user_id])
+      Following.create(following_params.merge!(follower_id: current_user.id, user_id: params[:user_id])) if current_user.follows_or_same?(follow)
+      flash[:success] = "You are now following #{follow.full_name}"
+      redirect_to dashboard_path(follow.id)
     end
   end
   
