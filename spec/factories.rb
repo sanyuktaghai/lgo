@@ -96,4 +96,5 @@ FactoryGirl.define do
     user
     body { Faker::Hipster.sentence }
   end
+  
 end
