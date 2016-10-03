@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ListingFollowings" do 
+RSpec.feature "Listing Followings" do 
   before do
     @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
@@ -28,7 +28,6 @@ RSpec.feature "ListingFollowings" do
     expect(page).to have_content(Following.where(follower_id: @foo).count)
     expect(page).to have_content("Following: 1")
     expect(page).to have_content(@car.full_name) 
-    expect(page).to have_link("Unfollow")
   end
   
   scenario "Shows list of user's followers", js: true do
@@ -39,8 +38,6 @@ RSpec.feature "ListingFollowings" do
     click_link "Followers"
     expect(page).to have_content("Followers: 1")
     expect(page).to have_content(@bar.full_name) 
-    expect(page).to have_link("Follow")
-    expect(page).not_to have_link("Unfollow")
   end
   
   scenario "Shows list of users who owner follows", js: true do
@@ -51,7 +48,5 @@ RSpec.feature "ListingFollowings" do
     
     expect(page).to have_content("Following: 1")
     expect(page).to have_content(@car.full_name) 
-    expect(page).to have_link("Follow")
-    expect(page).not_to have_link("Unfollow")
   end
 end

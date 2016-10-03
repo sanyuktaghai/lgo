@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
   before_action :set_bookmarked_stories, only: [:show, :bookmarked_stories]
   before_action :set_commented_stories, only: [:show, :commented_stories]
   before_action :set_followers, only: [:show, :followers]
-   before_action :set_followings, only: [:show, :followings]
+  before_action :set_followings, only: [:show, :followings]
   
   def show
     @following = @user.followings.build
