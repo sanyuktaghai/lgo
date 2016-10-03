@@ -16,6 +16,7 @@ RSpec.feature "Deleting Followings" do
  
     expect(page).to have_content("Followers: 0")
     expect(page).to have_content("You unfollowed #{@foo.full_name}")
-    expect(page).to have_link("Follow", href: "/followings?user_id=#{@foo.id}")
+#    link = "a[href='/followings?follower_id=#{@bar.id}&user_id=#{@foo.id}']"
+    expect(page).to have_link("Follow", href: "/followings?follower_id=#{@bar.id}&user_id=#{@foo.id}")
   end
 end
