@@ -1,0 +1,17 @@
+header role="banner"
+  nav
+    div
+      == link_to "Home", root_path
+    div
+      - if user_signed_in?
+        div
+          == link_to "My Dashboard", dashboard_path(current_user)
+        div
+          == link_to "Sign out", destroy_user_session_path, method: :delete
+        div class="navbar-right"
+          p class="navbar-text"
+            | Signed in as 
+            == "#{current_user.email}."
+      - else
+        == link_to "Sign up", new_user_registration_path
+        == link_to "Sign in", new_user_session_path

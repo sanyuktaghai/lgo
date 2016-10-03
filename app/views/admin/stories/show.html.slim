@@ -1,6 +1,6 @@
 p
   | Original Author: 
-  == @story.user(:author_id).email
+  == link_to "#{@story.user(:author_id).full_name}", dashboard_path(@story.user(:author_id))
 p 
   | Submitted At: 
   == @story.created_at.strftime("%b %d, %Y")
@@ -17,7 +17,7 @@ p
 - if @story.poster_id?
   div
     | Posted by: 
-    == User.find(@story.poster_id).email
+    == link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
 h2
   | Raw Title: 
   == @story.raw_title
@@ -41,7 +41,7 @@ p
 p
   | Admin: 
   - if @story.admin_id?
-    == @story.user(:admin_id).email
+    == link_to "#{@story.user(:admin_id).full_name}", dashboard_path(@story.user(:admin_id))
   - else
     | Unclaimed
   

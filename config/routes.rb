@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
 
   devise_for :models
-  devise_for :users
+#  devise_for :users, :controlelrs => { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'registrations' }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
 #root 'welcome#index'
+  
   root to: 'stories#index'
+  
   resources :stories do 
     resources :comments
     resources :story_likes
@@ -18,6 +21,20 @@ Rails.application.routes.draw do
     root to: 'stories#index'
     resources :stories
   end
+  
+  resources :dashboard do
+    member do
+      get 'liked_stories'
+      get 'authored_stories'
+      get 'bookmarked_stories'
+      get 'commented_stories'
+      get 'followers'
+      get 'followings'
+    end
+    devise_for :users, controllers: { registrations: 'registrations' }
+  end
+  
+  resources :followings, only: [:show, :create, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

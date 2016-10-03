@@ -5,6 +5,7 @@ RSpec.feature "Adding Comments to Stories" do
     @bar = FactoryGirl.create(:user)
     @foo = FactoryGirl.create(:user_with_published_stories)
     @story = Story.find_by(author_id: @foo.id)
+    @comment1 = Faker::Hipster::sentence
   end
   
   scenario "Permit a signed in user to write a comment" do
@@ -12,11 +13,11 @@ RSpec.feature "Adding Comments to Stories" do
     
     visit "/"
     click_link @story.final_title
-    fill_in "New Comment", with: "Great story!"
+    fill_in "New Comment", with: @comment1
     click_button "Add Comment"
     
     expect(page).to have_content("Comment has been added")
-    expect(page).to have_content("Great story!")
+    expect(page).to have_content(@comment1)
     expect(page.current_path).to eq(story_path(@story))
   end
   

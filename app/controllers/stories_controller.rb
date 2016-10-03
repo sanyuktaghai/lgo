@@ -41,8 +41,10 @@ class StoriesController < ApplicationController
   end
   
   def update
+    if @story.published?
+      @story.validate_updated_fields = true
+    end
     @story.published = false
-    @story.validate_updated_fields = true
     respond_to do |format|
       if @story.user != current_user
         flash[:warning] = "You can only edit your own stories."
@@ -77,4 +79,5 @@ class StoriesController < ApplicationController
     #to make sure users can only get to their own stories
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
   end
+  
 end

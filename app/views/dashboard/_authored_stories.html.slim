@@ -1,0 +1,48 @@
+- if @user == current_user
+  h2 List of all Authored Stories
+  - @authored_stories.each do |story|
+    - if story.published?
+      div
+        == link_to story.final_title, story_path(story)
+      div
+        == truncate(story.final_body, length: 150)
+    - else 
+      - if story.updated_title?
+        div
+          == link_to story.updated_title, story_path(story)
+        div
+          == truncate(story.updated_body, length: 150)
+      - else
+        div
+          == link_to story.raw_title, story_path(story)
+        div
+          == truncate(story.raw_body, length: 150)
+      div Pending
+    - if story.anonymous?
+      div Anonymous
+    div
+      | Posted on: 
+      == story.created_at.strftime("%b %d, %Y")
+    p
+      - if story.poster_id?
+        | Posted by: 
+        == "#{User.find(story.poster_id).full_name}"
+      - else
+        | Written by: 
+        == "#{User.find(story.author_id).full_name}"
+        
+- else
+  h2 List of all Posted Stories
+  - @posted_stories.published.each do |story|
+      div
+        == link_to story.final_title, story_path(story)
+      div
+        == truncate(story.final_body, length: 150)
+      div
+        | Posted on: 
+        == story.created_at.strftime("%b %d, %Y")
+      - if story.anonymous?
+        div Anonymous
+      p
+        | Posted by: 
+        == "#{User.find(story.poster_id).full_name}"

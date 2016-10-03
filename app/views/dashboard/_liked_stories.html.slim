@@ -1,0 +1,9 @@
+h2 List of All Liked Stories:
+- @liked_stories.each do |story|
+  div
+    == link_to story.final_title, story_path(story)
+  div
+    == truncate(story.final_body, length: 150)
+  p
+    | Posted on: 
+    == story.created_at.strftime("%b %d, %Y")

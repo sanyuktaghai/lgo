@@ -7,9 +7,9 @@ RSpec.feature "Deleting Comments" do
     @story_foo = Story.find_by(author_id: @foo.id)
     @story_bar = Story.find_by(author_id: @bar.id)
     
-    @comment1 = Comment.create(body: "Great story!", user: @foo, story: @story_foo)
-    @comment2 = Comment.create(body: "Really great story!", user: @bar, story: @story_foo)
-    @comment3 = Comment.create(body: "Super great story!", user: @bar, story: @story_bar)
+    @comment1 = Comment.create(body: Faker::Hipster::word, user: @foo, story: @story_foo)
+    @comment2 = Comment.create(body: Faker::Hipster::sentence, user: @bar, story: @story_foo)
+    @comment3 = Comment.create(body: Faker::Hipster::paragraph, user: @bar, story: @story_bar)
   end
   
   scenario "An owner succeeds " do
@@ -20,7 +20,7 @@ RSpec.feature "Deleting Comments" do
     click_link "Delete"
     
     expect(page).to have_content("Comment has been deleted")
-    expect(page).not_to have_content("Great story!")
+    expect(page).not_to have_content(@comment1)
   end
   
   scenario "A non-owner fails" do

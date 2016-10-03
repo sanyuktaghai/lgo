@@ -1,23 +1,37 @@
 h2
-  == @story.final_title
-/div
-  | Posted by: 
-  == User.find(@story.poster_id).email
+  - unless @story.published?
+    == @story.raw_title
+  - else
+    == @story.final_title
+div
+  - unless @story.published?
+    - if @story.anonymous?
+      | Posted by: Anonymous
+    - else
+      | Posted by: 
+      == link_to "#{User.find(@story.author_id).full_name}", dashboard_path(User.find(@story.author_id))
+  - else
+    | Posted by: 
+    == link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
 p.small
   == @story.created_at.strftime("%b %d, %Y")
 p
-  == @story.final_body
+  - unless @story.published?
+    == @story.raw_body
+  - else
+    == @story.final_body
 
 - if user_signed_in? && current_user == @story.user(:author_id)
   == link_to "Edit Story", edit_story_path(@story), class: "btn"
   == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
 
-<!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
-== render 'comments/form'
-== render 'comments/show'
+- if @story.published?
+  <!--  Code for adding and displaying comments follows. Note: This is on the story show view -->
+  == render 'comments/form'
+  == render 'comments/show'
 
-<!-- Likes -->
-== render 'story_likes/show'
+  <!-- Likes -->
+  == render 'story_likes/show'
 
-<!-- Bookmarks -->
-== render 'bookmarks/show'
+  <!-- Bookmarks -->
+  == render 'bookmarks/show'

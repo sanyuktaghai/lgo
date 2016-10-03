@@ -7,7 +7,8 @@ h3 List of all Unpublished Stories
     == link_to story.raw_title, admin_story_path(story)
   div
     == truncate(story.raw_body, length: 150)
-    - if story.author_id #if story.author exists, then show the following line:
-      small 
-        | Created by: 
-        == User.find(story.author_id).email
+    div
+      - if story.author_id #if story.author exists, then show the following line:
+        small 
+          | Created by: 
+          == link_to "#{User.find(story.author_id).full_name}", dashboard_path(User.find(story.author_id))

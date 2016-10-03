@@ -1,0 +1,41 @@
+h1 Welcome to the Dashboard!
+
+div#user_registration
+  h4 
+    | Name: 
+    == @user.full_name
+  div 
+    - if @user.about_me?
+      | About Me: 
+      == @user.about_me
+  - if @user == current_user
+    == link_to "Edit", edit_user_dashboard_registration_path(@user), remote: true
+  - else
+    div
+      - if !current_user || current_user.follows_or_same?(@user)
+        == link_to "Follow", followings_path(user_id: @user.id), method: :post, class: "button"
+      - else
+        - unless @user == current_user
+          == link_to "Unfollow", following_path(@user, current_user), method: :delete, class: "button"
+    
+div
+  - if @user == current_user
+    == link_to "Stories: #{@authored_stories.count}", authored_stories_dashboard_path(@user), remote: true
+    |   
+    == link_to "Likes: #{@liked_stories.count}", liked_stories_dashboard_path(@user), remote: true
+    |  
+    == link_to "Saves: #{@bookmarked_stories.count}", bookmarked_stories_dashboard_path(@user), remote: true
+    |   
+    == link_to "Comments: #{@commented_stories.count}", commented_stories_dashboard_path(@user), remote: true
+  - else
+    == link_to "Stories: #{@posted_stories.published.count}", authored_stories_dashboard_path(@user), remote: true
+    |   
+    == link_to "Likes: #{@liked_stories.count}", liked_stories_dashboard_path(@user), remote: true
+  |  
+  == link_to "Followers: #{@followers.count}", followers_dashboard_path(@user), remote: true
+  |  
+  == link_to "Following: #{@followings.count}", followings_dashboard_path(@user), remote: true
+ 
+
+div#dashboard_partial
+  == render partial: 'authored_stories'

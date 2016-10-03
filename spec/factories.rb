@@ -1,18 +1,18 @@
 FactoryGirl.define do  
   factory :story do
-    sequence(:raw_title) { |n| "#{n.ordinalize.capitalize} Story" }
-    sequence(:raw_body) { |n| "Body of the #{n.ordinalize} story" }
+    raw_title { Faker::Hipster.sentence }
+    raw_body { Faker::Hipster.paragraph }
     user
     
     factory :published_story do
       published true
-      sequence(:final_title) { |n| "#{n.ordinalize.capitalize} Final Story" }
-      sequence(:final_body) { |n| "Final body of the #{n.ordinalize} story" }
+      final_title { Faker::Hipster.sentence }
+      final_body { Faker::Hipster.paragraph }
       
       factory :unpublished_updated_story do
         published false
-        sequence(:updated_title) { |n| "#{n.ordinalize.capitalize} Updated Story" }
-        sequence(:updated_body) { |n| "Updated body of the #{n.ordinalize} story" }
+        updated_title { Faker::Hipster.sentence }
+        updated_body { Faker::Hipster.paragraph }
       end
       
       factory :published_anonymous_story do
@@ -22,8 +22,11 @@ FactoryGirl.define do
   end
 
   factory :user, aliases: [:author, :poster] do
-    sequence(:email) { |n| "test#{n}@example.com" }
-    password 'password'
+    email {Faker::Internet.email }
+    password { Faker::Internet.password }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    about_me { Faker::Hipster.sentence }
     
     factory :admin do
       admin true
@@ -31,6 +34,9 @@ FactoryGirl.define do
     
     factory :anonymous_user do
       email "anonymous@example.com"
+      first_name "Brad"
+      last_name "The Penguin"
+      id 1000
     end
     
     factory :user_with_unpublished_stories do
@@ -49,7 +55,7 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:published_story, evaluator.stories_count, user: user, author_id: user.id)
+        create_list(:published_story, evaluator.stories_count, user: user, author_id: user.id, poster_id: user.id)
       end
     end
     
@@ -74,4 +80,21 @@ FactoryGirl.define do
     end
     
   end
+  
+  factory :story_like do
+    story
+    user
+  end
+  
+  factory :bookmark do
+    story
+    user
+  end
+  
+  factory :comment do
+    story
+    user
+    body { Faker::Hipster.sentence }
+  end
+  
 end

@@ -5,7 +5,7 @@ RSpec.describe StoriesController, type: :controller do
 
   describe "GET #edit" do
     before do
-      @foo = User.create(email: "foo@bar.com", password: "password")
+      @foo = FactoryGirl.create(:user)
     end
     
     context "owner is allowed to edit her stories" do
@@ -20,7 +20,7 @@ RSpec.describe StoriesController, type: :controller do
     
     context "non-owner is not allowed to edit other users' stories" do
       it "redirects to the root path" do
-        foobar = User.create(email: "foobar@bar.com", password: "password")
+        foobar = FactoryGirl.create(:user)
         sign_in foobar
         story = Story.create(raw_title: "first story", raw_body: "body of first story", user: @foo)
         
