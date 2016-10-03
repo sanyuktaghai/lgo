@@ -8,8 +8,15 @@ class FollowingsController < ApplicationController
     else 
       @following = Following.create(following_params)
       @user = User.find(@following.user_id)
-      flash[:success] = "You are now following #{@user.full_name}"
-      redirect_to dashboard_path(@user)
+      if @following.save
+        respond_to do |format|
+          flash.now[:success] = "You are now following #{@user.full_name}"
+          format.js
+        end
+      else
+        flash[:warning] = "#{@following.user.full_name} could not be followed"
+        redirect_to dashboard_path(@user)
+      end
     end
   end
   
@@ -17,10 +24,11 @@ class FollowingsController < ApplicationController
     @following = Following.where(following_params).first
     @user = User.find(@following.user_id)
     if @following.destroy
+      
       flash[:success] = "You unfollowed #{@user.full_name}"
       redirect_to dashboard_path(@user)
     else
-      flash[:danger] = "{@following.user.full_name} could not be unfollowed"
+      flash[:danger] = "#{@following.user.full_name} could not be unfollowed"
       redirect_to dashboard_path(@user)
     end
   end

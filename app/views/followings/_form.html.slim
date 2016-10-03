@@ -2,6 +2,6 @@
   == link_to "Follow", followings_path(user_id: user.id, follower_id: 0), method: :post, class: "button"
 - else
   - if current_user.follows_or_same?(user) 
-    == link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: "button"
+    == link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: "button", remote: true
   - else
-    == link_to "Unfollow", following_path(user_id: user.id, follower_id: follower.id), method: :delete, class: "button"
+    == link_to "Unfollow", following_path(user_id: user.id, follower_id: follower.id), method: :delete, class: "button", remote: true

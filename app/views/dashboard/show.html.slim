@@ -11,7 +11,7 @@ div#user_registration
   - if @user == current_user
     == link_to "Edit", edit_user_dashboard_registration_path(@user), remote: true
   - else
-    div
+    div#follow_user
       == render partial: 'followings/form', locals: { user: @user, follower: current_user }
     
 div
