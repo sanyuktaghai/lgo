@@ -10,7 +10,6 @@ class DashboardController < ApplicationController
   before_action :set_followings, only: [:show, :followings]
   
   def show
-    @following = @user.followings.build
   end
   
   def liked_stories
