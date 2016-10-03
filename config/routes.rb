@@ -29,7 +29,8 @@ Rails.application.routes.draw do
       get 'bookmarked_stories'
       get 'commented_stories'
       get 'followers'
-      get 'followings'
+      get 'followings'     
+#      resources :followings
     end
     devise_for :users, controllers: { registrations: 'registrations' }
   end

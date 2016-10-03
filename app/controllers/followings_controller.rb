@@ -13,6 +13,17 @@ class FollowingsController < ApplicationController
     end
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    @following = Following.where(user_id: @user.id, follower_id: current_user.id).first
+    if @following.destroy
+      flash[:success] = "You unfollowed #{@user.full_name}"
+    else
+      flash[:danger] = "{@following.user.full_name} could not be unfollowed"
+    end
+      redirect_to dashboard_path(@user)
+  end
+  
   private
   
   def following_params
