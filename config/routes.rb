@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :stories
   end
   
-  resources :dashboard do
+  resources :dashboard, except: [:index] do
     member do
       get 'liked_stories'
       get 'authored_stories'
