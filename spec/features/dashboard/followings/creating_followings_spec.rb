@@ -16,7 +16,7 @@ RSpec.feature "ListingFollowings" do
     expect(page).not_to have_link("Follow", href: "/followings?follower_id=#{@foo.id}&user_id=#{@foo.id}")
    end
   
-  scenario "Logged-in user can follow others" do
+  scenario "Logged-in user can follow others", :js => true do
     visit(dashboard_path(@bar))
     
     expect(page).to have_content(@bar.full_name) 

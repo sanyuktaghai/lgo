@@ -1,8 +1,8 @@
 div id="follow_user_#{user.id}"
-  - unless user.id == follower.id
-    - if !current_user
-      == link_to "Follow", followings_path(user_id: user.id, follower_id: 0), method: :post, class: "button"
-    - else
+  - if !current_user
+    == link_to "Follow", followings_path(user_id: user.id, follower_id: 0), method: :post, class: "button"
+  - else
+    - unless user.id == follower.id
       - if current_user.follows_or_same?(user) 
         == link_to "Follow", followings_path(user_id: user.id, follower_id: follower.id), method: :post, class: "button", remote: true
       - else
