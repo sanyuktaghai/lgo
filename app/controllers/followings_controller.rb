@@ -7,20 +7,32 @@ class FollowingsController < ApplicationController
       redirect_to new_user_session_path
     else 
       @following = Following.create(following_params)
-      @user = User.find(@following.user_id)
-      flash[:success] = "You are now following #{@user.full_name}"
-      redirect_to dashboard_path(@user)
+      if @following.save
+        respond_to do |format|
+          @user = User.find(@following.user_id)
+#          @test = @following.id
+          flash.now[:success] = "You are now following #{@user.full_name}"
+          format.js
+        end
+#        format.html {redirect_to root_path}
+      else
+        redirect_to dashboard_path(@user)
+      end
     end
   end
   
   def destroy
     @following = Following.where(following_params).first
-    @user = User.find(@following.user_id)
     if @following.destroy
-      flash[:success] = "You unfollowed #{@user.full_name}"
-      redirect_to dashboard_path(@user)
+      respond_to do |format|
+        @test = @following.id
+        @user = User.find(@following.user_id)
+        flash.now[:success] = "You unfollowed #{@user.full_name}"
+        format.js
+      end
+#      redirect_to dashboard_path(@user)
     else
-      flash[:danger] = "{@following.user.full_name} could not be unfollowed"
+      flash[:danger] = "#{@following.user.full_name} could not be unfollowed"
       redirect_to dashboard_path(@user)
     end
   end
