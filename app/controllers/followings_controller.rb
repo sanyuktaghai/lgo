@@ -25,11 +25,6 @@ class FollowingsController < ApplicationController
   def destroy
     @following = Following.where(following_params).first
     if @following.destroy
-<<<<<<< HEAD
-      
-      flash[:success] = "You unfollowed #{@user.full_name}"
-      redirect_to dashboard_path(@user)
-=======
       respond_to do |format|
         @test = @following.id
         @user = User.find(@following.user_id)
@@ -37,7 +32,6 @@ class FollowingsController < ApplicationController
         format.js
       end
 #      redirect_to dashboard_path(@user)
->>>>>>> asynchronous_followings
     else
       flash[:danger] = "#{@following.user.full_name} could not be unfollowed"
       redirect_to dashboard_path(@user)
