@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get 'followings'
     end
     devise_for :users, controllers: { registrations: 'registrations' }
+
   end
   
   resources :followings, only: [:show, :create, :destroy]
