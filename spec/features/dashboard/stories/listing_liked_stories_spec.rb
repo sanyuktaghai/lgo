@@ -8,12 +8,9 @@ RSpec.feature "Listing Liked Stories" do
     @story2 = Story.where(author_id: @author.id).last
     @story3 = Story.find_by(author_id: @user.id)
     
-    @story_like1 = FactoryGirl.create(:story_like)
-    @story_like2 = FactoryGirl.create(:story_like)
-    @story_like3 = FactoryGirl.create(:story_like)
-    @story_like1.update(user_id: @user.id, story_id: @story1.id)
-    @story_like2.update(user_id: @user.id, story_id: @story2.id)
-    @story_like3.update(user_id: @user.id, story_id: @story3.id)
+    @story_like1 = StoryLike.create(user_id: @user.id, story_id: @story1.id)
+    @story_like2 = StoryLike.create(user_id: @user.id, story_id: @story2.id)
+    @story_like3 = StoryLike.create(user_id: @user.id, story_id: @story3.id)
     
   end
   

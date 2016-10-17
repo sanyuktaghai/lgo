@@ -8,12 +8,9 @@ RSpec.feature "Listing Bookmarked Stories" do
     @story2 = Story.where(author_id: @author.id).last
     @story3 = Story.find_by(author_id: @user.id)
     
-    @bookmark1 = FactoryGirl.create(:bookmark)
-    @bookmark2 = FactoryGirl.create(:bookmark)
-    @bookmark3 = FactoryGirl.create(:bookmark)
-    @bookmark1.update(user_id: @user.id, story_id: @story1.id)
-    @bookmark2.update(user_id: @user.id, story_id: @story2.id)
-    @bookmark3.update(user_id: @user.id, story_id: @story3.id)
+    @bookmark1 = Bookmark.create(user_id: @user.id, story_id: @story1.id)
+    @bookmark2 = Bookmark.create(user_id: @user.id, story_id: @story2.id)
+    @bookmark3 = Bookmark.create(user_id: @user.id, story_id: @story3.id)
     
     login_as(@user, :scope => :user)
   end
