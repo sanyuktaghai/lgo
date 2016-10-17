@@ -10,6 +10,8 @@ div
     - else
       | Posted by: 
       == link_to "#{User.find(@story.author_id).full_name}", dashboard_path(User.find(@story.author_id))
+      div id="follow_user_#{@story.author_id}"
+        == render partial: 'followings/form', locals: { user: User.find(@story.author_id), follower: current_user }
   - else
     | Posted by: 
     == link_to "#{User.find(@story.poster_id).full_name}", dashboard_path(User.find(@story.poster_id))
