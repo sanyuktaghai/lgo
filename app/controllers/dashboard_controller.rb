@@ -75,7 +75,7 @@ class DashboardController < ApplicationController
   end
   
   def set_commented_stories
-    @commented_stories = Story.where.not(author_id: @user.id).joins(:comments).where(:comments => { :user_id => @user.id})
+    @commented_stories = Story.joins(:comments).where(:comments => { :user_id => @user.id})
   end
   
   def set_followers
