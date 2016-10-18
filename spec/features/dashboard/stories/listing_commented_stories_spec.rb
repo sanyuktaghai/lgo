@@ -9,14 +9,10 @@ RSpec.feature "Listing Commented Stories" do
     @story3 = Story.where(author_id: @author.id).last
     @story4 = Story.find_by(author_id: @user.id)
     
-    @comment1 = FactoryGirl.create(:comment)
-    @comment2 = FactoryGirl.create(:comment)
-    @comment3 = FactoryGirl.create(:comment)
-    @comment4 = FactoryGirl.create(:comment)
-    @comment1.update(user_id: @user.id, story_id: @story1.id)
-    @comment2.update(user_id: @user.id, story_id: @story2.id)
-    @comment3.update(user_id: @author.id, story_id: @story3.id)
-    @comment4.update(user_id: @user.id, story_id: @story4.id)
+    @comment1 = Comment.create(user_id: @user.id, story_id: @story1.id, body: Faker::Hipster.sentence)
+    @comment2 = Comment.create(user_id: @user.id, story_id: @story2.id, body: Faker::Hipster.sentence)
+    @comment3 = Comment.create(user_id: @author.id, story_id: @story3.id, body: Faker::Hipster.sentence)
+    @comment4 = Comment.create(user_id: @user.id, story_id: @story4.id, body: Faker::Hipster.sentence)
     
     login_as(@user, :scope => :user)
   end
@@ -25,7 +21,7 @@ RSpec.feature "Listing Commented Stories" do
     visit(dashboard_path(@user))
     click_link "Comments"
     
-    expect(page).to have_content("Comments: 2")
+    expect(page).to have_content("Comments: 3")
 
     expect(page).to have_content(@story1.final_title)
     expect(page).to have_content(@story1.final_body.truncate(150))
@@ -41,8 +37,8 @@ RSpec.feature "Listing Commented Stories" do
     expect(page).not_to have_content(@story3.final_body.truncate(150))
     expect(page).not_to have_link(@story3.final_title)
     
-    expect(page).not_to have_content(@story4.final_title)
-    expect(page).not_to have_content(@story4.final_body.truncate(150))
-    expect(page).not_to have_link(@story4.final_title)
+    expect(page).to have_content(@story4.final_title)
+    expect(page).to have_content(@story4.final_body.truncate(150))
+    expect(page).to have_link(@story4.final_title)
    end
 end

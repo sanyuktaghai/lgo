@@ -5,22 +5,35 @@ class FollowingsController < ApplicationController
     unless current_user
       flash[:warning] = "Please sign in to continue"
       redirect_to new_user_session_path
-    else
-      follow = User.find(params[:user_id])
-      Following.create(following_params.merge!(follower_id: current_user.id, user_id: params[:user_id])) if current_user.follows_or_same?(follow)
-      flash[:success] = "You are now following #{follow.full_name}"
-      redirect_to dashboard_path(follow.id)
+    else 
+      @following = Following.create(following_params)
+      if @following.save
+        respond_to do |format|
+          @user = User.find(@following.user_id)
+#          @test = @following.id
+          flash.now[:success] = "You are now following #{@user.full_name}"
+          format.js
+        end
+#        format.html {redirect_to root_path}
+      else
+        flash[:warning] = "#{@following.user.full_name} could not be followed"
+        redirect_to dashboard_path(@user)
+      end
     end
   end
   
   def destroy
-    @user = User.find(params[:id])
-    @following = Following.where(user_id: @user.id, follower_id: current_user.id).first
+    @following = Following.where(following_params).first
     if @following.destroy
-      flash[:success] = "You unfollowed #{@user.full_name}"
-      redirect_to dashboard_path(@user)
+      respond_to do |format|
+        @test = @following.id
+        @user = User.find(@following.user_id)
+        flash.now[:success] = "You unfollowed #{@user.full_name}"
+        format.js
+      end
+#      redirect_to dashboard_path(@user)
     else
-      flash[:danger] = "{@following.user.full_name} could not be unfollowed"
+      flash[:danger] = "#{@following.user.full_name} could not be unfollowed"
       redirect_to dashboard_path(@user)
     end
   end

@@ -28,6 +28,7 @@ RSpec.feature "Listing Followings" do
     expect(page).to have_content(Following.where(follower_id: @foo).count)
     expect(page).to have_content("Following: 1")
     expect(page).to have_content(@car.full_name) 
+    expect(page).to have_content("Unfollow")
   end
   
   scenario "Shows list of user's followers", js: true do

@@ -18,8 +18,9 @@ class User < ApplicationRecord
     l_name = self.last_name.titleize.gsub(/\b\w/) { |w| w.upcase }
     "#{f_name} #{l_name}"
   end
-
-  def follows_or_same?(follow)
-    Following.where(follower_id: self.id).where(user_id: follow.id).empty? || self == follow
+  
+  def follows?(follow)
+    Following.where(follower_id: self.id).where(user_id: follow.id).any?
   end
+  
 end
