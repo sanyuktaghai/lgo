@@ -1,2 +1,2 @@
 $("#flash_notice").html('<div class="callout success" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-check"></i> <%= j flash[:success] %></p></div>');
-$("#follow_user_<%= j @user.id.to_s %>").html('<%= render partial: "followings/dynform.html.slim", locals: { user: @user, follower: current_user}%>');
+$("#follow_user_<%= j @user.id.to_s %>").html('<%= render partial: "followings/form.html.slim", locals: { user: @user, follower: current_user}%>');
