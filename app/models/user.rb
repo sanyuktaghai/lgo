@@ -41,4 +41,14 @@ class User < ApplicationRecord
     end
   end
   
+  def self.find_for_facebook_oauth(auth)
+    user = User.where("(uid = ? AND provider = 'facebook') OR lower(email) = ?", auth.uid, auth.info.email).first
+
+    user.provider = auth.provider
+    user.uid = auth.uid
+
+    user.save
+    user
+  end
+  
 end
