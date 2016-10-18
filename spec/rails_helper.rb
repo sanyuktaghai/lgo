@@ -6,6 +6,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'factory_girl_rails'
+require 'omniauth'
 
 require 'database_cleaner'
 
@@ -38,6 +39,7 @@ RSpec.configure do |config|
     # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
+  
   config.use_transactional_fixtures = false
   
   config.before(:suite) do
@@ -46,6 +48,7 @@ RSpec.configure do |config|
   
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
+#    OmniAuth.config.mock_auth[:facebook] = nil
   end
   
   config.before(:each, type: :feature) do
@@ -94,3 +97,26 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+OmniAuth.config.test_mode = true
+#OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+#  provider: 'facebook',
+#  ui: '123545',
+#  email: 'example@test.com',
+#  password: 'password',
+#  first_name: 'John',
+#  last_name: 'Doe'
+#})
+OmniAuth.config.add_mock(:facebook, {
+  uid: '123545',
+  info: {
+    email: 'example@test.com',
+    first_name: 'John',
+    last_name: 'Doe'
+    },
+  credentials:  {
+    token: "EAAZA3djnm4CEBAPJzIVWhhsBF",
+    expires_at: 12345678,
+    expires: true}
+  }
+)
