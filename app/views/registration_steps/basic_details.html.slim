@@ -1,1 +1,15 @@
-h1 basic details1
+p Only one more step:
+
+= form_for @user, :url => wizard_path, :method => :put do |f|
+  - if f.object.errors.any?
+    div
+      - f.object.errors.full_messages.each do |error|
+          p
+            = error
+  = f.label :first_name
+  = f.text_field :first_name
+  = f.label :last_name
+  = f.text_field :last_name
+  = f.submit "Submit"
+  
+  = step

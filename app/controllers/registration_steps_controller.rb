@@ -3,7 +3,7 @@ class RegistrationStepsController < ApplicationController
   
   include Wicked::Wizard
   
-  steps :basic_details, :basic_details2
+  steps *User.form_steps
   
   def show
     @user = current_user
@@ -12,6 +12,7 @@ class RegistrationStepsController < ApplicationController
   
   def update
     @user = current_user
+    params[:user][:status] = 'active' if step == "basic_details"
     @user.update_attributes(user_update_params)
     sign_in(@user, bypass: true)
     render_wizard @user
@@ -20,6 +21,6 @@ class RegistrationStepsController < ApplicationController
   private
   
   def user_update_params
-    params[:user].permit(:first_name, :last_name)
+    params[:user].permit(:first_name, :last_name, :status)
   end
 end

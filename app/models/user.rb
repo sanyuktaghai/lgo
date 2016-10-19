@@ -10,8 +10,19 @@ class User < ApplicationRecord
   has_many :followings
   has_many :followers, through: :followings, class_name: "User"
   
-#  validates :first_name, presence: true
-#  validates :last_name, presence: true
+  cattr_accessor :form_steps do
+    %w(basic_details)
+  end
+  
+  attr_accessor :form_step
+  
+  validates :first_name, presence: true, if: :active?
+  validates :last_name, presence: true, if: :active?
+  
+  def active?
+    status == 'active'
+  end
+
   
   def full_name
     f_name = self.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }

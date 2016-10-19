@@ -1,18 +1,10 @@
 class RegistrationsController < Devise::RegistrationsController
   
-  include Wicked::Wizard
-  
-  steps :basic_details, :basic_details2
-  
   def new 
     super
   end
 
   def create
-    super
-  end
-
-  def update 
     super
   end
 
@@ -23,6 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def update
+    super
     respond_to do |format|
       if resource.update_without_password(account_update_params)
         flash[:success] = "Profile has been updated"
@@ -40,11 +33,9 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
   
-#  def after_sign_up_path_for(resource)
-#    after_signup_path(:create_profile)
-#  end  
   def after_sign_up_path_for(resource)
-    registration_steps_path
+    @user = current_user
+    registration_step_path(:basic_details)
   end
   
   private
