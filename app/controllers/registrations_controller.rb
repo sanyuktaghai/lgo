@@ -1,7 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
   
-  include Wicked::Wizard
-  
   def edit
     respond_to do |format|
       format.js
