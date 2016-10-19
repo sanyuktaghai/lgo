@@ -1,16 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  def new 
-    super
-  end
-
-  def create
-    super
-  end
-
-  def update 
-    super
-  end
-
+  
   def edit
     respond_to do |format|
       format.js
@@ -35,8 +24,8 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
   
-  def user_step_path_for(resource)
-    user_step_path(:basic_details)
+  def after_sign_up_path_for(resource)
+    after_signup_path(:create_profile)
   end
   
   private

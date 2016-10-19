@@ -10,23 +10,8 @@ class User < ApplicationRecord
   has_many :followings
   has_many :followers, through: :followings, class_name: "User"
   
-  cattr_accessor :form_steps do
-#    %w(identity characteristics instructions)
-    %w(basic_details)
-  end
-  
-  attr_accessor :form_step
-  
-  def required_for_step?(step)
-  # All fields are required if no form step is present
-    return true if form_step.nil?
-
-    # All fields from previous steps are required if the
-    # step parameter appears before or we are on the current step
-    return true if self.form_steps.index(step.to_s) <= self.form_steps.index(form_step)
-  end
-#  validates :first_name, presence: true, if: -> {required_for_step?(:basic_details)}
-#  validates :last_name, presence: true, if: -> {required_for_step?(:basic_details)}
+#  validates :first_name, presence: true
+#  validates :last_name, presence: true
   
   def full_name
     f_name = self.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }
