@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def after_sign_up_path_for(resource)
-    after_signup_path(:create_profile)
+    after_signup_path(:basic_details)
   end
   
   private
