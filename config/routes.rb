@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   
   resources :followings, only: [:show, :create, :destroy]
   
-  resources :after_signup
+#  resources :after_signup
+  resources :registration_steps
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

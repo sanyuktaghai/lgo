@@ -1,5 +1,21 @@
 class RegistrationsController < Devise::RegistrationsController
   
+  include Wicked::Wizard
+  
+  steps :basic_details, :basic_details2
+  
+  def new 
+    super
+  end
+
+  def create
+    super
+  end
+
+  def update 
+    super
+  end
+
   def edit
     respond_to do |format|
       format.js
@@ -24,8 +40,11 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
   
+#  def after_sign_up_path_for(resource)
+#    after_signup_path(:create_profile)
+#  end  
   def after_sign_up_path_for(resource)
-    after_signup_path(:create_profile)
+    registration_steps_path
   end
   
   private
