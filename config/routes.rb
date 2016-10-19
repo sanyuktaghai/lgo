@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :models
+#  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  resources :users do
+    resources :steps, only: [:show, :update], controller: 'users/steps'
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -36,7 +40,7 @@ Rails.application.routes.draw do
   
   resources :followings, only: [:show, :create, :destroy]
   
-  resources :after_signup
+  #  resources :after_signup 
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
