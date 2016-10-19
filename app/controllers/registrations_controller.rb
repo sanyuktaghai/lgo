@@ -24,6 +24,10 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
   
+  def after_sign_up_path_for(resource)
+    after_signup_path(:create_profile)
+  end
+  
   private
   
   def account_update_params
