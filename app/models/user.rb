@@ -10,15 +10,6 @@ class User < ApplicationRecord
   has_many :followings
   has_many :followers, through: :followings, class_name: "User"
   
-  include Wicked::Wizard::Validations
-  
-  def self.wizard_steps
-    [
-      "create_user",
-      "basic_details"
-    ]
-  end
-  
 #  validates :first_name, presence: true
 #  validates :last_name, presence: true
   

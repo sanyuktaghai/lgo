@@ -40,7 +40,6 @@ gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'omniauth-facebook'
 
 gem 'wicked'
-gem 'wicked-wizard-validations'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
