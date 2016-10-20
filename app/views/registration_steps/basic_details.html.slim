@@ -4,12 +4,10 @@ p Only one more step:
   - if f.object.errors.any?
     div
       - f.object.errors.full_messages.each do |error|
-          p
-            = error
-  = f.label :first_name
+        p
+          = error
+  = f.label :first_name, "First Name"
   = f.text_field :first_name
-  = f.label :last_name
+  = f.label :last_name, "Last Name"
   = f.text_field :last_name
   = f.submit "Submit"
-  
-  = step
