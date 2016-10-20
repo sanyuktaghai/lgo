@@ -13,9 +13,15 @@ class RegistrationStepsController < ApplicationController
   def update
     @user = current_user
     params[:user][:status] = 'active' if step == "basic_details"
-    @user.update_attributes(user_update_params)
-    sign_in(@user, bypass: true)
-    render_wizard @user
+    respond_to do |format|
+      if @user.update_attributes(user_update_params)
+        sign_in(@user, bypass: true)
+        format.html { render_wizard @user }
+      else
+        flash.now[:warning] = "User has not been created"
+        format.js {render :partial => '/registration_steps/usererrors', :data => @user.to_json  }
+      end
+    end
   end
   
   private

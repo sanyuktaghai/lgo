@@ -43,7 +43,7 @@ RSpec.feature "Users signup" do
     expect(page).to have_content("Password can't be blank")
   end
   
-  scenario "with invalid credentials - step 1" do
+  scenario "with invalid credentials - step 2", :js => true do
     visit "/"
     
     click_link "Sign up"
