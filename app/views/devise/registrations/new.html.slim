@@ -4,18 +4,10 @@ h2 Sign up
   = devise_error_messages!
 
   div.form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true
-    span.form-error
+    = devise_email_field
 
   div.form-group
-    = f.label :password
-    = f.password_field :password, class: "form-control", autocomplete: "off"
-    span.form-error
-    - if @minimum_password_length
-      em
-        = @minimum_password_length
-        |  characters minimum
+    = devise_password_field
 
   div.form-group
     = f.label :password_confirmation
