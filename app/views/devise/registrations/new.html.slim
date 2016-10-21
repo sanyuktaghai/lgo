@@ -9,11 +9,6 @@ h2 Sign up
   div.form-group
     = devise_password_field
 
-  /div.form-group
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation, autocomplete: "off" 
-    span.form-error
-
   div.form-group
     = f.submit "Sign up", class: "button"
 
