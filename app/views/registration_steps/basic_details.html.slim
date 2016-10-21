@@ -10,11 +10,15 @@ p Only one more step:
     = f.text_field :last_name, autofocus: true, class: "form-control"
     span.form-error
   div
-    = f.label :age, "Age"
-    = f.text_field :age_range, autofocus: true, class: "form-control"
+    = f.label :birthday, "Birthday"
+    = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true}
+    / removed prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }
     span.form-error
-  div
+  div.form-group
     = f.label :gender, "Gender"
-    = f.text_field :gender, autofocus: true, class: "form-control"
+    = f.radio_button :gender, 'male'
+    = f.label :gender_male, 'Male'
+    = f.radio_button :gender, 'Female'
+    = f.label :gender_female, 'female'
     span.form-error
   = f.submit "Submit", class: "button"
