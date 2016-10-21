@@ -9,4 +9,12 @@ p Only one more step:
     = f.label :last_name, "Last Name"
     = f.text_field :last_name, autofocus: true, class: "form-control"
     span.form-error
+  div
+    = f.label :age, "Age"
+    = f.text_field :age_range, autofocus: true, class: "form-control"
+    span.form-error
+  div
+    = f.label :gender, "Gender"
+    = f.text_field :gender, autofocus: true, class: "form-control"
+    span.form-error
   = f.submit "Submit", class: "button"
