@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   end
   
   resources :followings, only: [:show, :create, :destroy]
+  
+  resources :registration_steps, only: [:show, :update]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

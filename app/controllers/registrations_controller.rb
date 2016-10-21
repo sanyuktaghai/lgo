@@ -1,5 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
   
+  def new 
+    super
+  end
+
+  def create
+    super
+  end
+
   def edit
     respond_to do |format|
       format.js
@@ -7,6 +15,8 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def update
+    @user = current_user
+    params[:user][:status] = 'active'
     respond_to do |format|
       if resource.update_without_password(account_update_params)
         flash[:success] = "Profile has been updated"
@@ -24,10 +34,16 @@ class RegistrationsController < Devise::RegistrationsController
     resource.update_without_password(params)
   end
   
+  def after_sign_up_path_for(resource)
+    @user = current_user
+    flash[:notice] = nil
+    registration_step_path(:basic_details)
+  end
+  
   private
   
   def account_update_params
-    params[:user].permit(:first_name, :last_name, :about_me)
+    params[:user].permit(:first_name, :last_name, :about_me, :status)
   end
   
 end
