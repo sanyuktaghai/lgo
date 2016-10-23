@@ -48,7 +48,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-      user.image = auth.info.image
+#      user.image = auth.info.image
+      user.image = process_uri(auth.info.image)
       user.age_range = auth.extra.raw_info.age_range
       user.password = Devise.friendly_token[0,20]
       user.gender = auth.extra.raw_info.gender
@@ -69,7 +70,8 @@ class User < ApplicationRecord
 
     user.provider = auth.provider
     user.uid = auth.uid
-    user.image = auth.info.image
+#    user.image = auth.info.image
+    user.image = process_uri(auth.info.image)
     user.age_range = auth.extra.raw_info.age_range
 
     user.save
@@ -78,7 +80,7 @@ class User < ApplicationRecord
   
   def largesquareimage
 #    "http://graph.facebook.com/#{self.uid}/picture?type=square&type=large"
-    "http://graph.facebook.com/#{self.uid}/picture?type=square&width=200&height=200"
+    "https://graph.facebook.com/#{self.uid}/picture?type=square&width=200&height=200"
   end
   
   has_attached_file :image, styles: {
@@ -88,4 +90,12 @@ class User < ApplicationRecord
     }
   
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  
+  private
+  
+  def self.process_uri(uri)
+    avatar_url = URI.parse(uri)
+    avatar_url.scheme = 'https'
+    avatar_url.to_s
+  end
 end
