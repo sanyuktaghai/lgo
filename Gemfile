@@ -48,6 +48,8 @@ gem 'wicked'
 gem 'paperclip'
 gem 'aws-sdk', '~> 2.3'
 
+#gem to submit file upload via AJAX
+gem 'remotipart', '~> 1.2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
