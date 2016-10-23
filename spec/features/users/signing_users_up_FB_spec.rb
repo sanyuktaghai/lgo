@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Users sign in via Facebook" do
+RSpec.feature "New users sign up via Facebook" do
   
   before do
     Rails.application.env_config["devise.mapping"] = Devise.mappings[:user] # If using Devise

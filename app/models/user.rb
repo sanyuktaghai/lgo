@@ -43,8 +43,6 @@ class User < ApplicationRecord
       user.age_range = auth.extra.raw_info.age_range
       user.password = Devise.friendly_token[0,20]
       user.gender = auth.extra.raw_info.gender
-        
-      return user
     end
   end
   
