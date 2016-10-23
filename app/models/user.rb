@@ -48,8 +48,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-#      user.image = auth.info.image
-      user.image = process_uri(auth.info.image)
+      user.fbimage = auth.info.image
+#      user.image = process_uri(auth.info.image)
       user.age_range = auth.extra.raw_info.age_range
       user.password = Devise.friendly_token[0,20]
       user.gender = auth.extra.raw_info.gender
@@ -70,8 +70,8 @@ class User < ApplicationRecord
 
     user.provider = auth.provider
     user.uid = auth.uid
-#    user.image = auth.info.image
-    user.image = process_uri(auth.info.image)
+    user.fbimage = auth.info.image
+#    user.image = process_uri(auth.info.image)
     user.age_range = auth.extra.raw_info.age_range
 
     user.save

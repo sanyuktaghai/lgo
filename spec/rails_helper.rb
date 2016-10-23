@@ -106,7 +106,7 @@ OmniAuth.config.add_mock(:facebook, {
     email: 'example@test.com',
     first_name: 'John',
     last_name: 'Doe',
-    image: 'https://graph.facebook.com/10154412550396140/picture'
+    fbimage: 'https://graph.facebook.com/10154412550396140/picture'
     },
   credentials:  {
     token: "EAAZA3djnm4CEBAPJzIVWhhsBF",
