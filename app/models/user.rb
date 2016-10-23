@@ -16,11 +16,20 @@ class User < ApplicationRecord
   
   attr_accessor :form_step
   
-  validates :first_name, presence: true, if: :active?
-  validates :last_name, presence: true, if: :active?
+  validates :first_name, presence: true, unless: :inactive?
+  validates :last_name, presence: true, unless: :inactive?
+  validates :birthday, presence: true, if: :active?
+  validates :gender, presence: true, if: :active?
   
   def active?
+    #active is set by registration_steps 
+    #controller; active+db is set by 
+    #registrations_controller
     status == 'active'
+  end
+  
+  def inactive?
+    status == nil
   end
   
   def full_name
