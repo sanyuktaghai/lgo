@@ -4,7 +4,7 @@ header role="banner"
       == link_to "Home", root_path
     div
       - if user_signed_in?
-        unless current_page? registration_step_path(:basic_details)
+        - unless current_page? registration_step_path(:basic_details)
           div
             == link_to "My Dashboard", dashboard_path(current_user)
           div
