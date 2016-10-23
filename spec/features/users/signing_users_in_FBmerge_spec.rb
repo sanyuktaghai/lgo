@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Users sign in via Facebook" do
+RSpec.feature "Existing users sign in via Facebook" do
   
   before do
     @user = User.create(first_name: 'John', last_name: 'Doe', password: 'password', email: 'example@test.com')
