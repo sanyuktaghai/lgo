@@ -4,6 +4,8 @@ div#user_registration
   h4 
     | Name: 
     == @user.full_name
+  div
+    = user_photo(@user)
   div 
     - if @user.about_me?
       | About Me: 

@@ -76,4 +76,8 @@ class User < ApplicationRecord
     user
   end
   
+  def largesquareimage
+#    "http://graph.facebook.com/#{self.uid}/picture?type=square&type=large"
+    "http://graph.facebook.com/#{self.uid}/picture?type=square&width=200&height=200"
+  end
 end
