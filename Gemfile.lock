@@ -314,6 +314,7 @@ DEPENDENCIES
   jquery-rails
   omniauth-facebook
   pg
+  pry
   rails (~> 5.0.0)
   rails-controller-testing
   rspec-rails

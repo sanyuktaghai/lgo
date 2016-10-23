@@ -16,7 +16,7 @@ class RegistrationsController < Devise::RegistrationsController
   
   def update
     @user = current_user
-    params[:user][:status] = 'active'
+    params[:user][:status] = 'active_db'
     respond_to do |format|
       if resource.update_without_password(account_update_params)
         flash[:success] = "Profile has been updated"
@@ -43,7 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
   private
   
   def account_update_params
-    params[:user].permit(:first_name, :last_name, :about_me, :status)
+    params[:user].permit(:first_name, :last_name, :about_me, :status, :birthday, :gender)
   end
   
 end

@@ -16,13 +16,21 @@ class User < ApplicationRecord
   
   attr_accessor :form_step
   
-  validates :first_name, presence: true, if: :active?
-  validates :last_name, presence: true, if: :active?
+  validates :first_name, presence: true, unless: :inactive?
+  validates :last_name, presence: true, unless: :inactive?
+  validates :birthday, presence: true, if: :active?
+  validates :gender, presence: true, if: :active?
   
   def active?
+    #active is set by registration_steps 
+    #controller; active+db is set by 
+    #registrations_controller
     status == 'active'
   end
-
+  
+  def inactive?
+    status == nil
+  end
   
   def full_name
     f_name = self.first_name.titleize.gsub(/\b\w/) { |w| w.upcase }
@@ -35,12 +43,15 @@ class User < ApplicationRecord
   end
   
   def self.from_omniauth(auth)
+#    binding.pry
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-  #    user.image = auth.info.image # assuming the user model has an image
+      user.image = auth.info.image
+      user.age_range = auth.extra.raw_info.age_range
+      user.password = Devise.friendly_token[0,20]
+      user.gender = auth.extra.raw_info.gender
     end
   end
   
@@ -53,10 +64,13 @@ class User < ApplicationRecord
   end
   
   def self.find_for_facebook_oauth(auth)
+    #if not a new record
     user = User.where("(uid = ? AND provider = 'facebook') OR lower(email) = ?", auth.uid, auth.info.email).first
 
     user.provider = auth.provider
     user.uid = auth.uid
+    user.image = auth.info.image
+    user.age_range = auth.extra.raw_info.age_range
 
     user.save
     user

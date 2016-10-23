@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/macros'
 
 RSpec.feature "Users signup" do
   
@@ -6,6 +7,7 @@ RSpec.feature "Users signup" do
     @email = Faker::Internet.email
     @password = Faker::Internet.password
     @password2 = Faker::Internet.password
+    @birthday = Faker::Date.birthday(min_age = 18, max_age = 65)
   end
   
   scenario "with valid credentials" do
@@ -19,14 +21,19 @@ RSpec.feature "Users signup" do
     
     expect(page.current_path).to eq(registration_step_path(:basic_details)) 
     expect(page).not_to have_content("Signed in as #{@email}")
+    expect(page).not_to have_link("Sign out")
     
     fill_in "First Name", with: Faker::Name.first_name
     fill_in "Last Name", with: Faker::Name.last_name
+    select_date @birthday, :from => "user_birthday"
+    choose('user_gender_female')
     
     click_button "Submit"
     
     expect(page).to have_content("You have signed up successfully.")
     expect(page).to have_content("Signed in as #{@email}")
+    expect(page).to have_link("Sign out")
+    expect(page.current_path).to eq(dashboard_path(User.find_by(email: @email).id)) 
   end
   
   scenario "with invalid credentials - step 1" do
@@ -51,12 +58,11 @@ RSpec.feature "Users signup" do
     
     click_button "Sign up"
     
-    fill_in "First Name", with: ""
-    fill_in "Last Name", with: ""
-    
     click_button "Submit"
     
     expect(page).to have_content("First name can't be blank")
     expect(page).to have_content("Last name can't be blank")
+    expect(page).to have_content("Birthday can't be blank")
+    expect(page).to have_content("Gender can't be blank")
   end
 end

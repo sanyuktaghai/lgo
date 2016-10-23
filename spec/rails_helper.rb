@@ -105,11 +105,22 @@ OmniAuth.config.add_mock(:facebook, {
   info: {
     email: 'example@test.com',
     first_name: 'John',
-    last_name: 'Doe'
+    last_name: 'Doe',
+    image: 'http://graph.facebook.com/v2.6/10154412550396140/picture'
     },
   credentials:  {
     token: "EAAZA3djnm4CEBAPJzIVWhhsBF",
     expires_at: 12345678,
-    expires: true}
+    expires: true},
+  extra: {
+    raw_info: {
+      email: 'example@test.com',
+      first_name: 'John',
+      last_name: 'Doe',
+      gender: 'male',
+      age_range: '{"min"=>21}',
+      id: '123545'
+      }
+    }
   }
 )

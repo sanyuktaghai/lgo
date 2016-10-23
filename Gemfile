@@ -51,6 +51,7 @@ gem 'wicked'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'pry'
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'spring-commands-rspec'

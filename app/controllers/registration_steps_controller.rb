@@ -27,7 +27,7 @@ class RegistrationStepsController < ApplicationController
   private
   
   def user_update_params
-    params[:user].permit(:first_name, :last_name, :status)
+    params[:user].permit(:first_name, :last_name, :status, :gender, :birthday)
   end
   
   def finish_wizard_path
