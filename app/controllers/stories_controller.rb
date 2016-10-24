@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
+  before_filter :redirect_cancel, :only => [:update]
   
   def index
     @stories = Story.published
@@ -52,7 +53,7 @@ class StoriesController < ApplicationController
       else
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
-          format.html {redirect_to stories_path}
+          format.html {redirect_to dashboard_path(current_user)}
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders edit tmplt again
@@ -80,4 +81,7 @@ class StoriesController < ApplicationController
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
   end
   
+  def redirect_cancel
+    redirect_to story_path(@story) if params[:cancel]
+  end
 end

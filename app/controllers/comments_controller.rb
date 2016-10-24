@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_story
   before_action :set_comment, only: [:edit, :update, :destroy]
+  before_filter :redirect_cancel, :only => [:update]
   
   def index
     @comment = @story.comments.all
@@ -76,5 +77,9 @@ class CommentsController < ApplicationController
     
   def set_comment
     @comment = @story.comments.find(params[:id])
+  end
+  
+  def redirect_cancel
+    redirect_to story_path(@story) if params[:cancel]
   end
 end

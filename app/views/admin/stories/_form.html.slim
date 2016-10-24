@@ -1,10 +1,10 @@
 h3 Original User-Submitted Content:
 p
   | Original Author: 
-  == link_to "#{@story.user(:author_id).full_name}", dashboard_path(@story.user(:author_id))
+  = link_to "#{@story.user(:author_id).full_name}", dashboard_path(@story.user(:author_id))
 p 
   | Submitted At: 
-  == @story.created_at.strftime("%b %d, %Y")
+  = @story.created_at.strftime("%b %d, %Y")
 p
   - if @story.anonymous?
     | Anonymous
@@ -23,17 +23,26 @@ p
   p
     | Updated Body: 
     == @story.updated_body
-== form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
+- if @story.final_title?
+  h4 
+    | Final Title: 
+    == @story.final_title
+  p
+    | Final Body: 
+    == @story.final_body
+= form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
   div
-    == f.label :final_title, "Final Title"
-    == f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.final_title : @story.raw_title)
+    = f.label :final_title, "Final Title"
+    = f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.updated_title : @story.raw_title)
     span class="form-error" 
   div
-    == f.label :final_body, "Final Body"
-    == f.text_area :final_body, rows: 10, value: (@story.updated_body ? @story.final_body : @story.raw_body)
+    = f.label :final_body, "Final Body"
+    == f.trix_editor :final_body 
     span class="form-error"
   div
-    == f.label :published
-    == f.check_box :published, type: "checkbox"
+    = f.label :published
+    = f.check_box :published, type: "checkbox"
   div
-    == f.submit class: "button"
+    = f.submit class: "button"
+  script
+    == render partial: 'trix_input_id.js.erb', story: @story

@@ -34,9 +34,6 @@ $text-color: #fff;
     color: $text-color;
   }
 }
-#free_system_input {
-  display: none;
-}
 
 @media only screen and (min-width: 40.063em) {
 .footer {
@@ -55,3 +52,27 @@ $text-color: #fff;
 }
 
 //END Footer Styles
+
+//style for text box when users choose "other" radio button
+#free_system_input {
+  display: none;
+}
+
+//style for rick text editor
+trix-toolbar .button_groups {
+  button.code {
+    display: none;
+  }
+  button.nesting-level.increase {
+    display: none;
+  }
+  button.nesting-level.decrease {
+    display: none;
+  }
+  button.quote {
+    display: none;
+  }
+  button.link {
+    display: none;
+  }
+}

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/macros'
 
 RSpec.feature "Creating Stories", :type => :feature do 
   
@@ -13,7 +14,8 @@ RSpec.feature "Creating Stories", :type => :feature do
     click_link "New Story"
     
     fill_in "Title", with: Faker::Hipster::sentence
-    fill_in "Body", with: Faker::Hipster::paragraph
+#    fill_in "Body", with: Faker::Hipster::paragraph
+    fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
     click_button "Contribute Story"
     
     expect(page).to have_content("Story has been submitted")
@@ -26,7 +28,8 @@ RSpec.feature "Creating Stories", :type => :feature do
     click_link "New Story"
     
     fill_in "Title", with: ""
-    fill_in "Body", with: ""
+#    fill_in "Body", with: ""
+    fill_in_trix_editor('story_raw_body_trix_input_story', "")
     click_button "Contribute Story"
     assert_text("Title can't be blank")
     

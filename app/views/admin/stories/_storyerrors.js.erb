@@ -7,6 +7,7 @@
 
 $("#<%= j action_array[array_index].to_s %> label.is-invalid-label").removeClass("is-invalid-label");
 $("#<%= j action_array[array_index].to_s %> input.is-invalid-input, #<%= j action_array[array_index].to_s %> textarea.is-invalid-input").removeClass("is-invalid-input");
+$('trix-editor.formatted_content').removeClass("is-invalid-input");
 $("#<%= j action_array[array_index].to_s %> span.form-error").remove("p");
 $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeClass("is-visible");
 
@@ -19,7 +20,11 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
       <% if @story.errors.full_messages[i].downcase.include? field %>
         $('label[for="story_<%= j "final_"+field%>"]').addClass("is-invalid-label");
         $('#story_<%= j "final_"+field%>').addClass("is-invalid-input");
-        $('#story_<%= j "final_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i] %></p>");
+        $('#story_<%= j "final_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Final ).*?/im, "").capitalize %></p>");
+        <% if field == "body" %>
+            $('trix-editor.formatted_content').addClass("is-invalid-input");
+            $('trix-editor.formatted_content').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Final ).*?/im, "").capitalize %></p>");
+          <% end %>
       <% end %>
     <% end %>
   <% end %>
