@@ -12,13 +12,15 @@ p Only one more step:
   div
     = f.label :birthday, "Birthday"
     = f.date_select :birthday, {order: [:month, :day, :year], start_year: Date.today.year - 18, end_year: Date.today.year - 100, prompt: { day: 'Day', month: 'Month', year: 'Year'}}
-    /, {required: true}
     span.form-error
   div.form-group
     = f.label :gender, "Gender"
     = f.radio_button :gender, 'male'
     = f.label :gender_male, 'Male'
-    = f.radio_button :gender, 'female'
+    = f.radio_button :gender, 'female', :checked => 'checked'
     = f.label :gender_female, 'Female'
+    = f.radio_button :gender, nil, :id => :custom_defined_gender
+    = f.label :gender_custom, 'Custom'
+    input#free_system_input
     span.form-error
   = f.submit "Submit", class: "button"

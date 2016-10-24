@@ -65,4 +65,28 @@ RSpec.feature "Users signup" do
     expect(page).to have_content("Birthday can't be blank")
     expect(page).to have_content("Gender can't be blank")
   end
+  
+  scenario "with valid credentials (custom gender) - step 2", :js => true do
+    visit "/"
+    
+    click_link "Sign up"
+    fill_in "Email", with: Faker::Internet.email
+    fill_in "Password", with: @password2
+    
+    click_button "Sign up"
+    
+    fill_in "First Name", with: Faker::Name.first_name
+    fill_in "Last Name", with: Faker::Name.last_name
+    select_date @birthday, :from => "user_birthday"
+    
+    expect(page).not_to have_css("input#free_system_input")
+    choose('custom_defined_gender')
+    
+    expect(page).to have_css("input#free_system_input")
+    fill_in "free_system_input", with: "custom"
+    
+    click_button "Submit"
+    
+    expect(page).to have_content("You have signed up successfully.")
+  end
 end
