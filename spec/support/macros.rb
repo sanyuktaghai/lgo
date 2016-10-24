@@ -16,3 +16,8 @@ def select_date(date, options = {})
   select_by_id Date::MONTHNAMES[date.month], :from => "#{field}_2i"
   select date.day.to_s, :from => "#{field}_3i"  
 end
+
+def fill_in_trix_editor(id, value)
+#  find(:xpath, "//*[@id='#{id}'][last()]", visible: false).set(value)
+  find(:xpath, "//*[@id='#{id}']", visible: false).set(value)
+end
