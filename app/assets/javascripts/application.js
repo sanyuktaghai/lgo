@@ -21,3 +21,24 @@
 $(document).on('turbolinks:load', function() {
   $(document).foundation();
 });
+
+$(function(){
+  $('input[type="radio"]').change(function() {
+    var id = $(this).attr('id');
+    if(id=="custom_defined_gender") {
+      $("#free_system_input").show();
+    } else {
+      $("#free_system_input").hide();
+    };
+  });
+  
+  $('#free_system_input').keyup( function(){
+    if ( $(this).val() !== "" ) { $('#custom_defined_gender').val($(this).val());
+                                 } else { $('#custom_defined_gender').val("custom");
+                              };
+  });
+});
+
+$(document).ready(function() {
+  $('input[type="radio"]').removeAttr("checked");
+});
