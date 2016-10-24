@@ -30,7 +30,11 @@ p
     span class="form-error" 
   div
     == f.label :final_body, "Final Body"
-    == f.text_area :final_body, rows: 10, value: (@story.updated_body ? @story.final_body : @story.raw_body)
+    
+    /input field to populate the trix editor
+    input#trix_stored_content value= (@story.updated_body ? @story.final_body : @story.raw_body) type = "hidden"
+    
+    == f.trix_editor :final_body, input: "trix_stored_content"
     span class="form-error"
   div
     == f.label :published

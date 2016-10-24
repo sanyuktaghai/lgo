@@ -6,7 +6,7 @@
       span class="form-error"
     div
       = f.label :raw_body, "Body"
-      = f.text_area :raw_body, rows: 10,  value: @story.raw_body
+      = f.trix_editor :raw_body, rows: 10,  value: @story.raw_body
       span class="form-error"
     div
       = f.label :anonymous
@@ -21,7 +21,12 @@
       span class="form-error"
     div
       = f.label :updated_body, "Body"
-      = f.text_area :updated_body, rows: 10, value: @story.final_body
+      
+      /input field to populate the trix editor
+      input#trix_stored_content_user value= (@story.final_body ? @story.final_body : @story.raw_body) type = "hidden"
+      
+      = f.trix_editor :updated_body, input: "trix_stored_content_user"
+      
       span class="form-error"
     div
       = f.label :anonymous
