@@ -1,6 +1,13 @@
 class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
+  before_filter :redirect_cancel, :only => [:update]
+  
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to my_page_path
+    end
+  end
   
   def index
     @stories = Story.published
@@ -80,4 +87,7 @@ class StoriesController < ApplicationController
     #@story = current_user.stories.find(params[:id]) #This first grabs the user, then grabs their stories, starts with a smaller scope than all stories
   end
   
+  def redirect_cancel
+    redirect_to story_path(@story) if params[:cancel]
+  end
 end

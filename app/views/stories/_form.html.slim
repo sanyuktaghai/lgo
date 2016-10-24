@@ -1,32 +1,31 @@
-/- action_array = ["raw", "updated"]
-
 - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
-  == form_for(@story, :html => {class: "form"}, remote: true) do |f|
+  = form_for(@story, :html => {class: "form"}, remote: true) do |f|
     div
-      == f.label :raw_title, "Title"
-      == f.text_field :raw_title, autofocus: true, value: @story.raw_title
+      = f.label :raw_title, "Title"
+      = f.text_field :raw_title, autofocus: true, value: @story.raw_title
       span class="form-error"
     div
-      == f.label :raw_body, "Body"
-      == f.text_area :raw_body, rows: 10,  value: @story.raw_body
+      = f.label :raw_body, "Body"
+      = f.text_area :raw_body, rows: 10,  value: @story.raw_body
       span class="form-error"
     div
-      == f.label :anonymous
-      == f.check_box :anonymous, type: "checkbox"
+      = f.label :anonymous
+      = f.check_box :anonymous, type: "checkbox"
     div
-      == f.submit "Contribute Story", class: "button"
+      = f.submit "Contribute Story", class: "button"
 - elsif controller.action_name == "edit"
-  == form_for(@story, :html => {class: "form"}, remote: true) do |f|
+  = form_for(@story, :html => {class: "form"}, remote: true) do |f|
     div
-      == f.label :updated_title, "Title"
-      == f.text_field :updated_title, autofocus: true, value: @story.final_title
+      = f.label :updated_title, "Title"
+      = f.text_field :updated_title, autofocus: true, value: @story.final_title
       span class="form-error"
     div
-      == f.label :updated_body, "Body"
-      == f.text_area :updated_body, rows: 10, value: @story.final_body
+      = f.label :updated_body, "Body"
+      = f.text_area :updated_body, rows: 10, value: @story.final_body
       span class="form-error"
     div
-      == f.label :anonymous
-      == f.check_box :anonymous, type: "checkbox"
+      = f.label :anonymous
+      = f.check_box :anonymous, type: "checkbox"
     div
-      == f.submit class: "button"
+      = f.submit class: "button"
+      = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
