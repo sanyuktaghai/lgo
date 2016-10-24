@@ -3,12 +3,6 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [:show, :edit, :update, :destroy, :check_for_cancel]
   before_filter :redirect_cancel, :only => [:update]
   
-  def check_for_cancel
-    if params[:commit] == "Cancel"
-      redirect_to my_page_path
-    end
-  end
-  
   def index
     @stories = Story.published
   end
