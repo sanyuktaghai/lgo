@@ -1,0 +1,3 @@
+$(document).ready(function() {
+  $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").val("<%= @story.updated_body ? @story.final_body : @story.raw_body %>");
+});

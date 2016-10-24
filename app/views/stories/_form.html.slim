@@ -6,7 +6,7 @@
       span class="form-error"
     div
       = f.label :raw_body, "Body"
-      = f.trix_editor :raw_body, rows: 10,  value: @story.raw_body
+      = f.trix_editor :raw_body
       span class="form-error"
     div
       = f.label :anonymous
@@ -21,12 +21,7 @@
       span class="form-error"
     div
       = f.label :updated_body, "Body"
-      
-      /input field to populate the trix editor
-      input#trix_stored_content_user value= (@story.final_body ? @story.final_body : @story.raw_body) type = "hidden"
-      
-      = f.trix_editor :updated_body, input: "trix_stored_content_user"
-      
+      == f.trix_editor :updated_body
       span class="form-error"
     div
       = f.label :anonymous
@@ -34,3 +29,5 @@
     div
       = f.submit class: "button"
       = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
+script
+  == render partial: 'trix_input_id.js.erb', story: @story
