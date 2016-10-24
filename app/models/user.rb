@@ -20,6 +20,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true, unless: :inactive?
   validates :birthday, presence: true, if: :active?
   validates :gender, presence: true, if: :active?
+  validates_with AttachmentSizeValidator, attributes: :image, less_than: 2.megabytes
   
   def active?
     #active is set by registration_steps 
@@ -48,7 +49,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
-      user.image = auth.info.image
+      user.fbimage = auth.info.image
+#      user.image = process_uri(auth.info.image)
       user.age_range = auth.extra.raw_info.age_range
       user.password = Devise.friendly_token[0,20]
       user.gender = auth.extra.raw_info.gender
@@ -69,11 +71,32 @@ class User < ApplicationRecord
 
     user.provider = auth.provider
     user.uid = auth.uid
-    user.image = auth.info.image
+    user.fbimage = auth.info.image
+#    user.image = process_uri(auth.info.image)
     user.age_range = auth.extra.raw_info.age_range
 
     user.save
     user
   end
   
+  def largesquareimage
+#    "http://graph.facebook.com/#{self.uid}/picture?type=square&type=large"
+    "https://graph.facebook.com/#{self.uid}/picture?type=square&width=200&height=200"
+  end
+  
+  has_attached_file :image, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+    }
+  
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  
+  private
+  
+  def self.process_uri(uri)
+    avatar_url = URI.parse(uri)
+    avatar_url.scheme = 'https'
+    avatar_url.to_s
+  end
 end

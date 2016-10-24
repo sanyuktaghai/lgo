@@ -35,12 +35,21 @@ gem 'slim-rails'
 
 gem 'font-awesome-rails'
 
+#gem for random text generation
 gem 'faker', '~> 1.6', '>= 1.6.6'
 
+#gem for facebook login
 gem 'omniauth-facebook'
 
+#gem for multi-step forms
 gem 'wicked'
 
+#gems for uploading images to Amazon S3
+gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
+
+#gem to submit file upload via AJAX
+gem 'remotipart', '~> 1.2'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

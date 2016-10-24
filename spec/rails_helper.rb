@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'factory_girl_rails'
 require 'omniauth'
+require 'paperclip/matchers'
 
 require 'database_cleaner'
 
@@ -96,6 +97,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  
+  config.include Paperclip::Shoulda::Matchers
 end
 
 OmniAuth.config.test_mode = true
@@ -106,7 +109,7 @@ OmniAuth.config.add_mock(:facebook, {
     email: 'example@test.com',
     first_name: 'John',
     last_name: 'Doe',
-    image: 'http://graph.facebook.com/v2.6/10154412550396140/picture'
+    image: 'https://graph.facebook.com/10154412550396140/picture'
     },
   credentials:  {
     token: "EAAZA3djnm4CEBAPJzIVWhhsBF",
