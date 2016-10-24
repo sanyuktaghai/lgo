@@ -20,6 +20,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true, unless: :inactive?
   validates :birthday, presence: true, if: :active?
   validates :gender, presence: true, if: :active?
+  validates_with AttachmentSizeValidator, attributes: :image, less_than: 2.megabytes
   
   def active?
     #active is set by registration_steps 

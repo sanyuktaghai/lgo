@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'factory_girl_rails'
 require 'omniauth'
+require 'paperclip/matchers'
 
 require 'database_cleaner'
 
@@ -96,6 +97,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  
+  config.include Paperclip::Shoulda::Matchers
 end
 
 OmniAuth.config.test_mode = true
