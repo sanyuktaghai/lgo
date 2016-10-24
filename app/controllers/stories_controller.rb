@@ -53,7 +53,7 @@ class StoriesController < ApplicationController
       else
         if @story.update(story_params)
           flash[:success] = "Story has been updated"
-          format.html {redirect_to stories_path}
+          format.html {redirect_to dashboard_path(current_user)}
         else
           flash.now[:alert] = "Story has not been updated"
           format.html {render :edit} #renders edit tmplt again
