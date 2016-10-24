@@ -1,5 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
-  
+  before_filter :redirect_cancel, :only => [:update]
+
+  def check_for_cancel
+    if params[:commit] == "Cancel"
+      redirect_to my_page_path
+    end
+  end
+
   def new 
     super
   end
@@ -46,4 +53,7 @@ class RegistrationsController < Devise::RegistrationsController
     params[:user].permit(:first_name, :last_name, :about_me, :status, :birthday, :gender, :image, :fbimage)
   end
   
+  def redirect_cancel
+    redirect_to dashboard_path(resource) if params[:cancel]
+  end
 end
