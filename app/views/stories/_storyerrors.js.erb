@@ -7,6 +7,7 @@
 
 $("#<%= j action_array[array_index].to_s %> label.is-invalid-label").removeClass("is-invalid-label");
 $("#<%= j action_array[array_index].to_s %> input.is-invalid-input, #<%= j action_array[array_index].to_s %> textarea.is-invalid-input").removeClass("is-invalid-input");
+$('trix-editor.formatted_content').removeClass("is-invalid-input");
 $("#<%= j action_array[array_index].to_s %> span.form-error").remove("p");
 $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeClass("is-visible");
 
@@ -20,6 +21,10 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
         <% if @story.errors.full_messages[i].downcase.include? field %>
           $('label[for="story_<%= j "raw_"+field%>"]').addClass("is-invalid-label");
           $('#story_<%= j "raw_"+field%>').addClass("is-invalid-input");
+          <% if field == "body" %>
+            $('trix-editor.formatted_content').addClass("is-invalid-input");
+            $('trix-editor.formatted_content').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Raw ).*?/im, "").capitalize %></p>");
+          <% end %>
           $('#story_<%= j "raw_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Raw ).*?/im, "").capitalize %></p>");
         <% end %>
       <% end %>
@@ -30,6 +35,10 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
         <% if @story.errors.full_messages[i].downcase.include? field %>
           $('label[for="story_<%= j "updated_"+field%>"]').addClass("is-invalid-label");
           $('#story_<%= j "updated_"+field%>').addClass("is-invalid-input");
+          <% if field == "body" %>
+            $('trix-editor.formatted_content').addClass("is-invalid-input");
+            $('trix-editor.formatted_content').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Updated ).*?/im, "").capitalize %></p>");
+          <% end %>
           $('#story_<%= j "updated_"+field%>').closest('div').find('span.form-error').addClass("is-visible").html("<p><%= @story.errors.full_messages[i].gsub!(/.*?(?<=Updated ).*?/im, "").capitalize %></p>");
         <% end %>
       <% end %>
