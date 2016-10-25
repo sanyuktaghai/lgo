@@ -19,7 +19,8 @@ RSpec.feature "Creating Stories", :type => :feature do
     click_button "Contribute Story"
     
     expect(page).to have_content("Story has been submitted")
-    expect(page.current_path).to eq(stories_path)
+#    expect(page.current_path).to eq(stories_path)
+    expect(page.current_path).to eq(dashboard_path(@user))
   end
   
   scenario "A user fails to create a new story", :js => true do
