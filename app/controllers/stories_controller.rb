@@ -45,6 +45,9 @@ class StoriesController < ApplicationController
     if @story.published?
       @story.validate_updated_fields = true
     end
+    if @story.anonymous?
+      @story.poster_id = nil
+    end
     @story.published = false
     respond_to do |format|
       if @story.user != current_user
