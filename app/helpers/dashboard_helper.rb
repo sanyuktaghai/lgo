@@ -18,8 +18,8 @@ module DashboardHelper
       unless story.final_title? #story only has raw title
         link_to story.raw_title, story_path(story)
       else #story has final title and maybe also updated title
-        datearray = [story.updated_at, story.admin_updated_at]
-        if datearray.max == story.admin_updated_at #max => most recent
+        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
+        if datearray.max == story.admin_updated_at.to_i #max => most recent
           link_to story.final_title, story_path(story)
         else 
           link_to story.updated_title, story_path(story)
@@ -35,15 +35,15 @@ module DashboardHelper
       unless story.final_body? #story only has raw body
         body = story.raw_body
       else #story has final body and maybe also updated body
-        datearray = [story.updated_at, story.admin_updated_at]
-        if datearray.max == story.admin_updated_at #max => most recent
+        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
+        if datearray.max == story.admin_updated_at.to_i #max => most recent
           body = story.final_body
         else 
           body = story.updated_body
         end
       end
     end
-    truncate(strip_tags(body).gsub('&amp;','&'), length: 150)
+    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
   
   def story_pending(story)

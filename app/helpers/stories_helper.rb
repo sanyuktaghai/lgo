@@ -7,8 +7,8 @@ module StoriesHelper
       unless story.final_title? #story only has raw title
         story.raw_title
       else #story has final title and maybe also updated title
-        datearray = [story.updated_at, story.admin_updated_at]
-        if datearray.max == story.admin_updated_at #max => most recent
+        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
+        if datearray.max == story.admin_updated_at.to_i #max => most recent
           story.final_title
         else 
           story.updated_title
@@ -19,19 +19,20 @@ module StoriesHelper
   
   def story_body_show(story)
     if story.published?
-      story.final_body
+      body = story.final_body
     else
       unless story.final_body? #story only has raw body
-        story.raw_body
+        body = story.raw_body
       else #story has final body and maybe also updated body
-        datearray = [story.updated_at, story.admin_updated_at]
-        if datearray.max == story.admin_updated_at #max => most recent
-          story.final_body
+        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
+        if datearray.max == story.admin_updated_at.to_i #max => most recent
+          body = story.final_body
         else 
-          story.updated_body
+          body = story.updated_body
         end
       end
     end
+    html = "<div>#{body}</div>".html_safe
   end
   
   def story_by_show(story)
