@@ -5,18 +5,18 @@
       div
         == link_to story.final_title, story_path(story)
       div
-        == truncate(story.final_body, length: 150)
+        == truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
     - else 
       - if story.updated_title?
         div
           == link_to story.updated_title, story_path(story)
         div
-          == truncate(story.updated_body, length: 150)
+          == truncate(strip_tags(story.updated_body).gsub('&amp;','&'), length: 150)
       - else
         div
           == link_to story.raw_title, story_path(story)
         div
-          == truncate(story.raw_body, length: 150)
+          == truncate(strip_tags(story.raw_body).gsub('&amp;','&'), length: 150)
       div Pending
     - if story.anonymous?
       div Anonymous
@@ -37,12 +37,10 @@
       div
         == link_to story.final_title, story_path(story)
       div
-        == truncate(story.final_body, length: 150)
+        == truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
       div
         | Posted on: 
         == story.created_at.strftime("%b %d, %Y")
-      - if story.anonymous?
-        div Anonymous
       p
         | Posted by: 
         == "#{User.find(story.poster_id).full_name}"

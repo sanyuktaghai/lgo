@@ -3,7 +3,7 @@ h2 List of All Commented Stories:
   div
     == link_to story.final_title, story_path(story)
   div
-    == truncate(story.final_body, length: 150)
+    == truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
   div
     small 
       | Posted by: 
