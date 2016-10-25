@@ -19,20 +19,19 @@ module StoriesHelper
   
   def story_body_show(story)
     if story.published?
-      body = story.final_body
+      story.final_body
     else
       unless story.final_body? #story only has raw body
-        body = story.raw_body
+        story.raw_body
       else #story has final body and maybe also updated body
         datearray = [story.updated_at, story.admin_updated_at]
         if datearray.max == story.admin_updated_at #max => most recent
-          body = story.final_body
+          story.final_body
         else 
-          body = story.updated_body
+          story.updated_body
         end
       end
     end
-    truncate(strip_tags(body).gsub('&amp;','&'), length: 150)
   end
   
   def story_by_show(story)

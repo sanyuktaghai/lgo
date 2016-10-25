@@ -32,7 +32,7 @@ module DashboardHelper
     if story.published?
       body = story.final_body
     else
-      unless story.final_title? #story only has raw title
+      unless story.final_body? #story only has raw body
         body = story.raw_body
       else #story has final body and maybe also updated body
         datearray = [story.updated_at, story.admin_updated_at]
@@ -62,7 +62,7 @@ module DashboardHelper
     if story.poster_id?
       html = "<div>Posted by: #{User.find(story.poster_id).full_name}</div>".html_safe
     else
-      htlm = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
+      html = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
     end
   end
 end
