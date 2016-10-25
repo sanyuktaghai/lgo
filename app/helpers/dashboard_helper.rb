@@ -43,7 +43,8 @@ module DashboardHelper
         end
       end
     end
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
+    truncate(("#{body}").gsub!(/<.*?>/, " ").gsub('&amp;','&'), length: 150)
+#    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
   
   def story_pending(story)
