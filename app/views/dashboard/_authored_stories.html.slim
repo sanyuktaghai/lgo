@@ -1,36 +1,19 @@
 - if @user == current_user
   h2 List of all Authored Stories
   - @authored_stories.each do |story|
-    - if story.published?
-      div
-        == link_to story.final_title, story_path(story)
-      div
-        == truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
-    - else 
-      - if story.updated_title?
-        div
-          == link_to story.updated_title, story_path(story)
-        div
-          == truncate(strip_tags(story.updated_body).gsub('&amp;','&'), length: 150)
-      - else
-        div
-          == link_to story.raw_title, story_path(story)
-        div
-          == truncate(strip_tags(story.raw_body).gsub('&amp;','&'), length: 150)
-      div Pending
-    - if story.anonymous?
-      div Anonymous
+    div
+      = story_title(story)
+    div
+      = story_body(story)
+    div
+      = story_pending(story)
+    div
+      = story_anonymous(story)
     div
       | Posted on: 
       == story.created_at.strftime("%b %d, %Y")
-    p
-      - if story.poster_id?
-        | Posted by: 
-        == "#{User.find(story.poster_id).full_name}"
-      - else
-        | Written by: 
-        == "#{User.find(story.author_id).full_name}"
-        
+    div
+      = story_by(story)  
 - else
   h2 List of all Posted Stories
   - @posted_stories.published.each do |story|
