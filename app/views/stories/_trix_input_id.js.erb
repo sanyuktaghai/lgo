@@ -4,6 +4,25 @@ function htmlDecode(input){
   return e.childNodes[0].nodeValue;
 }
 
+function toJSDate(dateTime) {
+  var dateTime = dateTime.split(" ");
+  var date = dateTime[0].split("-");
+  var time = dateTime[1].split(":");
+  
+  //(year, month, day, hours, minutes, seconds, milliseconds)
+  //subtract 1 from month because Jan is 0 and Dec is 11
+  return new Date(date[2], (date[1]-1), date[0], time[0], time[1], 0, 0);
+}
+
 $(document).ready(function() {
-  $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.final_body %>"));
+
+  var date1 = toJSDate("<%= @story.updated_at %>");
+  var date2 = toJSDate("<%= @story.admin_updated_at %>");
+  var msg = (date1 > date2) ? 'Correct' : 'Wrong';
+  console.log(msg);
+  if (msg == "Correct") {
+    $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.updated_body %>"));
+  } else {
+    $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.final_body %>"));           
+  };
 });
