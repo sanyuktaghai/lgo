@@ -6,7 +6,8 @@ h1 List of all Stories
   div
     == link_to story.final_title, story_path(story)
   div
-    = truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
+    /= truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
+    == truncate_body_list(story.final_body)
   div
     - if story.poster_id?
       small 

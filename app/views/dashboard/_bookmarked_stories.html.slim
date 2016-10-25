@@ -3,7 +3,8 @@ h2 List of All Saved Stories:
   div
     == link_to story.final_title, story_path(story)
   div
-    == truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
+    == truncate_body(story.final_body)
+    /== truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
   div
     small 
       | Posted by: 

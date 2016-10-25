@@ -50,4 +50,9 @@ module StoriesHelper
       end
     end
   end
+  
+  def truncate_body_list(body)
+    body.gsub!('<br>', ' ')
+    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
+  end
 end
