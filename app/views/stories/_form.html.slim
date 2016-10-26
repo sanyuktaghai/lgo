@@ -12,6 +12,7 @@
       = f.label :anonymous
       = f.check_box :anonymous, type: "checkbox"
     div
+      = sanitize @story.raw_body
       = f.submit "Contribute Story", class: "button"
 - elsif controller.action_name == "edit"
   = form_for(@story, :html => {class: "form"}, remote: true) do |f|
@@ -27,6 +28,7 @@
       = f.label :anonymous
       = f.check_box :anonymous, type: "checkbox"
     div
+      = sanitize @story.updated_body
       = f.submit class: "button"
       = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
 script

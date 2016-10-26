@@ -24,5 +24,4 @@ class Story < ApplicationRecord
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }
-  
 end
