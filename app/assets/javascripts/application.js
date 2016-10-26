@@ -24,6 +24,7 @@ $(document).on('turbolinks:load', function() {
 });
 
 $(function(){
+  //fcn to show custom gender field
   $('input[type="radio"]').change(function() {
     var id = $(this).attr('id');
     if(id=="custom_defined_gender") {
@@ -33,13 +34,18 @@ $(function(){
     };
   });
   
+  //fcn to set value of custom gender
   $('#free_system_input').keyup( function(){
     if ( $(this).val() !== "" ) { $('#custom_defined_gender').val($(this).val());
-                                 } else { $('#custom_defined_gender').val("custom");
-                              };
+    } else { $('#custom_defined_gender').val("custom");
+    };
   });
 });
 
 $(document).ready(function() {
   $('input[type="radio"]').removeAttr("checked");
 });
+
+document.addEventListener("trix-file-accept", function(event) {
+  event.preventDefault()
+})
