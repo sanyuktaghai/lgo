@@ -340,6 +340,7 @@ DEPENDENCIES
   pry
   rails (~> 5.0.0)
   rails-controller-testing
+  rails-html-sanitizer
   remotipart (~> 1.2)
   rspec-rails
   sass-rails (~> 5.0)
