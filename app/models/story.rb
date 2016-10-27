@@ -20,6 +20,7 @@ class Story < ApplicationRecord
   has_many :comments, dependent: :destroy  # If story gets deleted, the depending comment also gets deleted
   has_many :story_likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
