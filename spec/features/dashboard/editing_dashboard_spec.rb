@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "Editing Dashboard" do 
   before do
     @user = FactoryGirl.create(:user)
+    @user2 = FactoryGirl.create(:user)
     @new_first_name = Faker::Name::first_name
     @new_last_name = Faker::Name::last_name
     @new_about_me = Faker::Hipster::sentence
@@ -35,5 +36,13 @@ RSpec.feature "Editing Dashboard" do
     
     expect(page).to have_content("First name can't be blank")
     expect(page).to have_content("Last name can't be blank")
+  end
+  
+  scenario "Logged-in user fails to edit another user's dashboard", js:true do
+    login_as(@user, :scope => :user)
+    visit(dashboard_path(@user2))
+    
+    expect(page).not_to have_link("Edit")
+    expect(page).not_to have_link("Upload Photo")
   end
 end

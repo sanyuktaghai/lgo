@@ -18,12 +18,11 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.save
         flash[:success] = "Story has been submitted"
-        format.html {redirect_to stories_path}
+        format.html {redirect_to dashboard_path(current_user)}
       else
         flash.now[:alert] = "Story has not been submitted"
         format.html {render :new}
         format.js {render :partial => 'stories/storyerrors', :data => @story.to_json }
-    
       end
     end
   end
@@ -44,6 +43,9 @@ class StoriesController < ApplicationController
   def update
     if @story.published?
       @story.validate_updated_fields = true
+    end
+    if @story.anonymous?
+      @story.poster_id = nil
     end
     @story.published = false
     respond_to do |format|

@@ -36,7 +36,7 @@ RSpec.feature "Editing Stories" do
     expect(page.current_path).to eq(admin_story_path(@story))  
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
-    expect(page).to have_content("#{@story.user(:admin_id).full_name}")
+    expect(page).to have_content("Admin: #{@admin.full_name}")
   end
   
   scenario "An admin edits an updated story", js: true do

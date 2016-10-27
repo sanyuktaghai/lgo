@@ -8,11 +8,13 @@ FactoryGirl.define do
       published true
       final_title { Faker::Hipster.sentence }
       final_body { Faker::Hipster.paragraph }
-      
+      admin_updated_at {Faker::Time.backward(1, :morning)}
+    
       factory :unpublished_updated_story do
         published false
         updated_title { Faker::Hipster.sentence }
         updated_body { Faker::Hipster.paragraph }
+#        updated_at {Faker::Time.forward(1, :afternoon)}
       end
       
       factory :published_anonymous_story do

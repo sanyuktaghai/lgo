@@ -1,4 +1,4 @@
-- if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.published )
+- if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.final_title )
   = form_for(@story, :html => {class: "form"}, remote: true) do |f|
     div
       = f.label :raw_title, "Title"
@@ -17,7 +17,7 @@
   = form_for(@story, :html => {class: "form"}, remote: true) do |f|
     div
       = f.label :updated_title, "Title"
-      = f.text_field :updated_title, autofocus: true, value: @story.final_title
+      = f.text_field :updated_title, autofocus: true, value: (@story.updated_at.to_i > @story.admin_updated_at.to_i) ? @story.updated_title : @story.final_title
       span class="form-error"
     div
       = f.label :updated_body, "Body"
