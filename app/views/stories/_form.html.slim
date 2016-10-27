@@ -1,5 +1,9 @@
 - if (controller.action_name == "new") || (controller.action_name == "edit" && !@story.final_title )
-  = form_for(@story, :html => {class: "form"}, remote: true) do |f|
+  = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
+    div 
+      = f.label :image
+      = f.file_field :image, multiple: true
+      span class="form-error"
     div
       = f.label :raw_title, "Title"
       = f.text_field :raw_title, autofocus: true, value: @story.raw_title
