@@ -66,8 +66,10 @@ ActiveRecord::Schema.define(version: 20161027190253) do
   end
 
   create_table "pictures", force: :cascade do |t|
+    t.integer  "story_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_pictures_on_story_id", using: :btree
   end
 
   create_table "stories", force: :cascade do |t|
@@ -139,6 +141,7 @@ ActiveRecord::Schema.define(version: 20161027190253) do
   add_foreign_key "comments", "stories"
   add_foreign_key "comments", "users"
   add_foreign_key "followings", "users"
+  add_foreign_key "pictures", "stories"
   add_foreign_key "stories", "users"
   add_foreign_key "stories", "users", column: "admin_id"
   add_foreign_key "stories", "users", column: "author_id"
