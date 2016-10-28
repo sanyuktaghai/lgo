@@ -21,6 +21,7 @@ class Story < ApplicationRecord
   has_many :story_likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  accepts_nested_attributes_for :pictures
   
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
