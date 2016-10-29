@@ -3,37 +3,20 @@
     div 
       = f.fields_for :pictures do |picture_fields|
         = picture_fields.label :image
-        /= picture_fields.file_field :image, multiple: true
-        = picture_fields.file_field :image
-        /= file_field_tag :image, multiple: true
-
-
-
-        /= picture_fields.input :image, as: :file, multiple: true
-        /= picture_fields.label :test_column
-        /= picture_fields.text_field :test_column
-        
-        /= file_field_tag "images[]", type: :file, multiple: true
-        
-        /- unless picture_fields.object_new_record?
-          /= link_to_remove_association 
-      
+        = picture_fields.file_field :image, multiple: true, :name =>"image[]"
+        /OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
       
       /- unless f.object_new_record?
         br
           = link_to_remove_association "Delete Picture", f
       /= f.label :image
-      /= f.file_field :image, multiple: true
-      
-      
-      
+      /= f.file_field :image, multiple: true      
       
         /= render partial: 'pictures_fields', f: image
       /.links
         br
           = link_to_add_association 'Add another image', f
-      /= f.label :image
-      /= f.file_field :image, multiple: true
+
       span class="form-error"
     div
       = f.label :raw_title, "Title"

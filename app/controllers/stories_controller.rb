@@ -9,7 +9,7 @@ class StoriesController < ApplicationController
   
   def new
     @story = Story.new
-    @story.pictures.build(:image => params[:image])
+    @story.pictures.build(:image => params[:image])   
   end
   
   def create
@@ -18,17 +18,11 @@ class StoriesController < ApplicationController
     @story.author_id = current_user[:id]
     respond_to do |format|
       if @story.save
-#        @story.pictures.build(:image => params[:image])
-        
-        
-#        if params[:image]
-#          params[:image].each do |image|
-#            @story.pictures.build(image: image)
-#            @story.pictures.build(params[:picture])
-#            @story.pictures.build
-#            @story.pictures.create(picture_params)
-#          end
-#        end
+        if params[:image]
+          params[:image].each { |image|
+            @story.pictures.create(image: image)
+          }
+        end
         flash[:success] = "Story has been submitted"
         format.html {redirect_to dashboard_path(current_user)}
       else
@@ -87,7 +81,7 @@ class StoriesController < ApplicationController
   private
   
   def story_params
-    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body, :anonymous, pictures_attributes: [:image, :id, :story_id, :_destroy])
+    params.require(:story).permit(:raw_title, :raw_body, :updated_title, :updated_body, :anonymous, pictures_attributes: [:id, :story_id, :_destroy, :image])
   end
   
   def set_story
