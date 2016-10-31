@@ -60,11 +60,6 @@ class StoriesController < ApplicationController
         redirect_to root_path
       else
         if @story.update(story_params)
-          if params[:image]
-            params[:image].each { |image|
-              @story.pictures.create(image: image)
-            }
-          end
           flash[:success] = "Story has been updated"
           format.html {redirect_to dashboard_path(current_user)}
         else

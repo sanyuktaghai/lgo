@@ -17,7 +17,6 @@ div
         = link_to "Delete Picture", story_picture_path(@story, picture), data: {confirm: "Are you sure?"}, method: :delete
   - if user_signed_in? && current_user == @story.user(:author_id)
     div
-      /= link_to "Upload More Pictures", edit_story_path(@story, :form => "add_images"), class: "btn"
       = link_to "Upload More Pictures", new_story_picture_path(@story), class: "btn"
 
 - if @story.published?
