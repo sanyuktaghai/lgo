@@ -21,7 +21,7 @@ class Story < ApplicationRecord
   has_many :story_likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :pictures, dependent: :destroy
-  accepts_nested_attributes_for :pictures, reject_if: :all_blank
+  accepts_nested_attributes_for :pictures, limit: 15, reject_if: :all_blank
   
 #  def pictures_array=(array)
 #    array.each do |picture|
