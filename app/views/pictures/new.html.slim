@@ -1,8 +1,11 @@
 = form_for [@story, @picture], :html => {class: "form", multipart: true}, remote: true do |f|
-  div 
+  div#test
     | Add More Pictures
     = f.label :image
-    = f.file_field :image, url: stories_path(), multiple: true, :name =>"image[]"
+    #image_fields
+      .upload_image
+        = f.file_field :image, url: stories_path(), multiple: true, :name =>"image[]"
+    = link_to 'Add another image', 'javascript:', id: "add_image_fields", remote: true
   div
     = f.submit class: "button"
     = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
