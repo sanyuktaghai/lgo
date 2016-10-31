@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :story_likes
     resources :bookmarks
+    resources :pictures, only: [:destroy, :update, :new, :create]
   end
   
   namespace :admin do
@@ -37,8 +38,6 @@ Rails.application.routes.draw do
   resources :followings, only: [:show, :create, :destroy]
   
   resources :registration_steps, only: [:show, :update]
-  
-  resources :pictures, only: [:destroy, :update]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
