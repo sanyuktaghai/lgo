@@ -53,6 +53,10 @@ gem 'remotipart', '~> 1.2'
 
 #gem for rich text editing
 gem 'trix'
+
+#gem for sanitizing html input
+gem 'rails-html-sanitizer'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
