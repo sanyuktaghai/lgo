@@ -44,6 +44,6 @@ class PicturesController < ApplicationController
   end
   
   def set_picture
-    @picture = @story.pictures.find(params[:id])
+    @picture = Picture.find(params[:id])
   end
 end
