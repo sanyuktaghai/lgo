@@ -57,6 +57,9 @@ gem 'trix'
 #gem for sanitizing html input
 gem 'rails-html-sanitizer'
 
+#gem for handling nested model attributes in one form
+gem 'cocoon'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -16,6 +16,7 @@
 //= require foundation
 //= require turbolinks
 //= require trix
+//= require cocoon
 //= require_tree .
 
 //$(function(){  });
