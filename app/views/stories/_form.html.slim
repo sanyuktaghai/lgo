@@ -2,22 +2,12 @@
   = form_for(@story, :html => {class: "form", multipart: true}, remote: true) do |f|
     div 
       - if (controller.action_name == "new")
-        = f.fields_for :pictures do |picture_fields|
-          = picture_fields.label :image
-          = picture_fields.file_field :image, multiple: true, :name =>"image[]"
-        /OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
-      
-      /- unless f.object_new_record?
-        br
-          = link_to_remove_association "Delete Picture", f
-      /= f.label :image
-      /= f.file_field :image, multiple: true      
-      
-        /= render partial: 'pictures_fields', f: image
-      /.links
-        br
-          = link_to_add_association 'Add another image', f
-
+        = f.fields_for :pictures do |picture|
+          = picture.label :image
+          = picture.file_field :image, multiple: true, :name =>"image[]"
+          /OTHERWISE, the name would be: /story[pictures_attributes][0][image][]
+        .links
+          = link_to_add_association 'Add another image', f, :pictures
       span class="form-error"
     div
       = f.label :raw_title, "Title"
