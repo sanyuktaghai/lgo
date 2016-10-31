@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :story_likes
     resources :bookmarks
-    resources :pictures, only: [:destroy, :update, :new, :create]
+    resources :pictures, only: [:destroy, :new, :create]
   end
   
   namespace :admin do
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       get 'followings'
     end
     devise_for :users, controllers: { registrations: 'registrations' }
-
   end
   
   resources :followings, only: [:show, :create, :destroy]
