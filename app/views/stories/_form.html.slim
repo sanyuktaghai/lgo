@@ -34,6 +34,10 @@
       = f.submit "Contribute Story", class: "button"
 - elsif controller.action_name == "edit"
   = form_for(@story, :html => {class: "form"}, remote: true) do |f|
+    /div
+      = f.fields_for :pictures do |picture_fields|
+        = picture_fields.label :image
+        = picture_fields.file_field :image, multiple: true, :name =>"image[]"
     div
       = f.label :updated_title, "Title"
       = f.text_field :updated_title, autofocus: true, value: (@story.updated_at.to_i > @story.admin_updated_at.to_i) ? @story.updated_title : @story.final_title
