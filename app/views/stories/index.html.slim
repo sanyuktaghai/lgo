@@ -3,6 +3,8 @@ h1 List of all Stories
   == link_to "New Story", new_story_path, class: "btn", id: "new-story-btn"
 
 - @stories.each do |story|
+  div 
+    == image_tag story.main_image.url
   div
     == link_to story.final_title, story_path(story)
   div
