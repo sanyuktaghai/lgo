@@ -20,7 +20,7 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
   end
   
   scenario "Logged-in user can delete pictures from story after creating" do
-    click_button "Delete Picture"
+    click_link "Delete Picture"
     expect(page).not_to have_css("img[src*='image.png']")
     expect(page).not_to have_content("Delete Picture")
   end
