@@ -1,7 +1,8 @@
 module StoriesHelper
   def story_main_image_show(story)
-    if story.main_image?
-      story.main_image.url
+    if story.published? && story.main_image?
+      image_tag story.main_image.url
+    else
     end
   end
   
