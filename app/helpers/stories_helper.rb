@@ -1,12 +1,7 @@
 module StoriesHelper
   def story_main_image_show(story)
     if story.main_image?
-<<<<<<< HEAD
       image_tag story.main_image.url
-    else
-=======
-      story.main_image.url
->>>>>>> parent of 895f910... fix bug on stories show page s.t. ignores stories with blank main_image
     end
   end
   
