@@ -8,4 +8,4 @@
     = link_to 'Add another image', 'javascript:', id: "add_image_fields", remote: true
   div
     = f.submit class: "button"
-    = button_tag t('buttons.cancel'), type: "submit", name: "cancel", value: true
+    = link_to "Cancel", story_path(@story)
