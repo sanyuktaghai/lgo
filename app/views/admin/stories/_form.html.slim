@@ -35,6 +35,7 @@ p
     == @story.final_body
 = form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
   div
+    = f.label :main_image, "Main Image"
     = f.file_field :main_image
     span class="form-error" 
   div

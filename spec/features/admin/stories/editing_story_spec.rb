@@ -76,6 +76,7 @@ RSpec.feature "Editing Stories" do
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")
+    expect(page).to have_content("Main image can't be blank")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Body can't be blank")
   end

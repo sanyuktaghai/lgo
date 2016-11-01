@@ -19,7 +19,7 @@ FactoryGirl.define do
       final_title { Faker::Hipster.sentence }
       final_body { Faker::Hipster.paragraph }
       admin_updated_at {Faker::Time.backward(1, :morning)}
-#      main_image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
+      main_image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
     
       factory :unpublished_updated_story do
         published false
