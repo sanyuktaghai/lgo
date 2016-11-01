@@ -9,7 +9,7 @@ p
 - if user_signed_in? && current_user == @story.user(:author_id)
   == link_to "Edit Story", edit_story_path(@story), class: "btn"
   == link_to "Delete Story", story_path(@story), method: :delete, data: {confirm: "Are you sure you want to delete the story?"}, class: "btn"
-div
+div.story_pictures
   - unless @story.pictures.empty?
     - @story.pictures.each do |picture|
       = image_tag picture.image.url

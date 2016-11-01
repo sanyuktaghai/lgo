@@ -1,7 +1,9 @@
 FactoryGirl.define do  
+  
   factory :story do
     raw_title { Faker::Hipster.sentence }
     raw_body { Faker::Hipster.paragraph }
+#    image Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/jpg')
     user
     
     factory :published_story do
