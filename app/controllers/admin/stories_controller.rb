@@ -22,6 +22,7 @@ class Admin::StoriesController < ApplicationController
   
   def update
     @story.validate_final_fields = true
+    @story.validate_main_image = true
     @story.admin_id = current_user[:id]
     @story.admin_updated_at = DateTime.current
     unless @story.anonymous?

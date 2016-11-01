@@ -4,11 +4,15 @@ class Story < ApplicationRecord
   
   attr_accessor :validate_final_fields
   attr_accessor :validate_updated_fields
+  attr_accessor :validate_main_image
   def validate_final_fields?
     validate_final_fields == 'true' || validate_final_fields == true
   end
   def validate_updated_fields?
     validate_updated_fields == 'true' || validate_updated_fields == true
+  end
+  def validate_main_image?
+    validate_main_image == 'true' || validate_main_image == true
   end
   validates :final_title, presence: true, if: :validate_final_fields?
   validates :final_body, presence: true, if: :validate_final_fields?
@@ -29,6 +33,8 @@ class Story < ApplicationRecord
     medium: '300x300>', 
     large: '1000x1000>' 
   }
+  
+  validates_attachment :main_image, :content_type => { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png"] }, :size => { in: 0..8.megabytes }, :presence => true, if: :validate_main_image?
   
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
