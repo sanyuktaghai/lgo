@@ -1,6 +1,6 @@
 module StoriesHelper
   def story_main_image_show(story)
-    if story.main_image?
+    unless story.main_image.nil?
       image_tag story.main_image.url
     end
   end

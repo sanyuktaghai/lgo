@@ -4,7 +4,7 @@ h1 List of all Stories
 
 - @stories.each do |story|
   div 
-    == image_tag story.main_image.url
+    == story_main_image_show(story)
   div
     == link_to story.final_title, story_path(story)
   div
