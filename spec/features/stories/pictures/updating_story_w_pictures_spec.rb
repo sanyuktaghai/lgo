@@ -33,4 +33,11 @@ RSpec.feature "Updating Stories with Pictures", :type => :feature do
     expect(page).to have_content("Delete Picture", count: 2)
   end
   
+  scenario "Logged-in user fails to add pictures to a story after creating", js: true do
+    click_link "Upload More Pictures"
+    click_button "Create Picture"
+    
+    expect(page).to have_content("Image can't be blank")
+  end
+  
 end
