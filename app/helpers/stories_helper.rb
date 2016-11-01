@@ -1,4 +1,9 @@
 module StoriesHelper
+  def story_main_image_show(story)
+    if story.main_image?
+      story.main_image.url
+    end
+  end
   
   def story_title_show(story)
     if story.published?
