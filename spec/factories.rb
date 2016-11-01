@@ -3,8 +3,13 @@ FactoryGirl.define do
   factory :story do
     raw_title { Faker::Hipster.sentence }
     raw_body { Faker::Hipster.paragraph }
-#    image Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png')
-    image { fixture_file_upload( File.join(Rails.root, 'spec', 'fixtures', 'image.png'), 'image/png') }
+    
+    factory :picture do
+      image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
+  #    image_file_name {'image.png'}
+  #    image_content_type {'image/png'}
+  #    image_file_size { 1024 }
+    end
     user
     
     factory :published_story do
@@ -12,7 +17,7 @@ FactoryGirl.define do
       final_title { Faker::Hipster.sentence }
       final_body { Faker::Hipster.paragraph }
       admin_updated_at {Faker::Time.backward(1, :morning)}
-      main_image { fixture_file_upload( File.join(Rails.root, 'spec', 'fixtures', 'mainimage.png'), 'image/png') }
+#      main_image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
     
       factory :unpublished_updated_story do
         published false
