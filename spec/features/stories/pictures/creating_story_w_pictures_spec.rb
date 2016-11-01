@@ -25,11 +25,11 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
   end
   
   scenario "A user creates a new story w/ many pictures", js: true do
-    attach_file('image[]', './spec/fixtures/image.png', visible: false)
+    attach_file('image[]', './spec/fixtures/image.png')
     
     click_link "Add another image"
     within('.nested-fields') do
-      attach_file('image[]', './spec/fixtures/image.png', visible: false)
+      attach_file('image[]', './spec/fixtures/image.png')
     end
     click_button "Contribute Story"
     
