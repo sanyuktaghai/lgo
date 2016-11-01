@@ -13,7 +13,7 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
   end
   
-  scenario "A user creates a new story w picture" do
+  scenario "A user creates a new story w/ one picture" do
     attach_file('image[]', './spec/fixtures/image.png')
     click_button "Contribute Story"
     
@@ -23,19 +23,20 @@ RSpec.feature "Creating Stories with Pictures", :type => :feature do
     click_link @title
     expect(page).to have_css("img[src*='image.png']")
   end
-#  scenario "A user fails to create a new story", :js => true do
-#    visit "/"
-#    
-#    click_link "New Story"
-#    
-#    fill_in "Title", with: ""
-##    fill_in "Body", with: ""
-#    fill_in_trix_editor('story_raw_body_trix_input_story', "")
-#    click_button "Contribute Story"
-#    assert_text("Title can't be blank")
-#    
-#    expect(page).to have_content("Story has not been submitted")
-#    expect(page).to have_content("Title can't be blank")
-#    expect(page).to have_content("Body can't be blank")
-#  end
+  
+  scenario "A user creates a new story w/ many pictures", js: true do
+    attach_file('image[]', './spec/fixtures/image.png', visible: false)
+    
+    click_link "Add another image"
+    within('.nested-fields') do
+      attach_file('image[]', './spec/fixtures/image.png', visible: false)
+    end
+    click_button "Contribute Story"
+    
+    expect(page).to have_content("Story has been submitted")
+    expect(page.current_path).to eq(dashboard_path(@user))
+    
+    click_link @title
+    expect(page).to have_css("img[src*='image.png']", count: 2)
+  end
 end
