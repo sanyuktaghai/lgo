@@ -44,7 +44,7 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_updated_at)
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_updated_at, :main_image)
   end
   
   def require_admin
