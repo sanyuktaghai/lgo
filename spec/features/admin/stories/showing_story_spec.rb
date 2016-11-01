@@ -18,6 +18,7 @@ RSpec.feature "Showing Stories" do
     expect(page).to have_content("Unpublished")
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
+    expect(page).to have_css("img[src*='image.png']")
     expect(current_path).to eq(admin_story_path(@story))
     expect(page).to have_link("Edit Story")
     expect(page).to have_link("Delete Story")
