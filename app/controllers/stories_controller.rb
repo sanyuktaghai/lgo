@@ -17,18 +17,21 @@ class StoriesController < ApplicationController
     @story.published = false
     @story.author_id = current_user[:id]
     respond_to do |format|
-      if @story.save
-        if params[:image]
-          params[:image].each { |image|
-            @story.pictures.create(image: image)
-          }
+      if params[:image]
+        params[:image].each { |image|
+          @picture = @story.pictures.build(image: image)
+        }
+      end
+      if @picture.nil? || !@picture.errors.any?
+        if @story.save
+          flash[:success] = "Story has been submitted"
+          format.html {redirect_to dashboard_path(current_user)}
         end
-        flash[:success] = "Story has been submitted"
-        format.html {redirect_to dashboard_path(current_user)}
-      else
+      end
+      unless @story.save
         flash.now[:alert] = "Story has not been submitted"
         format.html {render :new}
-        format.js {render :partial => 'stories/storyerrors', :data => @story.to_json }
+        format.js {render :partial => 'stories/storyerrors', :data => [ @story.to_json, @picture.to_json ] }
       end
     end
   end
