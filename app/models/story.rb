@@ -25,6 +25,11 @@ class Story < ApplicationRecord
   accepts_nested_attributes_for :pictures, limit: 15, reject_if: :all_blank
   validates_associated :pictures
   
+  has_attached_file :main_image, styles: {
+    medium: '300x300>', 
+    large: '1000x1000>' 
+  }
+  
   default_scope { order(created_at: :desc)}
   scope :published, -> { where(published: true) }
   scope :unpublished, -> { where(published: false) }

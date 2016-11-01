@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027200945) do
+ActiveRecord::Schema.define(version: 20161101210010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,11 +79,11 @@ ActiveRecord::Schema.define(version: 20161027200945) do
   create_table "stories", force: :cascade do |t|
     t.string   "raw_title"
     t.text     "raw_body"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "final_title"
     t.text     "final_body"
-    t.boolean  "published",        default: false
+    t.boolean  "published",               default: false
     t.integer  "admin_id"
     t.integer  "author_id"
     t.integer  "poster_id"
@@ -92,6 +92,10 @@ ActiveRecord::Schema.define(version: 20161027200945) do
     t.integer  "user_id"
     t.boolean  "anonymous"
     t.datetime "admin_updated_at"
+    t.string   "main_image_file_name"
+    t.string   "main_image_content_type"
+    t.integer  "main_image_file_size"
+    t.datetime "main_image_updated_at"
     t.index ["admin_id"], name: "index_stories_on_admin_id", using: :btree
     t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
     t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree
