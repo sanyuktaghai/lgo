@@ -10,10 +10,14 @@ class PicturesController < ApplicationController
   
   def create
     @story = Story.find(params[:story_id])
-    params[:image].each { |image|
-      @picture = @story.pictures.create(image: image)
-    }
-    #variale name "@picture" might not work later when there are multiple images saved at once...
+    if params[:image]
+      params[:image].each { |image|
+        @picture = @story.pictures.create(image: image)
+      }
+    else
+      @picture = @story.pictures.build()
+      @picture.validate_story_image = true
+    end
     respond_to do |format|
       if @picture.save
         flash[:success] = "Success"
@@ -21,6 +25,7 @@ class PicturesController < ApplicationController
       else
         flash.now[:alert] = "Picture has not been uploaded."
         format.html {render :new}
+        format.js {render :partial => 'pictures/pictureerrors', :data => @picture.to_json }
       end  
     end
   end

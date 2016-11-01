@@ -1,0 +1,12 @@
+$("#new_picture label.is-invalid-label").removeClass("is-invalid-label");
+$("#new_picture input.is-invalid-input").removeClass("is-invalid-input");
+$("#new_picture span.form-error").remove("p");
+$("#new_picture span.form-error.is-visible").removeClass("is-visible");
+
+<% if @picture.errors.any? %>
+  $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
+  
+  $('label[for="picture_image"]').addClass("is-invalid-label");
+  $('#picture_image').addClass("is-invalid-input");
+  $('span.form-error').addClass("is-visible").html("<p><%= @picture.errors.full_messages.first %></p>");
+<% end %>

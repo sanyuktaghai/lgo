@@ -5,6 +5,7 @@
     #image_fields
       .upload_image
         = f.file_field :image, url: stories_path(), multiple: true, :name =>"image[]"
+    span class="form-error"
     = link_to 'Add another image', 'javascript:', id: "add_image_fields", remote: true
   div
     = f.submit class: "button"
