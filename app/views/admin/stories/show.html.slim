@@ -24,6 +24,9 @@ h2
 p
   | Raw Body: 
   == @story.raw_body
+div 
+  - if @story.main_image?
+    == image_tag @story.main_image
 - if @story.updated_title?
   h2
     | Updated Title: 

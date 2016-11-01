@@ -10,6 +10,9 @@ p
     | Anonymous
   - else
     | Not Anonymous
+div 
+  - if @story.main_image?
+    == image_tag @story.main_image
 h4 
   | Raw Title: 
   == @story.raw_title
@@ -31,6 +34,9 @@ p
     | Final Body: 
     == @story.final_body
 = form_for([:admin, @story], :html => {class: "form"}, remote: true) do |f|
+  div
+    = f.file_field :main_image
+    span class="form-error" 
   div
     = f.label :final_title, "Final Title"
     = f.text_field :final_title, autofocus: true, value: (@story.updated_title ? @story.updated_title : @story.raw_title)
