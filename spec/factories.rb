@@ -1,14 +1,16 @@
 FactoryGirl.define do  
+  factory :picture do
+    image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
+#    image_file_name {'image.png'}
+#    image_content_type {'image/png'}
+#    image_file_size { 1024 }
+  end
   
   factory :story do
     raw_title { Faker::Hipster.sentence }
     raw_body { Faker::Hipster.paragraph }
-    
-    factory :picture do
-      image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/image.png', 'image/png') }
-  #    image_file_name {'image.png'}
-  #    image_content_type {'image/png'}
-  #    image_file_size { 1024 }
+    after(:create) do |story|
+      create(:picture, story: story, story_id: story.id )
     end
     user
     
