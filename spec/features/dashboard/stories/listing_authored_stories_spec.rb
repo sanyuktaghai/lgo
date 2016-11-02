@@ -8,8 +8,8 @@ RSpec.feature "Listing Stories" do
     @story2 = Story.where(author_id: @user.id).second
     @story3 = Story.where(author_id: @user.id).third
     @story4 = Story.where(author_id: @user.id).last
-    @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, poster_id: @user.id)
-    @story4.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, anonymous: true, poster_id: 1000)
+    @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, poster_id: @user.id, main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
+    @story4.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, anonymous: true, poster_id: 1000, main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
     @visitor = FactoryGirl.create(:user)
   end
   
@@ -34,6 +34,8 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_content(@story4.final_body.truncate(150))
     expect(page).to have_link(@story4.final_title)
     expect(page).to have_content("Anonymous")
+    
+    expect(page).to have_css("img[src*='mainimage.png']", count: 2)
    end
   
   scenario "Logged-in user can click back to her full list of published and unpublished stories", js: true do
