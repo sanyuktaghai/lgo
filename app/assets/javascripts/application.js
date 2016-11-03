@@ -54,15 +54,15 @@ $(document).on('click', '.remove_image_field', function(event){
   $(this).closest(".upload_image").remove();
 });
 
+//fcn to load all radio buttons as unchecked
 $(document).ready(function() {
   $('input[type="radio"]').removeAttr("checked");
 });
 
+//fcn to hinder built-in capability of trix editor to accept embedded files
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
 
-$(document).ready(myFunction());
-$(document).on('turbolinks:load', function() {
-  myFunction();
-});
+$(document).ready(myFunction);
+$(document).on('turbolinks:load', myFunction);
