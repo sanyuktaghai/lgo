@@ -21,6 +21,7 @@ RSpec.feature "Listing Stories" do
     expect(page).to have_link(@story2.final_title)
     expect(page).not_to have_link("New Story")
     expect(page).to have_content("Posted by: #{@user.full_name}")
+    expect(page).to have_css("img[src*='mainimage.png']", count: 3)
   end
   
   scenario "List anonymous stories" do

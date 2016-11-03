@@ -16,6 +16,7 @@
 //= require foundation
 //= require turbolinks
 //= require trix
+//= require cocoon
 //= require_tree .
 
 //$(function(){  });
@@ -23,7 +24,7 @@ $(document).on('turbolinks:load', function() {
   $(document).foundation();
 });
 
-$(function(){
+function myFunction() {
   //fcn to show custom gender field
   $('input[type="radio"]').change(function() {
     var id = $(this).attr('id');
@@ -40,12 +41,28 @@ $(function(){
     } else { $('#custom_defined_gender').val("custom");
     };
   });
+  
+  //fcns to append extra image upload fields
+  $('#add_image_fields').click(function(){
+    $("#image_fields div:first-child").clone().insertAfter( $("#image_fields")).append('<a class="remove_image_field" data-remote= true href="javascript:">Remove image</a>');
+  });
+};
+
+//fcn to remove extra image upload fields, separate b/c dynamically-added element
+$(document).on('click', '.remove_image_field', function(event){
+  console.log("test");
+  $(this).closest(".upload_image").remove();
 });
 
+//fcn to load all radio buttons as unchecked
 $(document).ready(function() {
   $('input[type="radio"]').removeAttr("checked");
 });
 
+//fcn to hinder built-in capability of trix editor to accept embedded files
 document.addEventListener("trix-file-accept", function(event) {
   event.preventDefault()
 })
+
+$(document).ready(myFunction);
+$(document).on('turbolinks:load', myFunction);

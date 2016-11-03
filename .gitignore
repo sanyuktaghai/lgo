@@ -21,5 +21,5 @@
 *.DS_Store
 .DS_Store
 
-#Ignore all user images
-/public/system/users/images/*
+#Ignore all public test & dev files
+/public/system/*

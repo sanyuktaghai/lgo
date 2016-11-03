@@ -11,6 +11,12 @@ module DashboardHelper
     end
   end
   
+  def story_main_image(story)
+    unless story.main_image_file_name.nil?
+      image_tag story.main_image.url
+    end
+  end
+  
   def story_title(story)
     if story.published?
       link_to story.final_title, story_path(story)

@@ -26,6 +26,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
     
+    attach_file('story_main_image', './spec/fixtures/mainimage.png')
     fill_in "Final Title", with: @final_title1
 #    fill_in "Final Body", with: @final_body1
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, @final_body1)
@@ -37,6 +38,7 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@story.final_title)
     expect(page).to have_content(@story.final_body)
     expect(page).to have_content("Admin: #{@admin.full_name}")
+    expect(page).to have_css("img[src*='mainimage.png']")
   end
   
   scenario "An admin edits an updated story", js: true do
@@ -74,6 +76,7 @@ RSpec.feature "Editing Stories" do
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")
+    expect(page).to have_content("Main image can't be blank")
     expect(page).to have_content("Title can't be blank")
     expect(page).to have_content("Body can't be blank")
   end

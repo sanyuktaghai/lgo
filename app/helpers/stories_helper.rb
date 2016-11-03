@@ -1,4 +1,9 @@
 module StoriesHelper
+  def story_main_image_show(story)
+    unless story.main_image_file_name.nil?
+      image_tag story.main_image.url
+    end
+  end
   
   def story_title_show(story)
     if story.published?

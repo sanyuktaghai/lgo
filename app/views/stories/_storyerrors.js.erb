@@ -10,6 +10,17 @@ $("#<%= j action_array[array_index].to_s %> input.is-invalid-input, #<%= j actio
 $('trix-editor.formatted_content').removeClass("is-invalid-input");
 $("#<%= j action_array[array_index].to_s %> span.form-error").remove("p");
 $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeClass("is-visible");
+;
+
+<% unless @picture.nil? %>
+  <% if @picture.errors.any? %>
+    $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
+
+    $('label[for="picture_image"]').addClass("is-invalid-label");
+    $('#picture_image').addClass("is-invalid-input");
+    $('#picture_fields span.form-error').addClass("is-visible").html("<p><%= @picture.errors.full_messages.first %></p>");
+  <% end %>
+<% end %>
 
 <% if @story.errors.any? %>
   $("#flash_notice").html('<div class="callout alert" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-alert"></i> <%= j flash[:alert] %></p></div>');
@@ -29,6 +40,7 @@ $("#<%= j action_array[array_index].to_s %> span.form-error.is-visible").removeC
         <% end %>
       <% end %>
     <% end %>
+  
   <% else %>
     <% for i in 0..@story.errors.full_messages.length-1 %>
       <% field_array.each do |field| %>

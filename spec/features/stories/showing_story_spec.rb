@@ -20,6 +20,8 @@ RSpec.feature "Showing Stories" do
     
     expect(page).not_to have_link("Edit Story")
     expect(page).not_to have_link("Delete Story")
+    expect(page).to have_css("img[src*='image.png']")
+    expect(page).to have_css("img[src*='mainimage.png']")
   end
   
   scenario "A non-owner signed in does not see edit or delete links" do

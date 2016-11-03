@@ -40,5 +40,7 @@ RSpec.feature "Listing Commented Stories" do
     expect(page).to have_content(@story4.final_title)
     expect(page).to have_content(@story4.final_body.truncate(150))
     expect(page).to have_link(@story4.final_title)
+    
+    expect(page).to have_css("img[src*='mainimage.png']", count: 3)
    end
 end

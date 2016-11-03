@@ -24,6 +24,10 @@ h2
 p
   | Raw Body: 
   == @story.raw_body
+div 
+  - if @story.main_image?
+    | Main Image:
+    == image_tag @story.main_image
 - if @story.updated_title?
   h2
     | Updated Title: 
@@ -38,6 +42,11 @@ p
   p 
     | Final Body: 
     == @story.final_body
+div 
+  - unless @story.pictures.empty?
+    | User Uploaded Images:
+    - @story.pictures.each do |picture|
+      = image_tag picture.image.url
 p
   | Admin: 
   - if @story.admin_id?
