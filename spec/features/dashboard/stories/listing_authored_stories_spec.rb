@@ -8,8 +8,8 @@ RSpec.feature "Listing Stories" do
     @story2 = Story.where(author_id: @user.id).second
     @story3 = Story.where(author_id: @user.id).third
     @story4 = Story.where(author_id: @user.id).last
-    @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, poster_id: @user.id, main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
-    @story4.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, anonymous: true, poster_id: 1000, main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
+    @story3.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, poster_id: @user.id, last_user_to_update: "Admin", main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
+    @story4.update(published: true, final_title: Faker::Hipster.sentence, final_body: Faker::Hipster.paragraph, anonymous: true, poster_id: 1000, last_user_to_update: "Admin", main_image: Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') )
     @visitor = FactoryGirl.create(:user)
   end
   

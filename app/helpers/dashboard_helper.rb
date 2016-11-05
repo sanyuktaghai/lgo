@@ -39,7 +39,11 @@ module DashboardHelper
     else
       body = story.raw_body
     end
-    truncate_body_list(body)
+    if body.nil?
+      body = "PROBLEM"
+    else
+      truncate_body_list(body)
+    end
   end
   
   def story_pending(story)
