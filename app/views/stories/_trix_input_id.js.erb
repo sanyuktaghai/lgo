@@ -16,7 +16,7 @@ function toJSDate(dateTime) {
 
 $(document).ready(function() {
 
-  if ("<%= @story.last_user_to_update" == "Admin") {
+  if ("<%= @story.last_user_to_update %>" == "Admin") {
     $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.final_body %>"));     
   } else {
     $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.updated_body %>"));    
