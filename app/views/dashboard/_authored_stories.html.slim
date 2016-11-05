@@ -4,7 +4,7 @@
     div
       = story_main_image(story)
     div
-      = story_title(story)
+      = link_to story_title(story), story_path(story)
     div
       = story_body(story)
     div
@@ -22,10 +22,9 @@
     div
       = story_main_image(story)
     div
-      == link_to story.final_title, story_path(story)
+      == link_to story_title(story), story_path(story)
     div
-      == truncate_body(story.final_body)
-      /== truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
+      = story_body(story)
     div
       | Posted on: 
       == story.created_at.strftime("%b %d, %Y")

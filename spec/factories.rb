@@ -18,7 +18,8 @@ FactoryGirl.define do
       published true
       final_title { Faker::Hipster.sentence }
       final_body { Faker::Hipster.paragraph }
-      admin_updated_at {Faker::Time.backward(1, :morning)}
+      admin_published_at { Faker::Time.backward(1, :morning) }
+      last_user_to_update { "Admin" }
       main_image { Rack::Test::UploadedFile.new(Rails.root + 'spec/fixtures/mainimage.png', 'image/png') }
     
       factory :unpublished_updated_story do
@@ -98,7 +99,7 @@ FactoryGirl.define do
       end
     
       after(:create) do |user, evaluator|
-        create_list(:unpublished_updated_story, evaluator.stories_count, author_id: user.id)
+        create_list(:unpublished_updated_story, evaluator.stories_count, author_id: user.id, last_user_to_update: "Author")
       end
     end
     

@@ -16,13 +16,9 @@ function toJSDate(dateTime) {
 
 $(document).ready(function() {
 
-  var date1 = toJSDate("<%= @story.updated_at %>");
-  var date2 = toJSDate("<%= @story.admin_updated_at %>");
-  var msg = (date1 > date2) ? 'Correct' : 'Wrong';
-  console.log(msg);
-  if (msg == "Correct") {
-    $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.updated_body %>"));
+  if ("<%= @story.last_user_to_update %>" == "Admin") {
+    $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.final_body %>"));     
   } else {
-    $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.final_body %>"));           
+    $("input#story_updated_body_trix_input_story_<%= j @story.id.to_s %>").attr('value', htmlDecode("<%= @story.updated_body %>"));    
   };
 });

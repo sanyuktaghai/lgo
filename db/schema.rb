@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105192824) do
+ActiveRecord::Schema.define(version: 20161105213948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,12 +91,13 @@ ActiveRecord::Schema.define(version: 20161105192824) do
     t.text     "updated_body"
     t.integer  "user_id"
     t.boolean  "anonymous"
-    t.datetime "admin_updated_at"
+    t.datetime "admin_published_at"
     t.string   "main_image_file_name"
     t.string   "main_image_content_type"
     t.integer  "main_image_file_size"
     t.datetime "main_image_updated_at"
     t.boolean  "review",                  default: false
+    t.string   "last_user_to_update"
     t.index ["admin_id"], name: "index_stories_on_admin_id", using: :btree
     t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
     t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree

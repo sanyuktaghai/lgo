@@ -52,11 +52,12 @@ class StoriesController < ApplicationController
   def update
     if @story.published?
       @story.validate_updated_fields = true
+    else
+      if @story.anonymous?
+        @story.poster_id = nil
+      end
     end
-    if @story.anonymous?
-      @story.poster_id = nil
-    end
-    @story.published = false
+    @story.last_user_to_update = "Author"
     respond_to do |format|
       if @story.user != current_user
         flash[:warning] = "You can only edit your own stories."

@@ -19,38 +19,31 @@ module DashboardHelper
   
   def story_title(story)
     if story.published?
-      link_to story.final_title, story_path(story)
-    else
-      unless story.final_title? #story only has raw title
-        link_to story.raw_title, story_path(story)
-      else #story has final title and maybe also updated title
-        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
-        if datearray.max == story.admin_updated_at.to_i #max => most recent
-          link_to story.final_title, story_path(story)
-        else 
-          link_to story.updated_title, story_path(story)
-        end
+      if story.last_user_to_update == "Admin"
+        body = story.final_title
+      else
+        body = story.updated_title
       end
+    else
+      body = story.raw_title
     end
   end
   
   def story_body(story)
     if story.published?
-      body = story.final_body
-    else
-      unless story.final_body? #story only has raw body
-        body = story.raw_body
-      else #story has final body and maybe also updated body
-        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
-        if datearray.max == story.admin_updated_at.to_i #max => most recent
-          body = story.final_body
-        else 
-          body = story.updated_body
-        end
+      if story.last_user_to_update == "Admin"
+        body = story.final_body
+      else
+        body = story.updated_body
       end
+    else
+      body = story.raw_body
     end
-    body.gsub!('<br>', ' ')
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
+    if body.nil?
+      body = "PROBLEM"
+    else
+      truncate_body_list(body)
+    end
   end
   
   def story_pending(story)
@@ -71,10 +64,5 @@ module DashboardHelper
     else
       html = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
     end
-  end
-  
-  def truncate_body(body)
-    body.gsub!('<br>', ' ')
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
 end

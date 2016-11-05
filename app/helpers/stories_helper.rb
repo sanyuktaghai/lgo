@@ -7,35 +7,25 @@ module StoriesHelper
   
   def story_title_show(story)
     if story.published?
-      story.final_title
-    else
-      unless story.final_title? #story only has raw title
-        story.raw_title
-      else #story has final title and maybe also updated title
-        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
-        if datearray.max == story.admin_updated_at.to_i #max => most recent
-          story.final_title
-        else 
-          story.updated_title
-        end
+      if story.last_user_to_update == "Admin"
+        body = story.final_title
+      else
+        body = story.updated_title
       end
+    else
+      body = story.raw_title
     end
   end
   
   def story_body_show(story)
     if story.published?
-      body = story.final_body
-    else
-      unless story.final_body? #story only has raw body
-        body = story.raw_body
-      else #story has final body and maybe also updated body
-        datearray = [story.updated_at.to_i, story.admin_updated_at.to_i]
-        if datearray.max == story.admin_updated_at.to_i #max => most recent
-          body = story.final_body
-        else 
-          body = story.updated_body
-        end
+      if story.last_user_to_update == "Admin"
+        body = story.final_body
+      else
+        body = story.updated_body
       end
+    else
+      body = story.raw_body
     end
     html = "<div>#{body}</div>".html_safe
   end
@@ -58,6 +48,9 @@ module StoriesHelper
   
   def truncate_body_list(body)
     body.gsub!('<br>', ' ')
+    body.gsub!('</li>', ' ')
+    body.gsub!('<ol>', ' ')
+    body.gsub!('<ul>', ' ')
     truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
 end

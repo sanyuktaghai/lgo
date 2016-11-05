@@ -6,7 +6,7 @@ h3 List of all Unpublished Stories
   div
     == link_to story.raw_title, admin_story_path(story)
   div
-    == truncate(strip_tags(story.raw_body).gsub('&amp;','&'), length: 150)
+    == story_body(story)
     div
       - if story.author_id #if story.author exists, then show the following line:
         small 
