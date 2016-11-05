@@ -40,9 +40,6 @@ module DashboardHelper
       body = story.raw_body
     end
     body.gsub!('<br>', ' ')
-    body.gsub!('</li>', ' ')
-    body.gsub!('<ul>', ' ')
-    body.gsub!('<ol>', ' ')
     truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
   
