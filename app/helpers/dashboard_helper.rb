@@ -39,8 +39,7 @@ module DashboardHelper
     else
       body = story.raw_body
     end
-    body.gsub!('<br>', ' ')
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
+    truncate_body_list(body)
   end
   
   def story_pending(story)
@@ -61,10 +60,5 @@ module DashboardHelper
     else
       html = "<div>Written by: #{User.find(story.author_id).full_name}</div>".html_safe
     end
-  end
-  
-  def truncate_body(body)
-    body.gsub!('<br>', ' ')
-    truncate(strip_tags("#{body}").gsub('&amp;','&'), length: 150)
   end
 end
