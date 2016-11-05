@@ -5,7 +5,6 @@ h2 List of All Liked Stories:
   div
     == link_to story_title(story), story_path(story)
   div
-    /== truncate(strip_tags(story.final_body).gsub('&amp;','&'), length: 150)
     == story_body(story)
   div
     small 
