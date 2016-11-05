@@ -62,6 +62,16 @@ FactoryGirl.define do
       end
     end
     
+    factory :user_with_unpublished_review_stories do
+      transient do
+        stories_count 1
+      end
+    
+      after(:create) do |user, evaluator|
+        create_list(:story, evaluator.stories_count, user: user, author_id: user.id, review: true)
+      end
+    end
+    
     factory :user_with_published_stories do
       transient do
         stories_count 1
