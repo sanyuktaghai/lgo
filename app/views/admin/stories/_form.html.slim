@@ -10,6 +10,12 @@ p
     | Anonymous
   - else
     | Not Anonymous
+p 
+  | User requested a GiftOn editor to add a light touch? 
+  - if @story.review?
+    | YES
+  - else
+    | No
 div 
   - if @story.main_image?
     == image_tag @story.main_image
@@ -46,9 +52,6 @@ p
     = f.label :final_body, "Final Body"
     == f.trix_editor :final_body 
     span class="form-error"
-  /div
-    = f.label :published
-    = f.check_box :published, type: "checkbox"
   div
     = f.submit class: "button", data:  {confirm: "Are you sure you want to publish the story?"}
   script
