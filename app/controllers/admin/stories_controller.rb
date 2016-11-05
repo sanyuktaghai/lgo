@@ -24,8 +24,10 @@ class Admin::StoriesController < ApplicationController
     @story.validate_final_fields = true
     @story.validate_main_image = true
     @story.admin_id = current_user[:id]
-    @story.published = true
-    @story.admin_updated_at = DateTime.current
+    unless @story.published? 
+      @story.published = true
+      @story.admin_published_at = DateTime.current
+    end
     unless @story.anonymous?
       @story.poster_id = @story.author_id
     else
@@ -45,7 +47,7 @@ class Admin::StoriesController < ApplicationController
   
   private
   def story_params
-    params.require(:story).permit(:final_title, :final_body, :published, :admin_updated_at, :main_image)
+    params.require(:story).permit(:final_title, :final_body, :published, :admin_published_at, :main_image)
   end
   
   def require_admin
