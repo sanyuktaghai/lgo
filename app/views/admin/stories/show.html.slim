@@ -9,6 +9,12 @@ p
     | Published
   - else
     | Unpublished
+p 
+  | User requested a GiftOn editor to add a light touch? 
+  - if @story.review?
+    | YES
+  - else
+    | No
 p
   - if @story.anonymous?
     | Anonymous
