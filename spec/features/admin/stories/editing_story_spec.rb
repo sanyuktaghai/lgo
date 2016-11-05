@@ -23,14 +23,16 @@ RSpec.feature "Editing Stories" do
     
     expect(page).to have_content("#{@story.user(:author_id).full_name}")
     expect(page).to have_content(@story.created_at.strftime("%b %d, %Y"))
+    expect(page).to have_content("Not Anonymous")
     expect(page).to have_content(@story.raw_title)
     expect(page).to have_content(@story.raw_body)
+    expect(page).to have_content("User requested a GiftOn editor to add a light touch? No")
     
     attach_file('story_main_image', './spec/fixtures/mainimage.png')
     fill_in "Final Title", with: @final_title1
 #    fill_in "Final Body", with: @final_body1
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, @final_body1)
-    check 'Published'
+#    check 'Published'
     click_button "Update Story"
     
     expect(page).to have_content("Story has been updated")
@@ -54,13 +56,14 @@ RSpec.feature "Editing Stories" do
     fill_in "Final Title", with: @final_title2
 #    fill_in "Final Body", with: @final_body2
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story2.id.to_s, @final_body2)
-    check 'Published'
+#    check 'Published'
     click_button "Update Story"
     
     expect(page).to have_content("Story has been updated")
     expect(page.current_path).to eq(admin_story_path(@story2))  
     expect(page).to have_content(@final_title2)
     expect(page).to have_content(@final_body2)
+    expect(page).to have_content("Published")
   end
   
   scenario "An admin fails to edit a story", js: true do
@@ -72,7 +75,7 @@ RSpec.feature "Editing Stories" do
     
     fill_in "Final Title", with: ""
     fill_in_trix_editor('story_final_body_trix_input_story_'+@story.id.to_s, "")
-    check 'Published'
+#    check 'Published'
     click_button "Update Story"
     
     expect(page).to have_content("Story has not been updated")
