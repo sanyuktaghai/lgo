@@ -20,12 +20,12 @@ module DashboardHelper
   def story_title(story)
     if story.published?
       if story.last_user_to_update == "Admin"
-        story.final_title
+        body = story.final_title
       else
-        story.updated_title
+        body = story.updated_title
       end
     else
-      story.raw_title
+      body = story.raw_title
     end
   end
   

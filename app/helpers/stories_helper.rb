@@ -8,12 +8,12 @@ module StoriesHelper
   def story_title_show(story)
     if story.published?
       if story.last_user_to_update == "Admin"
-        body = story.final_body
+        body = story.final_title
       else
-        body = story.updated_body
+        body = story.updated_title
       end
     else
-      body = story.raw_body
+      body = story.raw_title
     end
   end
   
