@@ -21,6 +21,11 @@
       = f.label :anonymous
       = f.check_box :anonymous, type: "checkbox"
     div
+      = f.radio_button :review, false
+      = f.label :review, "No, thanks"
+      = f.radio_button :review, true
+      = f.label :review, "Yes, thanks a lot!"
+    div
       - sanitize @story.raw_body
       = f.submit "Contribute Story", class: "button"
 - elsif controller.action_name == "edit"
