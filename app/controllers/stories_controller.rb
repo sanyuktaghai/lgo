@@ -56,6 +56,7 @@ class StoriesController < ApplicationController
     if @story.anonymous?
       @story.poster_id = nil
     end
+    @story.last_user_to_update = "Author"
     @story.published = false
     respond_to do |format|
       if @story.user != current_user

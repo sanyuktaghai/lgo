@@ -33,6 +33,7 @@ class Admin::StoriesController < ApplicationController
     else
       @story.poster_id = 3
     end
+    @story.last_user_to_update = "Admin"
     respond_to do |format|
       if @story.update(story_params)
         flash[:success] = "Story has been updated"
