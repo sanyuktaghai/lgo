@@ -18,6 +18,9 @@ RSpec.feature "Creating Stories", :type => :feature do
     fill_in_trix_editor('story_raw_body_trix_input_story', Faker::Hipster::paragraph)
     click_button "Contribute Story"
     
+    check "story_anonymous"
+    check "story_review"
+    
     expect(page).to have_content("Story has been submitted")
 #    expect(page.current_path).to eq(stories_path)
     expect(page.current_path).to eq(dashboard_path(@user))
