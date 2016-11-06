@@ -20,13 +20,13 @@ RSpec.feature "Adding Reaction_Lol to Stories" do
     visit "/"
     click_link @story.final_title
   
-#    click_on "Like Story"
+    click_on "Like Story"
     click_on "OMG Story"
     click_on "LOL Story"
     click_on "Cool Story"
     click_on "Love Story"
     
-#    expect(page).to have_content("Likes: 1")
+    expect(page).to have_content("Likes: 1")
     expect(page).to have_content("OMGs: 1")
     expect(page).to have_content("LOLs: 1")
     expect(page).to have_content("Cools: 1")
