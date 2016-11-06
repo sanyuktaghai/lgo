@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   
   resources :stories do 
     resources :comments
-    resources :story_likes
     resources :bookmarks
     resources :pictures, only: [:destroy, :new, :create]
   end
@@ -24,7 +23,6 @@ Rails.application.routes.draw do
   
   resources :dashboard, except: [:index] do
     member do
-      get 'liked_stories'
       get 'authored_stories'
       get 'bookmarked_stories'
       get 'commented_stories'
