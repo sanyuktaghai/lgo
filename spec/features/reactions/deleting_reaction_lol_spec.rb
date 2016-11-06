@@ -6,6 +6,7 @@ RSpec.feature "Deleting Reaction_Lol" do
     @foo = FactoryGirl.create(:user_with_published_stories)
     @story_foo = Story.find_by(author_id: @foo.id)
     @story_bar = Story.find_by(author_id: @bar.id)
+    ReactionCategory.create(id: 3, name: 'lol')
     @story_lol = Reaction.create(user: @foo, story: @story_bar, reaction_category_id: 3)
   end
   
