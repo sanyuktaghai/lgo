@@ -5,10 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
   
   has_many :stories  
-  has_many :story_likes
+  has_many :story_likes #destroy later
   has_many :bookmarks
   has_many :followings
   has_many :followers, through: :followings, class_name: "User"
+  has_many :reactions, dependent: :destroy
   
   cattr_accessor :form_steps do
     %w(basic_details)

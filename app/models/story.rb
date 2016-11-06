@@ -22,9 +22,11 @@ class Story < ApplicationRecord
   belongs_to :user
   
   has_many :comments, dependent: :destroy  # If story gets deleted, the depending comment also gets deleted
-  has_many :story_likes, dependent: :destroy
+  has_many :story_likes, dependent: :destroy # Delete soon...
   has_many :bookmarks, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  has_many :reactions, dependent: :destroy
+  has_many :reaction_categories, through: :reactions
 
   accepts_nested_attributes_for :pictures, limit: 15, reject_if: :all_blank
   validates_associated :pictures
