@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     devise_for :users, controllers: { registrations: 'registrations' }
   end
   
+  resources :reactions, only: [:create, :destroy]
+  
   resources :followings, only: [:show, :create, :destroy]
   
   resources :registration_steps, only: [:show, :update]
