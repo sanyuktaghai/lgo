@@ -1,0 +1,11 @@
+div#story_lol_button
+  - if Story.where(id: @story.id).joins(:reactions).where(reactions: {reaction_category_id: 3, user_id: current_user}) != nil
+    == link_to "UnLOL Story", story_reaction_path(@story, current_user, reaction_category_id: 3), method: :delete, class: "button", remote: true
+  - else
+    == form_for [@story, @reaction], remote: true do |f|
+      - f.hidden_field(:reaction_category_id, value: 3)
+      == f.submit "LOL Story", class: "button"
+p
+  | Lols: 
+  span#story_lols_count 
+    == @story.joins(:reactions).where(reactions: {reaction_category_id: 3}).count
