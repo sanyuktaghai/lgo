@@ -1,0 +1,27 @@
+$("#flash_notice").html('<div class="callout success" data-closable><button class="close-button" aria-label="Dismiss alert" type="button" data-close><span aria-hidden="true">&times;</span></button><p><i class="fi-check"></i> <%= j flash[:success] %></p></div>');
+
+
+//switch(<%= @reaction.reaction_category_id %>) {
+//  case 1:
+//    select_text = "Like Story"
+//    break;
+//  case 2:
+//    select_text = "OMG Story"
+//    break;
+//  case 3:
+//    select_text = "LOL Story"
+//    break;
+//  case 4:
+//    select_text = "Cool Story"
+//    break;
+//  default:
+//    select_text = "Love Story"
+//}
+//
+//console.log(select_text);
+//console.log(<%= @reaction.reaction_category_id %>);
+//console.log("<%= @select_text %>")
+//    
+
+//$("#story_reaction_<%= @reaction.reaction_category_id %>").reset();
+$("#story_reaction_<%= @reaction.reaction_category_id %>").load(location.href + "#story_reaction_<%= @reaction.reaction_category_id %>");
