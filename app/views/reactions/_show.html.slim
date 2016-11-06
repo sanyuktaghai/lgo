@@ -1,13 +1,2 @@
 - for i in 0..ReactionCategory.count-1
-  - case i
-    - when 0
-      - select_text = "Like Story"
-    - when 1
-      - select_text = "OMG Story"
-    - when 2
-      - select_text = "LOL Story"
-    - when 3
-      - select_text = "Cool Story"
-    - else
-      - select_text = "Love Story"
-  == render 'reactions/'+select_text.split(/\s/).first.downcase
+  == render 'reactions/'+ (i+1).to_s
