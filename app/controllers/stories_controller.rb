@@ -38,7 +38,6 @@ class StoriesController < ApplicationController
   
   def show
     @comment = @story.comments.build
-    @story_like = @story.story_likes.build
     @bookmark = @story.bookmarks.build
   end
   
