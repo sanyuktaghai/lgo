@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+ReactionCategory.create([
+  { name: 'like' }, 
+  { name: 'omg' },
+  { name: 'lol' },
+  { name: 'cool' },
+  { name: 'love' }
+])
