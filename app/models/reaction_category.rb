@@ -1,0 +1,2 @@
+class ReactionCategory < ApplicationRecord
+end
