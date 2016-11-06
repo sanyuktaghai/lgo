@@ -6,7 +6,6 @@ class ReactionsController < ApplicationController
     if @reaction.save
       respond_to do |format|
         @story = Story.find(@reaction.story_id)
-        flash.now[:success] = "You reacted to the story"
         format.js {render :data => [ @reaction.to_json, @story.to_json] }
       end
     else
@@ -20,7 +19,6 @@ class ReactionsController < ApplicationController
     @story = Story.find(@reaction.story_id)
     respond_to do |format|
       if @reaction.destroy
-        flash.now[:success] = "You un-reacted to the story"
         format.js {render :data => @reaction.to_json }
       else
         flash[:danger] = "Your reaction could not be removed."
