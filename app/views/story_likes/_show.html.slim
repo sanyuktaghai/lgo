@@ -1,9 +1,0 @@
-div#story_like_buttons
-  - if @story.story_likes.find_by(user_id: current_user) != nil
-    == link_to "Unlike Story", story_story_like_path(@story, current_user), method: :delete, class: "button", remote: true
-  - else
-    == render partial: 'story_likes/form'
-p
-  | Likes: 
-  span#story_like_count 
-    == @story.story_likes.count
