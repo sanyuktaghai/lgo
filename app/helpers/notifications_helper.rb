@@ -2,6 +2,9 @@ module NotificationsHelper
   def notification_text(notification)
     case notification.notification_category_id
     when 1 #Story published
+      story = Story.find(notification.origin_id)
+      link = link_to story_title(story), story_path(story)
+      text = "Your story has been published! See it here: "+link
     when 2 #Comment
     when 3 #Reaction
     when 4 #Bookmark
