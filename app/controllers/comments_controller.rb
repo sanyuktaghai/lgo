@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
       @comment.user = current_user    
       respond_to do |format|
         if @comment.save
+          create_notification(@comment)
           flash[:success] = "Comment has been added"
           format.html { redirect_to story_path(@story) }
         else
@@ -81,5 +82,34 @@ class CommentsController < ApplicationController
   
   def redirect_cancel
     redirect_to story_path(@story) if params[:cancel]
+  end
+  
+  def create_notification(comment)
+    story = Story.find(comment.story_id)
+    unless current_user.id == story.author_id
+      #story author gets notification
+      Notification.create(user_id: User.find(story.author_id).id,
+                          notified_by_user_id: current_user.id,
+                          notification_category_id: 2,
+                          read: false,
+                          origin_id: comment.id)
+    end
+    #get array of id's of other users who commented
+    user_array = []
+    Story.find(comment.story_id).comments.each do |existingcomment|
+      unless comment.user_id == story.author_id || comment.user_id == existingcomment.user_id || existingcomment.user_id == story.author_id
+        user_array.push(existingcomment.user_id)
+      end
+    end
+    user_array.uniq
+    user_array.each do |existingcomment_userid|
+      #others who commented get a notification
+      Notification.create(user_id: User.find(existingcomment_userid).id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 2,
+                        read: false,
+                        origin_id: comment.id,
+                        options: "commenters")
+    end
   end
 end
