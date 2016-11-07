@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :followings
   has_many :followers, through: :followings, class_name: "User"
   has_many :reactions, dependent: :destroy
+  has_many :notifications, dependant: :destroy
   
   cattr_accessor :form_steps do
     %w(basic_details)
