@@ -16,7 +16,6 @@ RSpec.feature "Listing Notifications" do
       published: true,
       poster_id: @foo.id)
     Notification.create(user: @foo, notified_by_user: @bar, notification_category_id: 5, read: false)
-    Notification.create(user: @foo, notification_category_id: 1, read: false, origin_id: @story.id)
     login_as(@foo, :scope => :user)
   end
   
@@ -24,12 +23,15 @@ RSpec.feature "Listing Notifications" do
     visit(dashboard_path(@foo))
     click_link "Notifications"
     
-    #published story notifications
-    expect(page).to have_content("Your story has been published: ")
-    expect(page).to have_content(@story.final_title)
+    #Note: notifications re: published stories are in spec/features/admin/stories/editing_story_spec.rb
     
     #followings notifications
     expect(page).to have_content("#{@bar.full_name} followed you.")
-    expect(page).to have_link("#{@bar.full_name}")
+    expect(page).to have_link(@bar.full_name)
+  end
+  
+  scenario "Shows notification of published story", js: true do
+    
+    
   end
 end

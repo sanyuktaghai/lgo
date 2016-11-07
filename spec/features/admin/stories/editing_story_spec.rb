@@ -12,6 +12,13 @@ RSpec.feature "Editing Stories" do
     @final_body1 = Faker::Hipster::paragraph
     @final_title2 = Faker::Hipster::sentence
     @final_body2 = Faker::Hipster::paragraph
+    NotificationCategory.create([
+      {id: 1, name: "Story"},
+      {id: 2, name: "Comment"},
+      {id: 3, name: "Reaction"},
+      {id: 4, name: "Bookmark"},
+      {id: 5, name: "Following"}
+      ])
   end
   
   scenario "An admin edits a story", js: true do
@@ -41,6 +48,14 @@ RSpec.feature "Editing Stories" do
     expect(page).to have_content(@story.final_body)
     expect(page).to have_content("Admin: #{@admin.full_name}")
     expect(page).to have_css("img[src*='mainimage.png']")
+    
+    click_link "Sign out"
+    
+    login_as(@user, :scope => :user)
+    visit(dashboard_path(@user))
+    click_link "Notifications"
+    expect(page).to have_content("Your story has been published! See it here: ")
+    expect(page).to have_link(@story.final_title)
   end
   
   scenario "An admin edits an updated story", js: true do
