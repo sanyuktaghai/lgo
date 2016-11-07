@@ -2,21 +2,17 @@ require 'rails_helper'
 
 RSpec.feature "Listing Notifications" do 
   before do
-#    @foo = FactoryGirl.create(:user)
-#    @bar = FactoryGirl.create(:user)
-#    @car = FactoryGirl.create(:user)
-#    
-#    @following = Following.create(user: @foo, follower: @bar)
-#    @following = Following.create(user: @car, follower: @foo)
-#  end
-#  
-#  scenario "Shows list of owner's followers", js: true do
-#    login_as(@foo, :scope => :user)
-#    visit(dashboard_path(@foo))
-#    click_link "Followers"
-#    
-#    expect(page).to have_content(Following.where(user: @foo).count)
-#    expect(page).to have_content("Followers: 1")
-#    expect(page).to have_content(@bar.full_name) 
+    @foo = FactoryGirl.create(:user)
+    @bar = FactoryGirl.create(:user)
+    NotificationCategory.create(id: 1, name: "following")
+    Notification.create(user: @foo, notified_by_user_id: @bar, notification_category_id: 1, read: false)
+    login_as(@foo, :scope => :user)
+  end
+  
+  scenario "Shows list of user's notifications", js: true do
+    visit(dashboard_path(@foo))
+    click_link "Notifications"
+    
+    expect(page).to have_content("#{@foo.full_name} followed you.")
   end
 end
