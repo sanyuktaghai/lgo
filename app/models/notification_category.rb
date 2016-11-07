@@ -1,0 +1,2 @@
+class NotificationCategory < ApplicationRecord
+end
