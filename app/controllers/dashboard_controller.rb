@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :followings, :followers]
+  before_action :set_user, only: [:show, :authored_stories, :bookmarked_stories, :commented_stories, :followings, :followers, :notifications]
   
   before_action :set_authored_stories, only: [:show, :authored_stories]  
   before_action :set_posted_stories, only: [:show, :authored_stories]  
@@ -63,8 +63,8 @@ class DashboardController < ApplicationController
   end
   
   def set_notifications
-    @notifications = Notification.where(user_id: @user)
-    @unread_notifications = Notification.where(user_id: @user, read: false)
+    @notifications = Notification.where(user_id: @user.id)
+    @unread_notifications = Notification.where(user_id: @user.id, read: false)
   end
   
 #  def set_liked_stories
