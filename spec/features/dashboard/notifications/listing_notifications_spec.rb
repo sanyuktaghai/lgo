@@ -5,7 +5,7 @@ RSpec.feature "Listing Notifications" do
     @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
     NotificationCategory.create(id: 1, name: "following")
-    Notification.create(user: @foo, notified_by_user_id: @bar, notification_category_id: 1, read: false)
+    Notification.create(user: @foo, notified_by_user: @bar, notification_category_id: 1, read: false)
     login_as(@foo, :scope => :user)
   end
   
