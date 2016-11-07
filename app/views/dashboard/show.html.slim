@@ -24,6 +24,8 @@ div
     == link_to "Saves: #{@bookmarked_stories.count}", bookmarked_stories_dashboard_path(@user), remote: true
     |   
     == link_to "Comments: #{@commented_stories.count}", commented_stories_dashboard_path(@user), remote: true
+    | 
+    == link_to "Notifications: #{@notifications.count}", notifications_dashboard_path(@user), remote: true
   - else
     == link_to "Stories: #{@posted_stories.published.count}", authored_stories_dashboard_path(@user), remote: true
     /|   
