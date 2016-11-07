@@ -2,5 +2,4 @@ h2 List of All Notifications:
 - @notifications.each do |notification|
   div
     p 
-      | You've been notified by 
-      == User.find(notification.notified_by_user).full_name
+      == notification_text(notification)
