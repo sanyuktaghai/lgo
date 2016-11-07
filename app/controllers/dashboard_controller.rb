@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
   before_action :set_commented_stories, only: [:show, :commented_stories]
   before_action :set_followers, only: [:show, :followers]
   before_action :set_followings, only: [:show, :followings]
+  before_action :set_notifications, only: [:show, :notifications]
   
   def show
   end
@@ -41,6 +42,12 @@ class DashboardController < ApplicationController
     end
   end
   
+  def notifications
+    respond_to do |format|
+      format.js {render :partial => 'dashboard/notifications'} 
+    end
+  end
+  
   private
   
   def set_user
@@ -53,6 +60,11 @@ class DashboardController < ApplicationController
   
   def set_posted_stories
     @posted_stories = Story.where(poster_id: @user)
+  end
+  
+  def set_notifications
+    @notifications = Notification.where(user_id: @user)
+    @unread_notifications = Notification.where(user_id: @user, read: false)
   end
   
 #  def set_liked_stories
