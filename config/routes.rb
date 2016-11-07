@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get 'commented_stories'
       get 'followers'
       get 'followings'
+      get 'notifications'
     end
     devise_for :users, controllers: { registrations: 'registrations' }
   end
