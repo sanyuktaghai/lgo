@@ -13,3 +13,11 @@ ReactionCategory.create([
   { name: 'cool' },
   { name: 'love' }
 ])
+
+NotificationCategory.create([
+  { name: 'Story' }, 
+  { name: 'Comment' },
+  { name: 'Reaction' },
+  { name: 'Bookmark' },
+  { name: 'Following' }
+])

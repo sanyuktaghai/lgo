@@ -74,14 +74,13 @@ ActiveRecord::Schema.define(version: 20161107005547) do
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "notified_by_user_id"
-    t.integer  "reaction_category_id"
+    t.integer  "notification_category_id"
     t.boolean  "read"
     t.integer  "origin_id"
-    t.integer  "notification_category_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["notification_category_id"], name: "index_notifications_on_notification_category_id", using: :btree
     t.index ["notified_by_user_id"], name: "index_notifications_on_notified_by_user_id", using: :btree
-    t.index ["reaction_category_id"], name: "index_notifications_on_reaction_category_id", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
@@ -179,7 +178,7 @@ ActiveRecord::Schema.define(version: 20161107005547) do
   add_foreign_key "comments", "stories"
   add_foreign_key "comments", "users"
   add_foreign_key "followings", "users"
-  add_foreign_key "notifications", "reaction_categories"
+  add_foreign_key "notifications", "notification_categories"
   add_foreign_key "notifications", "users"
   add_foreign_key "pictures", "stories"
   add_foreign_key "reactions", "reaction_categories"
