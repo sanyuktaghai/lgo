@@ -37,12 +37,15 @@ class ReactionsController < ApplicationController
   
   def create_notification(reaction)
     #Notification to story author
-    Notification.create(user_id: Story.find(reaction.story_id).author_id,
-                        notified_by_user_id: current_user.id,
-                        notification_category_id: 3,
-                        read: false,
-                        origin_id: reaction.id,
-                        options: reaction.reaction_category_id.to_s)
+    story = Story.find(reaction.story_id)
+    unless current_user.id == story.author_id
+      Notification.create(user_id: story.author_id,
+                          notified_by_user_id: current_user.id,
+                          notification_category_id: 3,
+                          read: false,
+                          origin_id: reaction.id,
+                          options: reaction.reaction_category_id.to_s)
+    end
   end
   def destroy_notification(reaction)
     unless Notification.where(notification_category_id: 3,

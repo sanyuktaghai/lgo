@@ -46,11 +46,14 @@ class BookmarksController < ApplicationController
   
   def create_notification(bookmark)
     #Notification to story author
-    Notification.create(user_id: Story.find(bookmark.story_id).author_id,
+    story = Story.find(bookmark.story_id)
+    unless current_user.id == story.author_id
+      Notification.create(user_id: story.author_id,
                         notified_by_user_id: current_user.id,
                         notification_category_id: 4,
                         read: false,
                         origin_id: bookmark.id)
+    end
   end
   def destroy_notification(bookmark)
     unless Notification.where(notification_category_id: 4,

@@ -7,7 +7,7 @@ RSpec.feature "Editing Comments" do
     @story_foo = Story.find_by(author_id: @foo.id)
     @story_bar = Story.find_by(author_id: @bar.id)
     
-    @comment1 = Comment.create(body: Faker::Hipster::word, user: @foo, story: @story_foo)
+    @comment1 = Comment.create(body: Faker::Hipster::sentence, user: @foo, story: @story_foo)
     @comment2 = Comment.create(body: Faker::Hipster::sentence, user: @bar, story: @story_foo)
     @comment3 = Comment.create(body: Faker::Hipster::paragraph, user: @bar, story: @story_bar)
   end
