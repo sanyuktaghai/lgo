@@ -21,7 +21,13 @@ RSpec.feature "Listing Notifications" do
     
     #Note: notifications re: published stories are in spec/features/admin/stories/editing_story_spec.rb
     
-    #Note: notifications re: commenting on stories are in spec/features/stories
+    #Note: should implement test that all story poster followers receive notification when story is published
+    
+    #Note: notifications re: commenting on stories are in spec/features/comments/creating_comments_spec.rb
+    
+    #Note: should implement test that all others who commented on a story also receive a notification
+    
+    #Note: notifications re: bookmarking stories are in spec/features/creating_bookmarks_spec.rb
     
     #followings notifications
     expect(page).to have_content("#{@bar.full_name} followed you.")

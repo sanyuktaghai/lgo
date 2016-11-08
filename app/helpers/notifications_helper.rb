@@ -32,7 +32,12 @@ module NotificationsHelper
     when 3 #Reaction
         
     when 4 #Bookmark
-        
+      bookmark = Bookmark.find(notification.origin_id)
+      story = Story.find(bookmark.story_id)
+      link = link_to story_title(story), story_path(story)
+      # Story author gets a notification
+      text = "Woohoo! Someone bookmarked your story, "+link
+      
     else #Following
       follower = User.find(notification.notified_by_user_id)
       link = link_to follower.full_name, dashboard_path(follower)
