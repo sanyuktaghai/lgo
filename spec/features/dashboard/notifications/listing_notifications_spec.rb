@@ -29,6 +29,8 @@ RSpec.feature "Listing Notifications" do
     
     #Note: notifications re: bookmarking stories are in spec/features/creating_bookmarks_spec.rb
     
+    #Note: notifications re: reacting to stories are in spec/features/creating_reaction_spec.rb
+    
     #followings notifications
     expect(page).to have_content("#{@bar.full_name} followed you.")
     expect(page).to have_link(@bar.full_name)

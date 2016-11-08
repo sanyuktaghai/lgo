@@ -5,6 +5,7 @@ class ReactionsController < ApplicationController
     @reaction = Reaction.create(reaction_params)
     if @reaction.save
       respond_to do |format|
+        create_notification(@reaction)
         @story = Story.find(@reaction.story_id)
         format.js {render :data => [ @reaction.to_json, @story.to_json] }
       end
@@ -19,6 +20,7 @@ class ReactionsController < ApplicationController
     @story = Story.find(@reaction.story_id)
     respond_to do |format|
       if @reaction.destroy
+        destroy_notification(@reaction)
         format.js {render :data => @reaction.to_json }
       else
         flash[:danger] = "Your reaction could not be removed."
@@ -31,5 +33,22 @@ class ReactionsController < ApplicationController
   
   def reaction_params
     params.permit(:story_id, :user_id, :reaction_category_id) 
+  end
+  
+  def create_notification(reaction)
+    #Notification to story author
+    Notification.create(user_id: Story.find(reaction.story_id).author_id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 3,
+                        read: false,
+                        origin_id: reaction.id,
+                        options: reaction.reaction_category_id.to_s)
+  end
+  def destroy_notification(reaction)
+    unless Notification.where(notification_category_id: 3,
+                       origin_id: reaction.id).empty?
+      Notification.where(notification_category_id: 3,
+                       origin_id: reaction.id).each(&:destroy)
+    end
   end
 end
