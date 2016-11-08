@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :redirect_cancel, :only => [:update]
+  before_action :redirect_cancel, :only => [:update]
 
   def new 
     super

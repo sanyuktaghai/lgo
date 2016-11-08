@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_story
   before_action :set_comment, only: [:edit, :update, :destroy]
-  before_filter :redirect_cancel, :only => [:update]
+  before_action :redirect_cancel, :only => [:update]
   
   def index
     @comment = @story.comments.all
@@ -119,7 +119,6 @@ class CommentsController < ApplicationController
                        origin_id: comment.id).empty?
       Notification.where(notification_category_id: 2,
                        origin_id: comment.id).each(&:destroy)
-      end
     end
   end
 end
