@@ -10,7 +10,6 @@ class FollowingsController < ApplicationController
       if @following.save
         respond_to do |format|
           @user = User.find(@following.user_id)
-#          @test = @following.id
           flash.now[:success] = "You are now following #{@user.full_name}"
           format.js
         end
@@ -26,7 +25,6 @@ class FollowingsController < ApplicationController
     @following = Following.where(following_params).first
     if @following.destroy
       respond_to do |format|
-        @test = @following.id
         @user = User.find(@following.user_id)
         flash.now[:success] = "You unfollowed #{@user.full_name}"
         format.js

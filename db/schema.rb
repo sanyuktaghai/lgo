@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105213948) do
+ActiveRecord::Schema.define(version: 20161106181001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,23 @@ ActiveRecord::Schema.define(version: 20161105213948) do
     t.index ["story_id"], name: "index_pictures_on_story_id", using: :btree
   end
 
+  create_table "reaction_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "reaction_category_id"
+    t.integer  "user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["reaction_category_id"], name: "index_reactions_on_reaction_category_id", using: :btree
+    t.index ["story_id"], name: "index_reactions_on_story_id", using: :btree
+    t.index ["user_id"], name: "index_reactions_on_user_id", using: :btree
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string   "raw_title"
     t.text     "raw_body"
@@ -102,15 +119,6 @@ ActiveRecord::Schema.define(version: 20161105213948) do
     t.index ["author_id"], name: "index_stories_on_author_id", using: :btree
     t.index ["poster_id"], name: "index_stories_on_poster_id", using: :btree
     t.index ["user_id"], name: "index_stories_on_user_id", using: :btree
-  end
-
-  create_table "story_likes", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "story_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["story_id"], name: "index_story_likes_on_story_id", using: :btree
-    t.index ["user_id"], name: "index_story_likes_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -152,10 +160,11 @@ ActiveRecord::Schema.define(version: 20161105213948) do
   add_foreign_key "comments", "users"
   add_foreign_key "followings", "users"
   add_foreign_key "pictures", "stories"
+  add_foreign_key "reactions", "reaction_categories"
+  add_foreign_key "reactions", "stories"
+  add_foreign_key "reactions", "users"
   add_foreign_key "stories", "users"
   add_foreign_key "stories", "users", column: "admin_id"
   add_foreign_key "stories", "users", column: "author_id"
   add_foreign_key "stories", "users", column: "poster_id"
-  add_foreign_key "story_likes", "stories"
-  add_foreign_key "story_likes", "users"
 end
