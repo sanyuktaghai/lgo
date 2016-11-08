@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   resources :followings, only: [:show, :create, :destroy]
   
   resources :registration_steps, only: [:show, :update]
+  
+  get 'notifications/:id/mark_as_read', to: 'notifications', as: :mark_as_read
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
