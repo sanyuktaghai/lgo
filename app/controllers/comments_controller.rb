@@ -60,6 +60,7 @@ class CommentsController < ApplicationController
       redirect_to story_path(@story)
     else
       if @comment.destroy
+        destroy_notification(@comment)
         flash[:success] = "Comment has been deleted"
         redirect_to story_path(@story)
       end
@@ -110,6 +111,16 @@ class CommentsController < ApplicationController
                         read: false,
                         origin_id: comment.id,
                         options: "commenters")
+    end
+  end
+  
+  def destroy_notification(comment)
+    unless Notification.where(notification_category_id: 2,
+                       origin_id: comment.id).empty?
+      Notification.where(notification_category_id: 2,
+                       origin_id: comment.id).each do |comment|
+        comment.destroy
+      end
     end
   end
 end

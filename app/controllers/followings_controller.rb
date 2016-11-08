@@ -25,7 +25,7 @@ class FollowingsController < ApplicationController
   def destroy
     @following = Following.where(following_params).first
     if @following.destroy
-      destroy_notification @following
+      destroy_notification(@following)
       respond_to do |format|
         @user = User.find(@following.user_id)
         flash.now[:success] = "You unfollowed #{@user.full_name}"
@@ -52,7 +52,10 @@ class FollowingsController < ApplicationController
                         origin_id: following.id)
   end
   def destroy_notification(following)
-    Notification.where(notification_category_id: 5,
+    unless Notification.where(notification_category_id: 5,
+                       origin_id: following.id).empty?
+      Notification.where(notification_category_id: 5,
                        origin_id: following.id).first.destroy
+    end
   end
 end

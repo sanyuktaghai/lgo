@@ -71,8 +71,11 @@ class Admin::StoriesController < ApplicationController
                         read: false,
                         origin_id: story.id)
   end
-  def destroy_notification(following)
-    Notification.where(notification_category_id: 1,
+  def destroy_notification(story)
+    unless Notification.where(notification_category_id: 1,
+                       origin_id: story.id).empty?
+      Notification.where(notification_category_id: 1,
                        origin_id: story.id).first.destroy
+    end
   end
 end
