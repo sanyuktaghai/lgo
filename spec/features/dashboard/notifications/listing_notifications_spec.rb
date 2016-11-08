@@ -11,10 +11,6 @@ RSpec.feature "Listing Notifications" do
       {id: 4, name: "Bookmark"},
       {id: 5, name: "Following"}
       ])
-    @story = Story.create(
-      final_title: Faker::Hipster.sentence,
-      published: true,
-      poster_id: @foo.id)
     Notification.create(user: @foo, notified_by_user: @bar, notification_category_id: 5, read: false)
     login_as(@foo, :scope => :user)
   end
@@ -25,13 +21,10 @@ RSpec.feature "Listing Notifications" do
     
     #Note: notifications re: published stories are in spec/features/admin/stories/editing_story_spec.rb
     
+    #Note: notifications re: commenting on stories are in spec/features/stories
+    
     #followings notifications
     expect(page).to have_content("#{@bar.full_name} followed you.")
     expect(page).to have_link(@bar.full_name)
-  end
-  
-  scenario "Shows notification of published story", js: true do
-    
-    
   end
 end

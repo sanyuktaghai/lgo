@@ -1,11 +1,21 @@
 module NotificationsHelper
   def notification_text(notification)
     case notification.notification_category_id
-    when 1 #Story published
+      
+    when 1 #Story
       story = Story.find(notification.origin_id)
       link = link_to story_title(story), story_path(story)
-      text = "Your story has been published! See it here: "+link
-    when 2 #Comment, notification to story author
+      unless notification.options == "followers"
+        # Story author gets a notification
+        text = "Your story has been published! See it here: "+link
+      else
+        poster = User.find(story.poster_id)
+        link_poster = link_to poster.full_name, dashboard_path(poster)
+        # Poster followers get a notification
+        text = link_poster+" published a new story! See it here: "+link
+      end
+        
+    when 2 #Comment
       story = Story.find(Comment.find(notification.origin_id).story_id)
       link_story = link_to story_title(story), story_path(story)
       commenter = User.find(notification.notified_by_user_id)
@@ -18,13 +28,17 @@ module NotificationsHelper
         # Other commenters get a notification
         text = link_user+" also commented on "+ link_story
       end 
+      
     when 3 #Reaction
+        
     when 4 #Bookmark
+        
     else #Following
       follower = User.find(notification.notified_by_user_id)
       link = link_to follower.full_name, dashboard_path(follower)
       text = link+ " followed you."
     end
+      
     text
   end
 end
