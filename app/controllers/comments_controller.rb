@@ -118,8 +118,7 @@ class CommentsController < ApplicationController
     unless Notification.where(notification_category_id: 2,
                        origin_id: comment.id).empty?
       Notification.where(notification_category_id: 2,
-                       origin_id: comment.id).each do |comment|
-        comment.destroy
+                       origin_id: comment.id).each(&:destroy)
       end
     end
   end
