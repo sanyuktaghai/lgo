@@ -20,8 +20,7 @@ module NotificationsHelper
       end 
     when 3 #Reaction
     when 4 #Bookmark
-    when 5 #Following
-    else #Comment, notification to story 
+    else #Following
       follower = User.find(notification.notified_by_user_id)
       link = link_to follower.full_name, dashboard_path(follower)
       text = link+ " followed you."
