@@ -5,3 +5,10 @@ h2 List of All Notifications:
     div
       == " "+time_ago_in_words(notification.created_at)
       |  ago
+    div
+      - unless notification.read?
+        | UNREAD
+      - else
+        | read
+    div 
+      == link_to "Mark as read", mark_as_read_path(notification), remote: true
