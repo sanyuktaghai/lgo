@@ -33,4 +33,5 @@ div
   |  
   == link_to "Following: #{@followings.count}", followings_dashboard_path(@user), remote: true
   |  
-  == link_to "Notifications: #{@unread_notifications.count}", notifications_dashboard_path(@user), remote: true
+  - if @user == current_user
+    == link_to "Notifications: #{@unread_notifications.count}", notifications_dashboard_path(@user), remote: true
