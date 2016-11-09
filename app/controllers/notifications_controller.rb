@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if @notification.update(notification_params)
         format.html {redirect_to notifications_dashboard_path(@user) }
-        format.js {render :partial => 'dashboard/notifications/markasread'}
+        format.js {render :partial => 'dashboard/notifications/markasread', :data => @notification.to_json}
       end
     end
   end
@@ -14,6 +14,6 @@ class NotificationsController < ApplicationController
   private
   
   def notification_params
-    params.permit(:read)
+  params.permit(:read)
   end
 end
