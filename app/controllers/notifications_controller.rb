@@ -11,6 +11,18 @@ class NotificationsController < ApplicationController
     end
   end
   
+  def mark_all_as_read
+    @user = current_user
+    @unread_notifications = Notification.where(user_id: @user.id, read: false)
+    @unread_notifications.each do |notification|
+      notification.update read: true
+    end
+#    binding.pry
+    if @unread_notifications.last.update(notification_params)
+      redirect_to notifications_dashboard_path(@user)
+    end
+  end
+  
   private
   
   def notification_params
