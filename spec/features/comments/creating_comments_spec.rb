@@ -6,9 +6,16 @@ RSpec.feature "Adding Comments to Stories" do
     @foo = FactoryGirl.create(:user_with_published_stories)
     @story = Story.find_by(author_id: @foo.id)
     @comment1 = Faker::Hipster::sentence
+    NotificationCategory.create([
+      {id: 1, name: "Story"},
+      {id: 2, name: "Comment"},
+      {id: 3, name: "Reaction"},
+      {id: 4, name: "Bookmark"},
+      {id: 5, name: "Following"}
+      ])
   end
   
-  scenario "Permit a signed in user to write a comment" do
+  scenario "Permit a signed in user to write a comment", js: true do
     login_as(@bar, :scope => :user)
     
     visit "/"
@@ -19,6 +26,16 @@ RSpec.feature "Adding Comments to Stories" do
     expect(page).to have_content("Comment has been added")
     expect(page).to have_content(@comment1)
     expect(page.current_path).to eq(story_path(@story))
+    
+    click_link "Sign out"
+    
+    login_as(@foo, :scope => :user)
+    visit(dashboard_path(@foo))
+    click_link "Notifications"
+    
+    expect(page).to have_content("#{@bar.full_name} commented on your story, #{@story.final_title}")
+    expect(page).to have_link(@story.final_title)
+    expect(page).to have_link(@bar.full_name)
   end
   
   scenario "A user fails to create a new comment", :js => true do

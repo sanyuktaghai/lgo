@@ -10,6 +10,7 @@ class BookmarksController < ApplicationController
       @bookmark.user = current_user
       respond_to do |format|
         if @bookmark.save
+          create_notification(@bookmark)
           flash.now[:success] = "Story has been saved"
           format.js {render :partial => 'bookmarks/showbookmarks'}
           format.html {redirect_to story_path(@story)}
@@ -25,6 +26,7 @@ class BookmarksController < ApplicationController
     @bookmark = @story.bookmarks.find_by(user_id: current_user)
     respond_to do |format|
       if @bookmark.destroy
+        destroy_notification(@bookmark)
         flash.now[:success] = "Story save has been deleted"
         format.js {render :partial => 'bookmarks/showbookmarks'}
 #        redirect_to story_path(@story)
@@ -40,5 +42,24 @@ class BookmarksController < ApplicationController
   
   def set_story
     @story = Story.find(params[:story_id])
+  end
+  
+  def create_notification(bookmark)
+    #Notification to story author
+    story = Story.find(bookmark.story_id)
+    unless current_user.id == story.author_id
+      Notification.create(user_id: story.author_id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 4,
+                        read: false,
+                        origin_id: bookmark.id)
+    end
+  end
+  def destroy_notification(bookmark)
+    unless Notification.where(notification_category_id: 4,
+                       origin_id: bookmark.id).empty?
+      Notification.where(notification_category_id: 4,
+                       origin_id: bookmark.id).each(&:destroy)
+    end
   end
 end

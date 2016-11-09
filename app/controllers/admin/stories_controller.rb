@@ -15,6 +15,7 @@ class Admin::StoriesController < ApplicationController
   
   def destroy
     if @story.destroy
+      destroy_notification(@story)
       flash[:success] = "Story has been deleted"
       redirect_to admin_stories_path
     end
@@ -36,6 +37,7 @@ class Admin::StoriesController < ApplicationController
     @story.last_user_to_update = "Admin"
     respond_to do |format|
       if @story.update(story_params)
+        create_notification(@story)
         flash[:success] = "Story has been updated"
         format.html {redirect_to admin_story_path(@story)}
       else
@@ -60,5 +62,31 @@ class Admin::StoriesController < ApplicationController
   
   def set_story
     @story = Story.find(params[:id])
+  end
+  
+  def create_notification(story)
+    #Notification to story author
+    Notification.create(user_id: story.author_id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 1,
+                        read: false,
+                        origin_id: story.id)
+    #Notification for all people who follow the poster
+    followings = Following.where(user_id: story.poster_id)
+    followings.each do |follower|
+      Notification.create(user_id: follower.follower_id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 1,
+                        read: false,
+                        origin_id: story.id,
+                        options: "followers")
+    end
+  end
+  def destroy_notification(story)
+    unless Notification.where(notification_category_id: 1,
+                       origin_id: story.id).empty?
+      Notification.where(notification_category_id: 1,
+                       origin_id: story.id).each(&:destroy)
+    end
   end
 end

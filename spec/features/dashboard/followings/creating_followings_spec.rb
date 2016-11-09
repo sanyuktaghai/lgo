@@ -2,6 +2,13 @@ require 'rails_helper'
 
 RSpec.feature "ListingFollowings" do 
   before do
+    NotificationCategory.create([
+      {id: 1, name: "Story"},
+      {id: 2, name: "Comment"},
+      {id: 3, name: "Reaction"},
+      {id: 4, name: "Bookmark"},
+      {id: 5, name: "Following"}
+    ])
     @foo = FactoryGirl.create(:user)
     @bar = FactoryGirl.create(:user)
     

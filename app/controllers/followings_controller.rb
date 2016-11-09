@@ -8,6 +8,7 @@ class FollowingsController < ApplicationController
     else 
       @following = Following.create(following_params)
       if @following.save
+        create_notification @following
         respond_to do |format|
           @user = User.find(@following.user_id)
           flash.now[:success] = "You are now following #{@user.full_name}"
@@ -24,6 +25,7 @@ class FollowingsController < ApplicationController
   def destroy
     @following = Following.where(following_params).first
     if @following.destroy
+      destroy_notification(@following)
       respond_to do |format|
         @user = User.find(@following.user_id)
         flash.now[:success] = "You unfollowed #{@user.full_name}"
@@ -42,4 +44,18 @@ class FollowingsController < ApplicationController
     params.permit(:follower_id, :user_id) 
   end
   
+  def create_notification(following)
+    Notification.create(user_id: following.user.id,
+                        notified_by_user_id: current_user.id,
+                        notification_category_id: 5,
+                        read: false,
+                        origin_id: following.id)
+  end
+  def destroy_notification(following)
+    unless Notification.where(notification_category_id: 5,
+                       origin_id: following.id).empty?
+      Notification.where(notification_category_id: 5,
+                       origin_id: following.id).first.destroy
+    end
+  end
 end
